@@ -1,0 +1,112 @@
+body {
+  width: 100%;
+  height: auto;
+  font-family: "Jost";
+}
+
+.quize {
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  background-image: url(https://templates.seekviral.com/quiza/quiz/Quiz7/assets/images/bg.jpg);
+  background-size: cover;
+  padding: 10px 48px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.bgColor {
+  content: "";
+  width: 100%;
+  height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--primary-color);
+  transition: 0.5s;
+}
+
+.steps {
+  text-align: center;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.stepImg {
+  width: 40%;
+  height: 100%;
+  margin: 0 auto;
+}
+.stepImg img {
+  width: 100%;
+}
+.options {
+  display: flex;
+  justify-content: center;
+  gap: 55px;
+  align-items: center;
+}
+.options .option {
+  width: 19%;
+  height: 256px;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  position: relative;
+  margin-top: 30px;
+}
+.option input {
+  -webkit-appearance: none;
+  appearance: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border-radius: 15px;
+  border: solid 3px transparent;
+  background-color: rgb(255, 255, 255);
+  transition: 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+
+.option input:checked {
+  border-color: rgb(24, 255, 0);
+}
+.option img,
+label {
+  pointer-events: none;
+  position: relative;
+  z-index: 100;
+}
+.option img {
+  width: auto;
+  margin: 0 auto;
+}
+.option label {
+  font-size: 20px;
+  color: rgb(87, 96, 114);
+  font-weight: normal;
+  margin-top: 5px;
+}
+.nextPrev {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: end;
+  margin-top: 30px;
+}
+.nextPrev button {
+  padding: 0 30px;
+  border-radius: 10px;
+  background-color: rgb(1, 47, 71);
+  height: 88px;
+  color: rgb(255, 255, 255);
+  font-size: 24px;
+  font-family: "Russo One";
+  border: 0;
+}
