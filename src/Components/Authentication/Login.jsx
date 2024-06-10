@@ -14,16 +14,13 @@ function Signin() {
   const handelsubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        "https://ssagriculturebackend.onrender.com/api/v1/user/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      const response = await fetch("/api/v1/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
       if (!response.ok) {
         throw new Error("Login failed");
       }

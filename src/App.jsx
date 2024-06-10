@@ -42,6 +42,7 @@ import Helpandfaq from "./Components/Helpandfaq";
 import Bloagepages from "./Components/Blogs/Bloagepages";
 import Blogdetails from "./Components/Blogs/Blogdetails";
 import Shop2 from "./Components/Shops/Shop2";
+
 function App() {
   return (
     <>

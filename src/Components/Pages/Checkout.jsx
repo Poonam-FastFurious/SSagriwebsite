@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Checkout() {
   const [formData, setFormData] = useState({
@@ -14,6 +15,7 @@ function Checkout() {
 
   const [errors, setErrors] = useState({});
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Assuming you have retrieved the products from the cart page and set them in localStorage
@@ -46,19 +48,86 @@ function Checkout() {
       newErrors.phoneNumber = "Phone number is required";
     return newErrors;
   };
+  const paymentHandler = async (e) => {
+    e.preventDefault();
 
-  const createOrder = async () => {
     const newErrors = validateForm();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
+    try {
+      const orderId = await createOrder();
+      const response = await fetch("/api/v1/payments/create", {
+        method: "POST",
+        body: JSON.stringify({
+          orderId,
+          amount: formData.totalAmount,
+          currency: "INR",
+          paymentMethod: "Credit Card",
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const order = await response.json();
+      console.log(order);
+
+      // Initialize Razorpay
+      var options = {
+        key: "rzp_test_HTwkRgRF0LKywx",
+        amount: formData.totalAmount * 100,
+        currency: "INR",
+        name: "Acme Corp",
+        description: "Test Transaction",
+        image: "https://example.com/your_logo",
+        order_id: order.payment.razorpayOrderId,
+        handler: async function (response) {
+          const body = {
+            orderId: order.payment.razorpayOrderId,
+            razorpayPaymentId: response.razorpay_payment_id,
+            razorpayOrderId: response.razorpay_order_id,
+            razorpaySignature: response.razorpay_signature,
+          };
+          // Verify payment on backend
+          const validateRes = await fetch("/api/v1/payments/verify", {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          const jsonRes = await validateRes.json();
+          console.log(jsonRes);
+        },
+        prefill: {
+          name: "Web Dev Matrix",
+          email: "webdevmatrix@example.com",
+          contact: "9000000000",
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+      var rzp1 = new window.Razorpay(options);
+      rzp1.open();
+      localStorage.removeItem("cartProducts");
+      navigate("/");
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const createOrder = async () => {
     const customerId = localStorage.getItem("userid"); // Retrieve customer ID from localStorage
 
     if (!customerId) {
       alert("Customer ID not found in local storage.");
-      return;
+      return null;
     }
 
     try {
@@ -84,16 +153,13 @@ function Checkout() {
         },
       };
 
-      const response = await fetch(
-        "https://ssagriculturebackend.onrender.com/api/v1/order/add",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(orderData),
-        }
-      );
+      const response = await fetch("/api/v1/order/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      });
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -104,7 +170,8 @@ function Checkout() {
 
       const responseData = await response.json();
       console.log("Order created successfully:", responseData);
-      alert("Order created successfully!");
+      console.log("Order created successfullyid:", responseData.data._id);
+      return responseData.data._id;
     } catch (error) {
       console.error("Error creating order:", error);
       alert(`Error creating order: ${error.message}`);
@@ -429,7 +496,7 @@ function Checkout() {
                     <div className="payment-method">
                       <div className="order-button-payment mt-20">
                         <button
-                          onClick={createOrder}
+                          onClick={paymentHandler}
                           type="button"
                           className="tp-btn tp-color-btn w-100 banner-animation"
                         >

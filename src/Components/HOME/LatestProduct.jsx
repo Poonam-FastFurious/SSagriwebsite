@@ -10,16 +10,13 @@ function LatestProduct() {
 
   const addToCart = async (productId) => {
     try {
-      const response = await fetch(
-        "https://ssagriculturebackend.onrender.com/api/v1/cart/add",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ productId }),
-        }
-      );
+      const response = await fetch("/api/v1/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productId }),
+      });
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -46,15 +43,12 @@ function LatestProduct() {
   useEffect(() => {
     const fetchlatestProduct = async () => {
       try {
-        const response = await fetch(
-          "https://ssagriculturebackend.onrender.com/api/v1/Product/products",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch("/api/v1/Product/products", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
         if (!response.ok) {
           const errorData = await response.json();

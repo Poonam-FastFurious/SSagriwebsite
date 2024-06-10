@@ -7,15 +7,12 @@ function Shop2() {
   useEffect(() => {
     const fetchlatestProduct = async () => {
       try {
-        const response = await fetch(
-          "https://ssagriculturebackend.onrender.com/api/v1/Product/products",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch("/api/v1/Product/products", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
         if (!response.ok) {
           const errorData = await response.json();

@@ -1,23 +1,21 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Cart() {
   const [cart, setCart] = useState(null);
+  const navigate = useNavigate(); // Use navigate hook for programmatic navigation
 
   useEffect(() => {
     const fetchCart = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch(
-          "https://ssagriculturebackend.onrender.com/api/v1/cart/product",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch("api/v1/cart/product", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
 
         if (!response.ok) {
           const errorData = await response.json();
@@ -51,16 +49,7 @@ function Cart() {
       const updatedItems = updatedCart.items.map((item) => {
         if (item.product._id === productId) {
           const updatedQuantity = item.quantity + 1;
-          const updatedItem = { ...item, quantity: updatedQuantity };
-          localStorage.setItem(
-            "cartProducts",
-            JSON.stringify(
-              prevCart.items.map((prevItem) =>
-                prevItem.product._id === productId ? updatedItem : prevItem
-              )
-            )
-          );
-          return updatedItem;
+          return { ...item, quantity: updatedQuantity };
         }
         return item;
       });
@@ -81,17 +70,14 @@ function Cart() {
   const removeProduct = async (productId) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(
-        "https://ssagriculturebackend.onrender.com/api/v1/cart/removeproduct",
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ productId }),
-        }
-      );
+      const response = await fetch("/api/v1/cart/removeproduct", {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productId }),
+      });
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -117,6 +103,11 @@ function Cart() {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleCheckout = () => {
+    localStorage.setItem("cartProducts", JSON.stringify(cart.items));
+    navigate("/checkout");
   };
 
   return (
@@ -275,12 +266,12 @@ function Cart() {
                                 Subtotal <span>Rs {cart.total}</span>
                               </li>
                             </ul>
-                            <Link
-                              to="/checkout"
+                            <button
+                              onClick={handleCheckout}
                               className="tp-btn tp-color-btn banner-animation"
                             >
                               Proceed to Checkout
-                            </Link>
+                            </button>
                           </div>
                         )}
                       </div>

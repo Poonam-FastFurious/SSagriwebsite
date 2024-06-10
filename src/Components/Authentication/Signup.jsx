@@ -14,20 +14,17 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        "https://ssagriculturebackend.onrender.com/api/v1/user/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            fullName,
-            password,
-          }),
-        }
-      );
+      const response = await fetch("/api/v1/user/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          fullName,
+          password,
+        }),
+      });
       if (response.ok) {
         toast.success("You have register  Successfully", {
           position: "top-right",

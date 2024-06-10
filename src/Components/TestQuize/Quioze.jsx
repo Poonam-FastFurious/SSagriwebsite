@@ -10,7 +10,7 @@ function Quioze() {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [topproduct, setTopproduct] = useState([]);
   useEffect(() => {
-    fetch("https://ssagriculturebackend.onrender.com/api/v1/Product/products")
+    fetch("/api/v1/Product/products")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

@@ -27,9 +27,7 @@ function Header() {
     navigate("/login");
   };
   useEffect(() => {
-    fetch(
-      "https://ssagriculturebackend.onrender.com/api/v1/category/allcategory"
-    )
+    fetch("/api/v1/category/allcategory")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
