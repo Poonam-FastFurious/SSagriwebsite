@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Baseurl } from "../Confige";
 
 function Cart() {
   const [cart, setCart] = useState(null);
@@ -9,13 +8,16 @@ function Cart() {
     const fetchCart = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch(Baseurl + "/api/v1/cart/product", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          "https://ssagriculturebackend.onrender.com/api/v1/cart/product",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (!response.ok) {
           const errorData = await response.json();
@@ -79,14 +81,17 @@ function Cart() {
   const removeProduct = async (productId) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(Baseurl + "/api/v1/cart/removeproduct", {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ productId }),
-      });
+      const response = await fetch(
+        "https://ssagriculturebackend.onrender.com/api/v1/cart/removeproduct",
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId }),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();

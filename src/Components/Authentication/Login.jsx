@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import logo from "../../assets/Images/white_logo.png";
-import { Baseurl } from "../Confige";
 
 function Signin() {
   const [email, setEmail] = useState("");
@@ -15,13 +14,16 @@ function Signin() {
   const handelsubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(Baseurl + "/api/v1/user/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        "https://ssagriculturebackend.onrender.com/api/v1/user/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
       if (!response.ok) {
         throw new Error("Login failed");
       }

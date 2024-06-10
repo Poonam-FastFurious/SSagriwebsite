@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Swiper from "swiper";
 import "swiper/swiper-bundle.css";
-import { Baseurl } from "../Confige";
+
 function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
   const [products, setProducts] = useState([]);
@@ -58,7 +58,7 @@ function ProductDetails() {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          `${Baseurl}/api/v1/Product/product?id=${id}`
+          `https://ssagriculturebackend.onrender.com/api/v1/Product/product?id=${id}`
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

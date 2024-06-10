@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Swiper from "swiper";
 import "swiper/swiper-bundle.css";
 import { Link } from "react-router-dom";
-import { Baseurl } from "../Confige";
+
 function Category() {
   const [categories, setCategories] = useState([]);
 
@@ -43,7 +43,9 @@ function Category() {
     };
   }, []);
   useEffect(() => {
-    fetch(Baseurl + "/api/v1/category/allcategory")
+    fetch(
+      "https://ssagriculturebackend.onrender.com/api/v1/category/allcategory"
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

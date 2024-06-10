@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import bgimages from "../../assets/Images/formula_bg.jpg";
 import imagesmicro from "../../assets/Images/formula_img1.png";
 import { useEffect, useState } from "react";
-import { Baseurl } from "../Confige";
+
 function Dealofday() {
   const [topproduct, setTopproduct] = useState([]);
   useEffect(() => {
-    fetch(Baseurl + "/api/v1/Product/products")
+    fetch("https://ssagriculturebackend.onrender.com/api/v1/Product/products")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Baseurl } from "../Confige";
 
 function Checkout() {
   const [formData, setFormData] = useState({
@@ -85,13 +84,16 @@ function Checkout() {
         },
       };
 
-      const response = await fetch(Baseurl + "/api/v1/order/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(orderData),
-      });
+      const response = await fetch(
+        "https://ssagriculturebackend.onrender.com/api/v1/order/add",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(orderData),
+        }
+      );
 
       if (!response.ok) {
         const errorText = await response.text();

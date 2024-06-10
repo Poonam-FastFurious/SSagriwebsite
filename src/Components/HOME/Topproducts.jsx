@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Swiper from "swiper";
 import "swiper/swiper-bundle.css";
-import { Baseurl } from "../Confige";
 
 function Topproducts() {
   const [topproduct, setTopproduct] = useState([]);
@@ -12,13 +11,16 @@ function Topproducts() {
 
   const addToCart = async (productId) => {
     try {
-      const response = await fetch(Baseurl + "/api/v1/cart/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ productId }),
-      });
+      const response = await fetch(
+        "https://ssagriculturebackend.onrender.com/api/v1/cart/add",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -119,7 +121,7 @@ function Topproducts() {
     };
   }, []);
   useEffect(() => {
-    fetch(Baseurl + "/api/v1/Product/products")
+    fetch("https://ssagriculturebackend.onrender.com/api/v1/Product/products")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
