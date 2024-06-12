@@ -76,7 +76,7 @@ function Checkout() {
 
       // Initialize Razorpay
       var options = {
-        key: "rzp_test_apOsHc9PArNQm9",
+        key: "rzp_test_HTwkRgRF0LKywx",
         amount: formData.totalAmount * 100,
         currency: "INR",
         name: "Acme Corp",
@@ -102,9 +102,9 @@ function Checkout() {
           console.log(jsonRes);
         },
         prefill: {
-          name: "SS AGRICULTURE",
-          email: "info.agriqulture@gmail.com",
-          contact: "9876543210",
+          name: "Web Dev Matrix",
+          email: "webdevmatrix@example.com",
+          contact: "9000000000",
         },
         notes: {
           address: "Razorpay Corporate Office",
