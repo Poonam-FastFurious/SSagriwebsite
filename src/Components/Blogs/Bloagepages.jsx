@@ -357,28 +357,6 @@ function Bloagepages() {
                 </div>
               </div>
             </div>
-            <div className="col-lg-12">
-              <div className="basic-pagination text-center mb-80">
-                <nav>
-                  <ul>
-                    <li>
-                      <span className="current">1</span>
-                    </li>
-                    <li>
-                      <Link to="blog">2</Link>
-                    </li>
-                    <li>
-                      <Link to="blog">3</Link>
-                    </li>
-                    <li>
-                      <Link to="blog">
-                        <i className="icon-chevrons-right"></i>
-                      </Link>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
           </div>
         </div>
       </section>

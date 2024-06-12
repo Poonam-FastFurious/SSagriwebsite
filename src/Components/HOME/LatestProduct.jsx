@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 function LatestProduct() {
   const [latestproduct, setLatestproduct] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
 
   const addToCart = async (productId) => {
     try {
@@ -40,8 +41,22 @@ function LatestProduct() {
     }
   };
 
+  const addToWishlist = (productId) => {
+    setWishlist((prevWishlist) => [...prevWishlist, productId]);
+    toast.success("Item added to wishlist!", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
   useEffect(() => {
-    const fetchlatestProduct = async () => {
+    const fetchLatestProduct = async () => {
       try {
         const response = await fetch("/api/v1/Product/products", {
           method: "GET",
@@ -62,7 +77,7 @@ function LatestProduct() {
       }
     };
 
-    fetchlatestProduct();
+    fetchLatestProduct();
   }, []);
 
   return (
@@ -102,8 +117,19 @@ function LatestProduct() {
                       <span className="tpproduct__info-hot bage__hot">HOT</span>
                     </div>
                     <div className="tpproduct__shopping pt-25">
-                      <Link className="tpproduct__shopping-wishlist  " to="#">
-                        <i className="icon-heart icons"></i>
+                      <Link
+                        className="tpproduct__shopping-wishlist"
+                        to="#"
+                        onClick={() => addToWishlist(product._id)}
+                      >
+                        <i
+                          className="icon-heart icons"
+                          style={{
+                            color: wishlist.includes(product._id)
+                              ? "red"
+                              : "black",
+                          }}
+                        ></i>
                       </Link>
 
                       <Link className="tpproduct__shopping-cart" to="#">
@@ -114,7 +140,7 @@ function LatestProduct() {
                   <div className="tpproduct__content">
                     <span className="tpproduct__content-weight">
                       <Link to={`/Product/${product._id}`}>Fresh Fruits</Link>,
-                      <Link to={`/Product/${product._id}`}>Vagetables</Link>
+                      <Link to={`/Product/${product._id}`}>Vegetables</Link>
                     </span>
                     <h4 className="tpproduct__title">
                       <Link to="shop-details-top-">{product.productTitle}</Link>

@@ -42,6 +42,7 @@ import Helpandfaq from "./Components/Helpandfaq";
 import Bloagepages from "./Components/Blogs/Bloagepages";
 import Blogdetails from "./Components/Blogs/Blogdetails";
 import Shop2 from "./Components/Shops/Shop2";
+import RouteProtected from "./Components/ProtectedRoutes/RouteProtected";
 
 function App() {
   return (
@@ -69,9 +70,19 @@ function App() {
             <Route path="/shop" element={<Shop2 />} />
             <Route path="/AboutUs" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
-            <Route path="/wishlist" element={<Wishlist />} />
+            <Route
+              path="/wishlist"
+              element={
+                <RouteProtected element={<Wishlist />} redirectTo="/login" />
+              }
+            />
             <Route path="Product/:id" element={<ProductDetails />} />
-            <Route path="/Cart" element={<Cart />} />
+            <Route
+              path="/Cart"
+              element={
+                <RouteProtected element={<Cart />} redirectTo="/login" />
+              }
+            />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/Profile" element={<Profile />} />
             <Route path="/quize" element={<Quioze />} />

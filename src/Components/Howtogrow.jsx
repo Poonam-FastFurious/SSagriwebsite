@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Swiper from "swiper";
-
+import aboutinnerbg from "../assets/Images/aboutbghowtogrow.png";
+import videobg from "../assets/Images/video-bg.png";
 /* eslint-disable react/no-unescaped-entities */
 function Howtogrow() {
   useEffect(() => {
@@ -64,10 +65,7 @@ function Howtogrow() {
             <div className="row">
               <div className="col-lg-12">
                 <div className="tpvideo__bg p-relative mb-25">
-                  <img
-                    src="https://html.hixstudio.net/orfarm/assets/img/banner/video-bg-1.jpg"
-                    alt=""
-                  />
+                  <img src={videobg} />
                   <div className="tpvideo__video-btn">
                     <a className="tpvideo__video-icon popup-video" href="#">
                       <i>
@@ -100,10 +98,7 @@ function Howtogrow() {
             <div className="row align-items-center">
               <div className="col-lg-6">
                 <div className="tpabout__inner-thumb-2 p-relative mb-30">
-                  <img
-                    src="https://html.hixstudio.net/orfarm/assets/img/banner/about-inner-bg.png"
-                    alt=""
-                  />
+                  <img src={aboutinnerbg} alt="" />
                   <div className="tpabout__inner-thumb-shape d-none d-md-block">
                     <div className="tpabout__inner-thumb-shape-one">
                       <img

@@ -2,7 +2,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/Images/logo ssagri.png";
 import { useEffect, useState } from "react";
-
+import images from "../assets/Images/1.png";
 function Header() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -68,7 +68,7 @@ function Header() {
                         <Link to="/shop">Shop</Link>
                         <ul
                           className="sub-menu mega-menu"
-                          data-background="https://html.hixstudio.net/orfarm/assets/img/banner/mega-menu-shop-1.jpg"
+                          data-background={images}
                         >
                           <li>
                             <Link className="mega-menu-title">

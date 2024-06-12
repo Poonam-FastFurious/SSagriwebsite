@@ -122,10 +122,11 @@ function Dealofday() {
                     />
                   </div>
                   <div className="tpbrandproduct__main-contetn">
-                    <h4 className="tpbrandproduct__title">Super Market</h4>
+                    <h4 className="tpbrandproduct__title">Super </h4>
                     <p>
                       Nam liber tempor cum soluta nobis eleifend congue doming
-                      quod mazim placerat facer possim assum typi.
+                      quod mazim placerat facer possim assum typi. Nam liber
+                      tempor cum soluta nobis eleifend congue
                     </p>
                   </div>
                 </div>
