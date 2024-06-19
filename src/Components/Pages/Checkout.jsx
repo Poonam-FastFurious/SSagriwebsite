@@ -58,6 +58,12 @@ function Checkout() {
     }
 
     try {
+      // Retrieve user ID from local storage
+      const userId = localStorage.getItem("userid");
+      if (!userId) {
+        throw new Error("User ID not found in local storage");
+      }
+
       const orderId = await createOrder();
       const response = await fetch("/api/v1/payments/create", {
         method: "POST",
@@ -66,17 +72,24 @@ function Checkout() {
           amount: formData.totalAmount,
           currency: "INR",
           paymentMethod: "Credit Card",
+          userId, // Include userId in the request body
         }),
         headers: {
           "Content-Type": "application/json",
         },
       });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to create payment");
+      }
+
       const order = await response.json();
       console.log(order);
 
       // Initialize Razorpay
       var options = {
-        key: "rzp_test_HTwkRgRF0LKywx",
+        key: "rzp_test_apOsHc9PArNQm9",
         amount: formData.totalAmount * 100,
         currency: "INR",
         name: "Acme Corp",
@@ -118,7 +131,7 @@ function Checkout() {
       localStorage.removeItem("cartProducts");
       navigate("/");
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error:", error.message); // Print error message to console
     }
   };
 
