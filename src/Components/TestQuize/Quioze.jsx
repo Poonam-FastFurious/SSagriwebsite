@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import "./test.css";
 import { Link } from "react-router-dom";
+import { Baseurl } from "../Confige";
 
 // import CardProduct from "../Product/CardProduct";
 
@@ -10,7 +11,7 @@ function Quioze() {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [topproduct, setTopproduct] = useState([]);
   useEffect(() => {
-    fetch("/api/v1/Product/products")
+    fetch(Baseurl + "/api/v1/Product/products")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

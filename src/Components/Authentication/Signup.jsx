@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import logo from "../../assets/Images/white_logo.png";
+import { Baseurl } from "../Confige";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -14,7 +15,7 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/v1/user/register", {
+      const response = await fetch(Baseurl + "/api/v1/user/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

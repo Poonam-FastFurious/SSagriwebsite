@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/Images/logo ssagri.png";
 import { useEffect, useState } from "react";
 import images from "../assets/Images/1.png";
+import { Baseurl } from "./Confige";
 function Header() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -27,7 +28,7 @@ function Header() {
     navigate("/login");
   };
   useEffect(() => {
-    fetch("/api/v1/category/allcategory")
+    fetch(Baseurl + "/api/v1/category/allcategory")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

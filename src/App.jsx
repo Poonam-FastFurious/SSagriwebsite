@@ -50,14 +50,6 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
-            path="/login"
-            element={<ProtectedRoute element={<Login />} redirectTo="/" />}
-          />
-          <Route
-            path="/register"
-            element={<ProtectedRoute element={<Signup />} redirectTo="/" />}
-          />
-          <Route
             element={
               <>
                 <Header /> <Outlet />
@@ -70,6 +62,14 @@ function App() {
             <Route path="/shop" element={<Shop2 />} />
             <Route path="/AboutUs" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route
+              path="/login"
+              element={<ProtectedRoute element={<Login />} redirectTo="/" />}
+            />
+            <Route
+              path="/register"
+              element={<ProtectedRoute element={<Signup />} redirectTo="/" />}
+            />
             <Route
               path="/wishlist"
               element={

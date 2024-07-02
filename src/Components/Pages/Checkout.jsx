@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Baseurl } from "../Confige";
 
 function Checkout() {
   const [formData, setFormData] = useState({
@@ -65,7 +66,7 @@ function Checkout() {
       }
 
       const orderId = await createOrder();
-      const response = await fetch("/api/v1/payments/create", {
+      const response = await fetch(Baseurl + "/api/v1/payments/create", {
         method: "POST",
         body: JSON.stringify({
           orderId,
@@ -104,7 +105,7 @@ function Checkout() {
             razorpaySignature: response.razorpay_signature,
           };
           // Verify payment on backend
-          const validateRes = await fetch("/api/v1/payments/verify", {
+          const validateRes = await fetch(Baseurl + "/api/v1/payments/verify", {
             method: "POST",
             body: JSON.stringify(body),
             headers: {
@@ -166,7 +167,7 @@ function Checkout() {
         },
       };
 
-      const response = await fetch("/api/v1/order/add", {
+      const response = await fetch(Baseurl + "/api/v1/order/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Baseurl } from "../Confige";
 
 function Cart() {
   const [cart, setCart] = useState(null);
@@ -9,7 +10,7 @@ function Cart() {
     const fetchCart = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("api/v1/cart/product", {
+        const response = await fetch(Baseurl + "api/v1/cart/product", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -70,7 +71,7 @@ function Cart() {
   const removeProduct = async (productId) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("/api/v1/cart/removeproduct", {
+      const response = await fetch(Baseurl + "/api/v1/cart/removeproduct", {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

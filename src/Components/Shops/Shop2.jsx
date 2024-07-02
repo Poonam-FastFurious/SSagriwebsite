@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import Category from "../Product/Category";
 import { useEffect, useState } from "react";
+import { Baseurl } from "../Confige";
 
 function Shop2() {
   const [latestproduct, setLatestproduct] = useState([]);
   useEffect(() => {
     const fetchlatestProduct = async () => {
       try {
-        const response = await fetch("/api/v1/Product/products", {
+        const response = await fetch(Baseurl + "/api/v1/Product/products", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
