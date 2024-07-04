@@ -1,17 +1,22 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
-import featureProduct2 from "../../assets/Images/features_product01.png";
-import featureProduct3 from "../../assets/Images/features_product03.png";
-function CardProduct() {
+import { addToCart } from "../Utils/Addtocartutils";
+
+function CardProduct({ product }) {
+  const handleAddToCart = (productId) => {
+    addToCart(productId);
+  };
+
   return (
     <>
       <div className="col">
         <div className="tpproduct p-relative mb-20">
           <div className="tpproduct__thumb p-relative text-center">
             <Link to="#">
-              <img src={featureProduct2} alt="" />
+              <img src={product.image} alt="" />
             </Link>
-            <Link className="tpproduct__thumb-img" to="/productDetails">
-              <img src={featureProduct3} alt="" />
+            <Link className="tpproduct__thumb-img" to="#">
+              <img src={product.image} alt="" />
             </Link>
             <div className="tpproduct__info bage">
               <span className="tpproduct__info-discount bage__discount">
@@ -20,7 +25,7 @@ function CardProduct() {
               <span className="tpproduct__info-hot bage__hot">HOT</span>
             </div>
             <div className="tpproduct__shopping">
-              <Link className="tpproduct__shopping-wishlist" to="wishlist">
+              <Link className="tpproduct__shopping-wishlist" to="#">
                 <i className="icon-heart icons"></i>
               </Link>
               <Link className="tpproduct__shopping-wishlist" to="#">
@@ -33,13 +38,10 @@ function CardProduct() {
           </div>
           <div className="tpproduct__content">
             <span className="tpproduct__content-weight">
-              <Link to="shop-details-3">Fresh Fruits</Link>,
-              <Link to="shop-details-3">Vagetables</Link>
+              <Link to={`/Product/${product._id}`}>{product.category}</Link>,
             </span>
             <h4 className="tpproduct__title">
-              <Link to="shop-details-top-">
-                Mangosteen Organic From VietNamese
-              </Link>
+              <Link to={`/Product/${product._id}`}>{product.productTitle}</Link>
             </h4>
             <div className="tpproduct__rating mb-5">
               <Link to="#">
@@ -59,8 +61,8 @@ function CardProduct() {
               </Link>
             </div>
             <div className="tpproduct__price">
-              <span>$56.00</span>
-              <del>$19.00</del>
+              <span>₹{product.oneTimePrice}</span>
+              <del className=" pl-10">{product.discountPercentage}%</del>
             </div>
           </div>
           <div className="">
@@ -68,7 +70,11 @@ function CardProduct() {
               className=" "
               style={{ marginLeft: "40px ", paddingBottom: "15px" }}
             >
-              <Link className="tp-btn-2" to="cart">
+              <Link
+                className="tp-btn-2"
+                to="#"
+                onClick={() => handleAddToCart(product._id)}
+              >
                 Add to cart
               </Link>
             </div>

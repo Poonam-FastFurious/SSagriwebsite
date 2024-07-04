@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect } from "react";
 import Swiper from "swiper";
-
+import imge from "../../assets/Images/instagram.jpeg";
 function Instagram() {
   useEffect(() => {
     const tpblogswiper = new Swiper(".insta-active", {
@@ -52,10 +52,7 @@ function Instagram() {
               <div className="swiper-slide">
                 <div className="tpinsta__item p-relative fix">
                   <a href="#">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
-                      alt="thumb-img"
-                    />
+                    <img src={imge} alt="thumb-img" />
                   </a>
                   <a
                     className="tpinsta__links popup-image"
@@ -68,10 +65,7 @@ function Instagram() {
               <div className="swiper-slide">
                 <div className="tpinsta__item p-relative fix">
                   <a href="#">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
-                      alt="thumb-img"
-                    />
+                    <img src={imge} alt="thumb-img" />
                   </a>
                   <a
                     className="tpinsta__links popup-image"
@@ -84,10 +78,7 @@ function Instagram() {
               <div className="swiper-slide">
                 <div className="tpinsta__item p-relative fix">
                   <a href="#">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
-                      alt="thumb-img"
-                    />
+                    <img src={imge} alt="thumb-img" />
                   </a>
                   <a
                     className="tpinsta__links popup-image"
@@ -101,10 +92,7 @@ function Instagram() {
                 <div className="tpblog__item">
                   <div className="tpinsta__item p-relative fix">
                     <a href="#">
-                      <img
-                        src="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
-                        alt="thumb-img"
-                      />
+                      <img src={imge} alt="thumb-img" />
                     </a>
                     <a
                       className="tpinsta__links popup-image"
@@ -118,10 +106,7 @@ function Instagram() {
               <div className="swiper-slide">
                 <div className="tpinsta__item p-relative fix">
                   <a href="#">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
-                      alt="thumb-img"
-                    />
+                    <img src={imge} alt="thumb-img" />
                   </a>
                   <a
                     className="tpinsta__links popup-image"
@@ -134,10 +119,7 @@ function Instagram() {
               <div className="swiper-slide">
                 <div className="tpinsta__item p-relative fix">
                   <a href="#">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
-                      alt="thumb-img"
-                    />
+                    <img src={imge} alt="thumb-img" />
                   </a>
                   <a
                     className="tpinsta__links popup-image"
@@ -150,10 +132,7 @@ function Instagram() {
               <div className="swiper-slide">
                 <div className="tpinsta__item p-relative fix">
                   <a href="#">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
-                      alt="thumb-img"
-                    />
+                    <img src={imge} alt="thumb-img" />
                   </a>
                   <a
                     className="tpinsta__links popup-image"
@@ -166,10 +145,7 @@ function Instagram() {
               <div className="swiper-slide">
                 <div className="tpinsta__item p-relative fix">
                   <a href="#">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
-                      alt="thumb-img"
-                    />
+                    <img src={imge} alt="thumb-img" />
                   </a>
                   <a
                     className="tpinsta__links popup-image"
@@ -182,10 +158,7 @@ function Instagram() {
               <div className="swiper-slide">
                 <div className="tpinsta__item p-relative fix">
                   <a href="#">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
-                      alt="thumb-img"
-                    />
+                    <img src={imge} alt="thumb-img" />
                   </a>
                   <a
                     className="tpinsta__links popup-image"

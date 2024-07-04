@@ -1,9 +1,9 @@
 function Whychooseus() {
   return (
     <>
-      <section className="feature-area whight-feature grey-bg feature-top">
+      <section className="feature-area whight-feature grey-bg feature-top ">
         <div className="container">
-          <div className="feature-bg-round  pt-50 pb-15">
+          <div className="feature-bg-round  ">
             <div className="tpfeature-border">
               <div className="row row-cols-lg-5 row-cols-md-3 row-cols-1">
                 <div className="col">

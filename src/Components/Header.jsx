@@ -1,32 +1,23 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../assets/Images/logo ssagri.png";
 import { useEffect, useState } from "react";
 import images from "../assets/Images/1.png";
 import { Baseurl } from "./Confige";
+import axios from "axios";
 function Header() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [categories, setCategories] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     if (token) {
       setIsUserLoggedIn(true);
     } else {
       setIsUserLoggedIn(false);
     }
   }, []);
-  const handleLogout = () => {
-    localStorage.removeItem("token");
 
-    document.cookie =
-      "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-    setIsUserLoggedIn(false);
-
-    navigate("/login");
-  };
   useEffect(() => {
     fetch(Baseurl + "/api/v1/category/allcategory")
       .then((response) => {
@@ -44,7 +35,42 @@ function Header() {
         console.log(error);
       });
   }, []);
+  const handleLogout = async () => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      const userId = localStorage.getItem("userid");
 
+      if (!accessToken || !userId) {
+        throw new Error("User information not found in local storage.");
+      }
+
+      const response = await axios.post(
+        Baseurl + "/api/v1/user/logout",
+        { id: userId },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("userid");
+        localStorage.removeItem("user"); // Remove user info if stored
+        localStorage.removeItem("refreshToken");
+
+        document.cookie = `accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        document.cookie = `refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        // Redirect to login page or perform any other actions
+        window.location.href = "/login"; // Example: redirect to login page
+      } else {
+        console.error("Failed to log out:", response);
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
   return (
     <>
       <div id="header-sticky" className="header__main-area d-none d-xl-block">
@@ -78,18 +104,11 @@ function Header() {
                               ))}
                             </Link>
                             <ul>
-                              <li>
-                                <Link to="/shop">Radish Mix Greens</Link>
-                              </li>
-                              <li>
-                                <Link to="/shop">Red Amaranth</Link>
-                              </li>
-                              <li>
-                                <Link to="/shop">Immunity Booster Pack</Link>
-                              </li>
-                              <li>
-                                <Link to="/shop">Memek</Link>
-                              </li>
+                              {categories.map((title, index) => (
+                                <li key={index}>
+                                  <Link to="/shop">{title}</Link>
+                                </li>
+                              ))}
                             </ul>
                           </li>
                         </ul>

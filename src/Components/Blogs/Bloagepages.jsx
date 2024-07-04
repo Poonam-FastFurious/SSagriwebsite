@@ -1,362 +1,64 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Baseurl } from "../Confige";
+import { format } from "date-fns";
 
 function Bloagepages() {
+  const [Blogs, setBlogs] = useState([]);
+  useEffect(() => {
+    const fetchblogs = async () => {
+      try {
+        const response = await fetch(Baseurl + "/api/v1/blog/allblogs");
+        const data = await response.json();
+        setBlogs(data.data); // Adjust this line based on the actual API response structure
+      } catch (error) {
+        console.error("Error fetching banner data:", error);
+      }
+    };
+
+    fetchblogs();
+  }, []);
   return (
     <>
       <section className="blog-area pt-80">
         <div className="container">
           <div className="row">
-            <div className="col-lg-4">
-              <div className="tpblog__item tpblog__item-2 mb-20">
-                <div className="tpblog__thumb fix">
-                  <Link to="/blog-details">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/blog/blog-bg-8.jpg"
-                      alt=""
-                    />
-                  </Link>
-                </div>
-                <div className="tpblog__wrapper">
-                  <div className="tpblog__entry-wap">
-                    <span className="cat-links">
-                      <Link to="#">Lifestyle</Link>
-                    </span>
-                    <span className="author-by">
-                      <Link to="#">Admin</Link>
-                    </span>
-                    <span className="post-data">
-                      <Link to="#">SEP 15. 2022</Link>
-                    </span>
+            {Blogs.map((blog, index) => (
+              <div className="col-lg-4" key={index}>
+                <div className="tpblog__item tpblog__item-2 mb-20">
+                  <div className="tpblog__thumb fix">
+                    <Link to="/blog-details">
+                      <img src={blog.thumbnail} alt="" />
+                    </Link>
                   </div>
-                  <h4 className="tpblog__title">
-                    <Link to="/blog-details">
-                      Avocado Grilled Salmon, Rich In Nutrients For The Body
-                    </Link>
-                  </h4>
-                  <p>
-                    These are the people who make your life easier. Egestas is
-                    tristique vestibulum...
-                  </p>
-                  <div className="tpblog__details">
-                    <Link to="/blog-details">
-                      Continue reading <i className="icon-chevrons-right"></i>{" "}
-                    </Link>
+                  <div className="tpblog__wrapper">
+                    <div className="tpblog__entry-wap">
+                      <span className="cat-links">
+                        <Link to="#">Lifestyle</Link>
+                      </span>
+                      <span className="author-by">
+                        <Link to="#">{blog.author}</Link>
+                      </span>
+                      <span className="post-data">
+                        <Link to="#">
+                          {format(new Date(blog.createdAt), "MMM dd, yyyy")}
+                        </Link>
+                      </span>
+                    </div>
+                    <h4 className="tpblog__title">
+                      <Link to={`/blogdetails/${blog._id}`}>{blog.title}</Link>
+                    </h4>
+                    <p>{blog.content.slice(0, 60)}....</p>
+                    <div className="tpblog__details">
+                      <Link to={`/blogdetails/${blog._id}`}>
+                        Continue reading
+                        <i className="icon-chevrons-right"></i>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-lg-4">
-              <div className="tpblog__item tpblog__item-2 mb-20">
-                <div className="tpblog__thumb fix">
-                  <Link to="/blog-details">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/blog/blog-bg-7.jpg"
-                      alt=""
-                    />
-                  </Link>
-                </div>
-                <div className="tpblog__wrapper">
-                  <div className="tpblog__entry-wap">
-                    <span className="cat-links">
-                      <Link to="#">Lifestyle</Link>
-                    </span>
-                    <span className="author-by">
-                      <Link to="#">Admin</Link>
-                    </span>
-                    <span className="post-data">
-                      <Link to="#">SEP 15. 2022</Link>
-                    </span>
-                  </div>
-                  <h4 className="tpblog__title">
-                    <Link to="/blog-details">
-                      Avocado Grilled Salmon, Rich In Nutrients For The Body
-                    </Link>
-                  </h4>
-                  <p>
-                    These are the people who make your life easier. Egestas is
-                    tristique vestibulum...
-                  </p>
-                  <div className="tpblog__details">
-                    <Link to="/blog-details">
-                      Continue reading <i className="icon-chevrons-right"></i>{" "}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4">
-              <div className="tpblog__item tpblog__item-2 mb-20">
-                <div className="tpblog__thumb fix">
-                  <Link to="/blog-details">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/blog/blog-bg-1.jpg"
-                      alt=""
-                    />
-                  </Link>
-                </div>
-                <div className="tpblog__wrapper">
-                  <div className="tpblog__entry-wap">
-                    <span className="cat-links">
-                      <Link to="#">Lifestyle</Link>
-                    </span>
-                    <span className="author-by">
-                      <Link to="#">Admin</Link>
-                    </span>
-                    <span className="post-data">
-                      <Link to="#">SEP 15. 2022</Link>
-                    </span>
-                  </div>
-                  <h4 className="tpblog__title">
-                    <Link to="/blog-details">
-                      Avocado Grilled Salmon, Rich In Nutrients For The Body
-                    </Link>
-                  </h4>
-                  <p>
-                    These are the people who make your life easier. Egestas is
-                    tristique vestibulum...
-                  </p>
-                  <div className="tpblog__details">
-                    <Link to="/blog-details">
-                      Continue reading <i className="icon-chevrons-right"></i>{" "}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4">
-              <div className="tpblog__item tpblog__item-2 mb-20">
-                <div className="tpblog__thumb fix">
-                  <Link to="/blog-details">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/blog/blog-bg-6.jpg"
-                      alt=""
-                    />
-                  </Link>
-                </div>
-                <div className="tpblog__wrapper">
-                  <div className="tpblog__entry-wap">
-                    <span className="cat-links">
-                      <Link to="#">Lifestyle</Link>
-                    </span>
-                    <span className="author-by">
-                      <Link to="#">Admin</Link>
-                    </span>
-                    <span className="post-data">
-                      <Link to="#">SEP 15. 2022</Link>
-                    </span>
-                  </div>
-                  <h4 className="tpblog__title">
-                    <Link to="/blog-details">
-                      Avocado Grilled Salmon, Rich In Nutrients For The Body
-                    </Link>
-                  </h4>
-                  <p>
-                    These are the people who make your life easier. Egestas is
-                    tristique vestibulum...
-                  </p>
-                  <div className="tpblog__details">
-                    <Link to="/blog-details">
-                      Continue reading <i className="icon-chevrons-right"></i>{" "}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4">
-              <div className="tpblog__item tpblog__item-2 mb-20">
-                <div className="tpblog__thumb fix">
-                  <Link to="/blog-details">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/blog/blog-bg-5.jpg"
-                      alt=""
-                    />
-                  </Link>
-                </div>
-                <div className="tpblog__wrapper">
-                  <div className="tpblog__entry-wap">
-                    <span className="cat-links">
-                      <Link to="#">Lifestyle</Link>
-                    </span>
-                    <span className="author-by">
-                      <Link to="#">Admin</Link>
-                    </span>
-                    <span className="post-data">
-                      <Link to="#">SEP 15. 2022</Link>
-                    </span>
-                  </div>
-                  <h4 className="tpblog__title">
-                    <Link to="/blog-details">
-                      Avocado Grilled Salmon, Rich In Nutrients For The Body
-                    </Link>
-                  </h4>
-                  <p>
-                    These are the people who make your life easier. Egestas is
-                    tristique vestibulum...
-                  </p>
-                  <div className="tpblog__details">
-                    <Link to="/blog-details">
-                      Continue reading <i className="icon-chevrons-right"></i>{" "}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4">
-              <div className="tpblog__item tpblog__item-2 mb-20">
-                <div className="tpblog__thumb fix">
-                  <Link to="/blog-details">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/blog/blog-bg-4.jpg"
-                      alt=""
-                    />
-                  </Link>
-                </div>
-                <div className="tpblog__wrapper">
-                  <div className="tpblog__entry-wap">
-                    <span className="cat-links">
-                      <Link to="#">Lifestyle</Link>
-                    </span>
-                    <span className="author-by">
-                      <Link to="#">Admin</Link>
-                    </span>
-                    <span className="post-data">
-                      <Link to="#">SEP 15. 2022</Link>
-                    </span>
-                  </div>
-                  <h4 className="tpblog__title">
-                    <Link to="/blog-details">
-                      Avocado Grilled Salmon, Rich In Nutrients For The Body
-                    </Link>
-                  </h4>
-                  <p>
-                    These are the people who make your life easier. Egestas is
-                    tristique vestibulum...
-                  </p>
-                  <div className="tpblog__details">
-                    <Link to="/blog-details">
-                      Continue reading <i className="icon-chevrons-right"></i>{" "}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4">
-              <div className="tpblog__item tpblog__item-2 mb-20">
-                <div className="tpblog__thumb fix">
-                  <Link to="/blog-details">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/blog/blog-bg-2.jpg"
-                      alt=""
-                    />
-                  </Link>
-                </div>
-                <div className="tpblog__wrapper">
-                  <div className="tpblog__entry-wap">
-                    <span className="cat-links">
-                      <Link to="#">Lifestyle</Link>
-                    </span>
-                    <span className="author-by">
-                      <Link to="#">Admin</Link>
-                    </span>
-                    <span className="post-data">
-                      <Link to="#">SEP 15. 2022</Link>
-                    </span>
-                  </div>
-                  <h4 className="tpblog__title">
-                    <Link to="/blog-details">
-                      Avocado Grilled Salmon, Rich In Nutrients For The Body
-                    </Link>
-                  </h4>
-                  <p>
-                    These are the people who make your life easier. Egestas is
-                    tristique vestibulum...
-                  </p>
-                  <div className="tpblog__details">
-                    <Link to="/blog-details">
-                      Continue reading <i className="icon-chevrons-right"></i>{" "}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4">
-              <div className="tpblog__item tpblog__item-2 mb-20">
-                <div className="tpblog__thumb fix">
-                  <Link to="/blog-details">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/blog/blog-bg-9.jpg"
-                      alt=""
-                    />
-                  </Link>
-                </div>
-                <div className="tpblog__wrapper">
-                  <div className="tpblog__entry-wap">
-                    <span className="cat-links">
-                      <Link to="#">Lifestyle</Link>
-                    </span>
-                    <span className="author-by">
-                      <Link to="#">Admin</Link>
-                    </span>
-                    <span className="post-data">
-                      <Link to="#">SEP 15. 2022</Link>
-                    </span>
-                  </div>
-                  <h4 className="tpblog__title">
-                    <Link to="/blog-details">
-                      Avocado Grilled Salmon, Rich In Nutrients For The Body
-                    </Link>
-                  </h4>
-                  <p>
-                    These are the people who make your life easier. Egestas is
-                    tristique vestibulum...
-                  </p>
-                  <div className="tpblog__details">
-                    <Link to="/blog-details">
-                      Continue reading <i className="icon-chevrons-right"></i>{" "}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-4">
-              <div className="tpblog__item tpblog__item-2 mb-20">
-                <div className="tpblog__thumb fix">
-                  <Link to="/blog-details">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/blog/blog-bg-3.jpg"
-                      alt=""
-                    />
-                  </Link>
-                </div>
-                <div className="tpblog__wrapper">
-                  <div className="tpblog__entry-wap">
-                    <span className="cat-links">
-                      <Link to="#">Lifestyle</Link>
-                    </span>
-                    <span className="author-by">
-                      <Link to="#">Admin</Link>
-                    </span>
-                    <span className="post-data">
-                      <Link to="#">SEP 15. 2022</Link>
-                    </span>
-                  </div>
-                  <h4 className="tpblog__title">
-                    <Link to="/blog-details">
-                      Avocado Grilled Salmon, Rich In Nutrients For The Body
-                    </Link>
-                  </h4>
-                  <p>
-                    These are the people who make your life easier. Egestas is
-                    tristique vestibulum...
-                  </p>
-                  <div className="tpblog__details">
-                    <Link to="/blog-details">
-                      Continue reading <i className="icon-chevrons-right"></i>{" "}
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

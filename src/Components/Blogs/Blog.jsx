@@ -1,10 +1,25 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Swiper from "swiper";
 import "swiper/swiper-bundle.css";
+import { Baseurl } from "../Confige";
+import { format } from "date-fns";
+import { Link } from "react-router-dom";
 function Blog() {
+  const [Blogs, setBlogs] = useState([]);
   useEffect(() => {
+    const fetchblogs = async () => {
+      try {
+        const response = await fetch(Baseurl + "/api/v1/blog/allblogs");
+        const data = await response.json();
+        setBlogs(data.data); // Adjust this line based on the actual API response structure
+      } catch (error) {
+        console.error("Error fetching banner data:", error);
+      }
+    };
+
+    fetchblogs();
     const tpblogswiper = new Swiper(".tpblog-active", {
       loop: false,
       slidesPerView: 4,
@@ -51,318 +66,44 @@ function Blog() {
           </div>
           <div className="swiper-container tpblog-active">
             <div className="swiper-wrapper">
-              <div className="swiper-slide">
-                <div className="tpblog__item">
-                  <div className="tpblog__thumb fix">
-                    <a href="blog-details.html">
-                      <img
-                        src="https://ingarden.com/cdn/shop/articles/Recipe_1_720x.jpg?v=1686057851"
-                        alt=""
-                      />
-                    </a>
-                  </div>
-                  <div className="tpblog__wrapper">
-                    <div className="tpblog__entry-wap">
-                      <span className="cat-links">
-                        <a href="shop-details.html">Lifestyle</a>
-                      </span>
-                      <span className="author-by">
-                        <a href="#">Admin</a>
-                      </span>
-                      <span className="post-data">
-                        <a href="#">SEP 15. 2022</a>
-                      </span>
-                    </div>
-                    <h4 className="tpblog__title">
+              {Blogs.map((blog, index) => (
+                <div className="swiper-slide" key={index}>
+                  <div className="tpblog__item">
+                    <div className="tpblog__thumb fix">
                       <a href="blog-details.html">
-                        Avocado Grilled Salmon, Rich In Nutrients For The Body
-                      </a>
-                    </h4>
-                    <p>
-                      These are the people who make your life easier. Egestas is
-                      tristique vestibulum...
-                    </p>
-                    <div className="tpblog__details">
-                      <a href="blog-details.html">
-                        Continue reading <i className="icon-chevrons-right"></i>
+                        <img src={blog.thumbnail} alt="" />
                       </a>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div className="swiper-slide">
-                <div className="tpblog__item">
-                  <div className="tpblog__thumb fix">
-                    <a href="blog-details.html">
-                      <img
-                        src="https://ingarden.com/cdn/shop/articles/Broccoli_2x_938b9cf6-f44a-441a-a24e-3d074c157db3_720x.jpg?v=1680070834"
-                        alt=""
-                      />
-                    </a>
-                  </div>
-                  <div className="tpblog__wrapper">
-                    <div className="tpblog__entry-wap">
-                      <span className="cat-links">
-                        <a href="shop-details.html">Organics</a>
-                      </span>
-                      <span className="author-by">
-                        <a href="#">Admin</a>
-                      </span>
-                      <span className="post-data">
-                        <a href="#">SEP 15. 2022</a>
-                      </span>
-                    </div>
-                    <h4 className="tpblog__title">
-                      <a href="blog-details.html">
-                        The Best Great Benefits For Women's Health
-                      </a>
-                    </h4>
-                    <p>
-                      These are the people who make your life easier. Egestas is
-                      tristique vestibulum...
-                    </p>
-                    <div className="tpblog__details">
-                      <a href="blog-details.html">
-                        Continue reading <i className="icon-chevrons-right"></i>
-                      </a>
+                    <div className="tpblog__wrapper">
+                      <div className="tpblog__entry-wap">
+                        <span className="cat-links">
+                          <a href="shop-details.html">Lifestyle</a>
+                        </span>
+                        <span className="author-by">
+                          <a href="#">{blog.author}</a>
+                        </span>
+                        <span className="post-data">
+                          <a href="#">
+                            {format(new Date(blog.createdAt), "MMM dd, yyyy")}
+                          </a>
+                        </span>
+                      </div>
+                      <h4 className="tpblog__title">
+                        <Link to={`/blogdetails/${blog._id}`}>
+                          {blog.title}
+                        </Link>
+                      </h4>
+                      <p>{blog.content.slice(0, 60)}....</p>
+                      <div className="tpblog__details">
+                        <Link to={`/blogdetails/${blog._id}`}>
+                          Continue reading
+                          <i className="icon-chevrons-right"></i>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="swiper-slide">
-                <div className="tpblog__item">
-                  <div className="tpblog__thumb fix">
-                    <a href="blog-details.html">
-                      <img
-                        src="https://ingarden.com/cdn/shop/articles/Recipe_1_720x.jpg?v=1686057851"
-                        alt=""
-                      />
-                    </a>
-                  </div>
-                  <div className="tpblog__wrapper">
-                    <div className="tpblog__entry-wap">
-                      <span className="cat-links">
-                        <a href="shop-details.html">Organics</a>
-                      </span>
-                      <span className="author-by">
-                        <a href="#">Admin</a>
-                      </span>
-                      <span className="post-data">
-                        <a href="#">SEP 15. 2022</a>
-                      </span>
-                    </div>
-                    <h4 className="tpblog__title">
-                      <a href="blog-details.html">
-                        Ways To Choose Fruits & Seafoods Good For Health
-                      </a>
-                    </h4>
-                    <p>
-                      These are the people who make your life easier. Egestas is
-                      tristique vestibulum...
-                    </p>
-                    <div className="tpblog__details">
-                      <a href="blog-details.html">
-                        Continue reading <i className="icon-chevrons-right"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="swiper-slide">
-                <div className="tpblog__item">
-                  <div className="tpblog__thumb fix">
-                    <a href="blog-details.html">
-                      <img
-                        src="https://ingarden.com/cdn/shop/articles/Recipe_1_720x.jpg?v=1686057851"
-                        alt=""
-                      />
-                    </a>
-                  </div>
-                  <div className="tpblog__wrapper">
-                    <div className="tpblog__entry-wap">
-                      <span className="cat-links">
-                        <a href="shop-details.html">Shopping</a>
-                      </span>
-                      <span className="author-by">
-                        <a href="#">Admin</a>
-                      </span>
-                      <span className="post-data">
-                        <a href="#">SEP 15. 2022</a>
-                      </span>
-                    </div>
-                    <h4 className="tpblog__title">
-                      <a href="blog-details.html">
-                        Summer Breakfast For The Healthy Morning With Tomatoes
-                      </a>
-                    </h4>
-                    <p>
-                      These are the people who make your life easier. Egestas is
-                      tristique vestibulum...
-                    </p>
-                    <div className="tpblog__details">
-                      <a href="blog-details.html">
-                        Continue reading <i className="icon-chevrons-right"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="swiper-slide">
-                <div className="tpblog__item">
-                  <div className="tpblog__thumb fix">
-                    <a href="blog-details.html">
-                      <img
-                        src="https://ingarden.com/cdn/shop/articles/Recipe_1_720x.jpg?v=1686057851"
-                        alt=""
-                      />
-                    </a>
-                  </div>
-                  <div className="tpblog__wrapper">
-                    <div className="tpblog__entry-wap">
-                      <span className="cat-links">
-                        <a href="#">Foods</a>
-                      </span>
-                      <span className="author-by">
-                        <a href="#">Admin</a>
-                      </span>
-                      <span className="post-data">
-                        <a href="#">SEP 15. 2022</a>
-                      </span>
-                    </div>
-                    <h4 className="tpblog__title">
-                      <a href="blog-details.html">
-                        Popular Reasons You Must Drinks Juice Everyday
-                      </a>
-                    </h4>
-                    <p>
-                      These are the people who make your life easier. Egestas is
-                      tristique vestibulum...
-                    </p>
-                    <div className="tpblog__details">
-                      <a href="blog-details.html">
-                        Continue reading <i className="icon-chevrons-right"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="swiper-slide">
-                <div className="tpblog__item">
-                  <div className="tpblog__thumb fix">
-                    <a href="blog-details.html">
-                      <img
-                        src="https://ingarden.com/cdn/shop/articles/Recipe_1_720x.jpg?v=1686057851"
-                        alt=""
-                      />
-                    </a>
-                  </div>
-                  <div className="tpblog__wrapper">
-                    <div className="tpblog__entry-wap">
-                      <span className="cat-links">
-                        <a href="shop-details.html">Lifestyle</a>
-                      </span>
-                      <span className="author-by">
-                        <a href="#">Admin</a>
-                      </span>
-                      <span className="post-data">
-                        <a href="#">SEP 15. 2022</a>
-                      </span>
-                    </div>
-                    <h4 className="tpblog__title">
-                      <a href="blog-details.html">
-                        Perfect Quality Reasonable Price For Your Family
-                      </a>
-                    </h4>
-                    <p>
-                      These are the people who make your life easier. Egestas is
-                      tristique vestibulum...
-                    </p>
-                    <div className="tpblog__details">
-                      <a href="blog-details.html">
-                        Continue reading <i className="icon-chevrons-right"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="swiper-slide">
-                <div className="tpblog__item">
-                  <div className="tpblog__thumb fix">
-                    <a href="blog-details.html">
-                      <img
-                        src="https://ingarden.com/cdn/shop/articles/Recipe_1_720x.jpg?v=1686057851"
-                        alt=""
-                      />
-                    </a>
-                  </div>
-                  <div className="tpblog__wrapper">
-                    <div className="tpblog__entry-wap">
-                      <span className="cat-links">
-                        <a href="shop-details.html">Dairy Farm</a>
-                      </span>
-                      <span className="author-by">
-                        <a href="#">Admin</a>
-                      </span>
-                      <span className="post-data">
-                        <a href="#">SEP 15. 2022</a>
-                      </span>
-                    </div>
-                    <h4 className="tpblog__title">
-                      <a href="blog-details.html">
-                        Ways To Choose Fruits Seafoods Good For Health
-                      </a>
-                    </h4>
-                    <p>
-                      These are the people who make your life easier. Egestas is
-                      tristique vestibulum...
-                    </p>
-                    <div className="tpblog__details">
-                      <a href="blog-details.html">
-                        Continue reading <i className="icon-chevrons-right"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="swiper-slide">
-                <div className="tpblog__item">
-                  <div className="tpblog__thumb fix">
-                    <a href="blog-details.html">
-                      <img
-                        src="https://ingarden.com/cdn/shop/articles/Recipe_1_720x.jpg?v=1686057851"
-                        alt=""
-                      />
-                    </a>
-                  </div>
-                  <div className="tpblog__wrapper">
-                    <div className="tpblog__entry-wap">
-                      <span className="cat-links">
-                        <a href="#">organis</a>
-                      </span>
-                      <span className="author-by">
-                        <a href="#">Admin</a>
-                      </span>
-                      <span className="post-data">
-                        <a href="#">SEP 15. 2022</a>
-                      </span>
-                    </div>
-                    <h4 className="tpblog__title">
-                      <a href="blog-details.html">
-                        The Best Great Benefits For Women’s Health
-                      </a>
-                    </h4>
-                    <p>
-                      These are the people who make your life easier. Egestas is
-                      tristique vestibulum...
-                    </p>
-                    <div className="tpblog__details">
-                      <a href="blog-details.html">
-                        Continue reading <i className="icon-chevrons-right"></i>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CardProduct from "../Product/CardProduct";
-import Category from "../Product/Category";
+
 import { Baseurl } from "../Confige";
-
-function Shop() {
+function Categoryproduct() {
   const [allproduct, setAllproduct] = useState([]);
-
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const { id } = useParams();
   useEffect(() => {
     fetch(Baseurl + "/api/v1/Product/products")
       .then((response) => {
@@ -17,11 +17,13 @@ function Shop() {
       })
       .then((data) => {
         setAllproduct(data.data);
+        const filtered = data.data.filter((product) => product.category === id);
+        setFilteredProducts(filtered);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -49,23 +51,6 @@ function Shop() {
             <div className="row">
               <div className="col-xl-12 col-lg-12 col-md-12">
                 <div className="tpshop__details">
-                  <div
-                    className="tpshop__banner mb-30"
-                    style={{
-                      backgroundImage:
-                        "url(https://html.hixstudio.net/orfarm/assets/img/banner/shop-bg-1.jpg)",
-                    }}
-                  >
-                    <div className="tpshop__content text-center">
-                      <span>The Salad</span>
-                      <h4 className="tpshop__content-title mb-20">
-                        Fresh & Natural <br />
-                        Healthy Food Special Offer
-                      </h4>
-                      <p>Do not miss the current offers of us!</p>
-                    </div>
-                  </div>
-                  <Category />
                   <div className="product__filter-content mb-30">
                     <div className="row align-items-center">
                       <div className="col-sm-4">
@@ -194,7 +179,7 @@ function Shop() {
                       aria-labelledby="nav-popular-tab"
                     >
                       <div className="row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-1 tpproduct__shop-item">
-                        {allproduct.map((product) => (
+                        {filteredProducts.map((product) => (
                           <CardProduct key={product.id} product={product} />
                         ))}
                       </div>
@@ -210,4 +195,4 @@ function Shop() {
   );
 }
 
-export default Shop;
+export default Categoryproduct;

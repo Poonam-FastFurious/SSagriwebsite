@@ -56,13 +56,10 @@ function Dealofday() {
                     data-countdown="2024/06/11"
                   ></div>
                   <div className="tpcoundown__btn mt-50">
-                    <Link className="whight-btn" to="shop-details-grid">
+                    <Link className="whight-btn" to="#">
                       Know More
                     </Link>
-                    <Link
-                      className="whight-btn border-btn ml-15"
-                      to="shop-list-view"
-                    >
+                    <Link className="whight-btn border-btn ml-15" to="#">
                       View Menu
                     </Link>
                   </div>
@@ -94,92 +91,66 @@ function Dealofday() {
           </div>
         </div>
       </section>
-      <section className="brand-product grey-bg mt-50 ">
-        <div className="">
-          <div className="sections__wrapper white-bg pl-50 pr-50 pb-40 brand-product">
-            <div className="row align-items-center">
-              <div className="col-md-6 text-center">
-                <div className="tpsection mb-15">
-                  <h4 className="tpsection__title text-start brand-product-title">
-                    Featured Brand Products
-                  </h4>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="tpproduct__all-item">
-                  <a href="#">
-                    View All <i className="icon-chevron-right"></i>
-                  </a>
+      <section className="brand-product pt-75 pb-60">
+        <div className="container">
+          <div className="white-bg pb-40 brand-product">
+            <div className="row">
+              <div className="col-lg-12 text-center">
+                <div className="tpsection mb-35">
+                  <h4 className="tpsection__sub-title">~ Best Products ~</h4>
+                  <h4 className="tpsection__title">This week’s highlights</h4>
+                  <p>
+                    The liber tempor cum soluta nobis eleifend option congue
+                    doming quod mazim.
+                  </p>
                 </div>
               </div>
             </div>
             <div className="row gx-3">
-              <div className="col-lg-3">
-                <div className="tpbrandproduct__main text-center">
-                  <div className="tpbrandproduct__main-thumb mb-20">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/brand/brand-thumb-1.png"
-                      alt=""
-                    />
-                  </div>
-                  <div className="tpbrandproduct__main-contetn">
-                    <h4 className="tpbrandproduct__title">Super </h4>
-                    <p>
-                      Nam liber tempor cum soluta nobis eleifend congue doming
-                      quod mazim placerat facer possim assum typi. Nam liber
-                      tempor cum soluta nobis eleifend congue
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-9">
-                <div className="row gx-3">
-                  {topproduct.map((product, index) => (
-                    <div className="col-xl-4 col-lg-6" key={index}>
-                      <div className="tpbrandproduct__item d-flex mb-20">
-                        <div className="tpbrandproduct__img p-relative">
-                          <img src={product.image} alt="" />
-                          <div className="tpproduct__info bage tpbrandproduct__bage">
-                            <span className="tpproduct__info-discount bage__discount">
-                              -{product.discountPercentage}%
-                            </span>
-                          </div>
-                        </div>
-                        <div className="tpbrandproduct__contact">
-                          <span className="tpbrandproduct__product-title">
-                            <a href="shop-details.html">
-                              {product.productTitle}
-                            </a>
-                          </span>
-                          <div className="tpproduct__rating mb-5">
-                            <a href="#">
-                              <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
-                              <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
-                              <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
-                              <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
-                              <i className="icon-star_outline1"></i>
-                            </a>
-                          </div>
-                          <div className="tpproduct__price">
-                            <span>{product.oneTimePrice}</span>
-                            <del className="ml-10">
-                              {product.subscriptionPrice}
-                            </del>
-                          </div>
-                        </div>
+              {topproduct.map((product, index) => (
+                <div className="col-xl-4 col-md-6 col-sm-12" key={index}>
+                  <div className="tpbrandproduct__item d-flex mb-20">
+                    <div className="tpbrandproduct__img p-relative">
+                      <img src={product.image} alt="" />
+                      <div className="tpproduct__info bage tpbrandproduct__bage">
+                        <span className="tpproduct__info-discount bage__discount">
+                          -50%
+                        </span>
                       </div>
                     </div>
-                  ))}
+                    <div className="tpbrandproduct__contact">
+                      <span className="tpbrandproduct__product-title">
+                        <Link to={`/Product/${product._id}`}>
+                          {product.productTitle}
+                        </Link>
+                      </span>
+                      <div className="tpproduct__rating mb-5">
+                        <Link to="#">
+                          <i className="icon-star_outline1"></i>
+                        </Link>
+                        <Link to="#">
+                          <i className="icon-star_outline1"></i>
+                        </Link>
+                        <Link to="#">
+                          <i className="icon-star_outline1"></i>
+                        </Link>
+                        <Link to="#">
+                          <i className="icon-star_outline1"></i>
+                        </Link>
+                        <Link to="#">
+                          <i className="icon-star_outline1"></i>
+                        </Link>
+                      </div>
+                      <div className="tpproduct__price">
+                        <span>₹{product.oneTimePrice}</span>
+                        <del className="pl-10">
+                          {product.discountPercentage}%
+                        </del>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

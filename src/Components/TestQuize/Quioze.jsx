@@ -154,7 +154,7 @@ function Quioze() {
                 </h3>
 
                 <div className="tpabout__inner-btn">
-                  <Link to="about">Take the test</Link>
+                  <Link to="#">Take the test</Link>
                 </div>
               </div>
             </div>
@@ -209,326 +209,77 @@ function Quioze() {
             )}
             {currentStep === quizData.length && (
               <fieldset id="recommendations">
-                <h4>
-                  according to your preferences, this is the perfect superfood
-                  for you
-                </h4>
-                <div
-                  className="tab-pane fade show active whight-product"
-                  id="nav-popular"
-                  role="tabpanel"
-                  aria-labelledby="nav-popular-tab"
-                >
-                  <div className="row">
-                    <div className="col-lg-12">
-                      <div className="tplist__product d-flex align-items-center justify-content-between mb-20">
-                        <div className="tplist__product-img">
-                          <Link to="#" className="tplist__product-img-one">
-                            <img
-                              src="https://html.hixstudio.net/orfarm/assets/img/product/products41-min.jpg"
-                              alt=""
-                            />
-                          </Link>
-                          <Link
-                            className="tplist__product-img-two"
-                            to="shop-details"
+                <section className="brand-product pt-75 pb-60">
+                  <div className="container">
+                    <div className="white-bg pb-40 brand-product">
+                      <div className="row">
+                        <div className="col-lg-12 text-center">
+                          <div className="tpsection mb-35">
+                            <h4 className="tpsection__sub-title">
+                              ~ Best Products ~
+                            </h4>
+                            <h4 className="tpsection__title">
+                              According to your choice
+                            </h4>
+                            <p>
+                              The liber tempor cum soluta nobis eleifend option
+                              congue doming quod mazim.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row gx-3">
+                        {topproduct.map((product, index) => (
+                          <div
+                            className="col-xl-4 col-md-6 col-sm-12"
+                            key={index}
                           >
-                            <img
-                              src="https://html.hixstudio.net/orfarm/assets/img/product/products48-min.jpg"
-                              alt=""
-                            />
-                          </Link>
-                          <div className="tpproduct__info bage">
-                            <span className="tpproduct__info-discount bage__discount">
-                              -50%
-                            </span>
-                            <span className="tpproduct__info-hot bage__hot">
-                              HOT
-                            </span>
+                            <div className="tpbrandproduct__item d-flex mb-20">
+                              <div className="tpbrandproduct__img p-relative">
+                                <img src={product.image} alt="" />
+                                <div className="tpproduct__info bage tpbrandproduct__bage">
+                                  <span className="tpproduct__info-discount bage__discount">
+                                    -50%
+                                  </span>
+                                </div>
+                              </div>
+                              <div className="tpbrandproduct__contact">
+                                <span className="tpbrandproduct__product-title">
+                                  <Link to={`/Product/${product._id}`}>
+                                    {product.productTitle}
+                                  </Link>
+                                </span>
+                                <div className="tpproduct__rating mb-5">
+                                  <Link to="#">
+                                    <i className="icon-star_outline1"></i>
+                                  </Link>
+                                  <Link to="#">
+                                    <i className="icon-star_outline1"></i>
+                                  </Link>
+                                  <Link to="#">
+                                    <i className="icon-star_outline1"></i>
+                                  </Link>
+                                  <Link to="#">
+                                    <i className="icon-star_outline1"></i>
+                                  </Link>
+                                  <Link to="#">
+                                    <i className="icon-star_outline1"></i>
+                                  </Link>
+                                </div>
+                                <div className="tpproduct__price">
+                                  <span>₹{product.oneTimePrice}</span>
+                                  <del className="pl-10">
+                                    {product.discountPercentage}%
+                                  </del>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div className="tplist__content">
-                          <span>500 gram</span>
-                          <h4 className="tplist__content-title">
-                            <Link to="#">
-                              Fresh Mangosteen 100% Organic From VietNamese
-                            </Link>
-                          </h4>
-                          <div className="tplist__rating mb-5">
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                          </div>
-                          <ul className="tplist__content-info">
-                            <li>Delicous Non-Dairy cheese sauce</li>
-                            <li>Vegan & Allergy Friendly</li>
-                            <li>Smooth, velvety Dairy free cheese sauce</li>
-                          </ul>
-                        </div>
-                        <div className="tplist__price justify-content-end">
-                          <h4 className="tplist__instock">
-                            Availability: <span>92 in stock</span>{" "}
-                          </h4>
-                          <h3 className="tplist__count mb-15">$56.00</h3>
-                          <button className="tp-btn-2 mb-10">
-                            Add to cart
-                          </button>
-                          <div className="tplist__shopping">
-                            <Link to="#">
-                              <i className="icon-heart icons"></i> wishlist
-                            </Link>
-                          </div>
-                        </div>
+                        ))}
                       </div>
                     </div>
                   </div>
-                  <div className="row">
-                    <div className="col-lg-12">
-                      <div className="tplist__product d-flex align-items-center justify-content-between mb-20">
-                        <div className="tplist__product-img">
-                          <Link to="#" className="tplist__product-img-one">
-                            <img
-                              src="https://html.hixstudio.net/orfarm/assets/img/product/products41-min.jpg"
-                              alt=""
-                            />
-                          </Link>
-                          <Link
-                            className="tplist__product-img-two"
-                            to="shop-details"
-                          >
-                            <img
-                              src="https://html.hixstudio.net/orfarm/assets/img/product/products48-min.jpg"
-                              alt=""
-                            />
-                          </Link>
-                          <div className="tpproduct__info bage">
-                            <span className="tpproduct__info-discount bage__discount">
-                              -50%
-                            </span>
-                            <span className="tpproduct__info-hot bage__hot">
-                              HOT
-                            </span>
-                          </div>
-                        </div>
-                        <div className="tplist__content">
-                          <span>500 gram</span>
-                          <h4 className="tplist__content-title">
-                            <Link to="#">
-                              Fresh Mangosteen 100% Organic From VietNamese
-                            </Link>
-                          </h4>
-                          <div className="tplist__rating mb-5">
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                          </div>
-                          <ul className="tplist__content-info">
-                            <li>Delicous Non-Dairy cheese sauce</li>
-                            <li>Vegan & Allergy Friendly</li>
-                            <li>Smooth, velvety Dairy free cheese sauce</li>
-                          </ul>
-                        </div>
-                        <div className="tplist__price justify-content-end">
-                          <h4 className="tplist__instock">
-                            Availability: <span>92 in stock</span>{" "}
-                          </h4>
-                          <h3 className="tplist__count mb-15">$56.00</h3>
-                          <button className="tp-btn-2 mb-10">
-                            Add to cart
-                          </button>
-                          <div className="tplist__shopping">
-                            <Link to="#">
-                              <i className="icon-heart icons"></i> wishlist
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-layers"></i>Compare
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>{" "}
-                  <div className="row">
-                    <div className="col-lg-12">
-                      <div className="tplist__product d-flex align-items-center justify-content-between mb-20">
-                        <div className="tplist__product-img">
-                          <Link to="#" className="tplist__product-img-one">
-                            <img
-                              src="https://html.hixstudio.net/orfarm/assets/img/product/products41-min.jpg"
-                              alt=""
-                            />
-                          </Link>
-                          <Link
-                            className="tplist__product-img-two"
-                            to="shop-details"
-                          >
-                            <img
-                              src="https://html.hixstudio.net/orfarm/assets/img/product/products48-min.jpg"
-                              alt=""
-                            />
-                          </Link>
-                          <div className="tpproduct__info bage">
-                            <span className="tpproduct__info-discount bage__discount">
-                              -50%
-                            </span>
-                            <span className="tpproduct__info-hot bage__hot">
-                              HOT
-                            </span>
-                          </div>
-                        </div>
-                        <div className="tplist__content">
-                          <span>500 gram</span>
-                          <h4 className="tplist__content-title">
-                            <Link to="#">
-                              Fresh Mangosteen 100% Organic From VietNamese
-                            </Link>
-                          </h4>
-                          <div className="tplist__rating mb-5">
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                          </div>
-                          <ul className="tplist__content-info">
-                            <li>Delicous Non-Dairy cheese sauce</li>
-                            <li>Vegan & Allergy Friendly</li>
-                            <li>Smooth, velvety Dairy free cheese sauce</li>
-                          </ul>
-                        </div>
-                        <div className="tplist__price justify-content-end">
-                          <h4 className="tplist__instock">
-                            Availability: <span>92 in stock</span>{" "}
-                          </h4>
-                          <h3 className="tplist__count mb-15">$56.00</h3>
-                          <button className="tp-btn-2 mb-10">
-                            Add to cart
-                          </button>
-                          <div className="tplist__shopping">
-                            <Link to="#">
-                              <i className="icon-heart icons"></i> wishlist
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-layers"></i>Compare
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>{" "}
-                  <div className="row">
-                    <div className="col-lg-12">
-                      <div className="tplist__product d-flex align-items-center justify-content-between mb-20">
-                        <div className="tplist__product-img">
-                          <Link to="#" className="tplist__product-img-one">
-                            <img
-                              src="https://html.hixstudio.net/orfarm/assets/img/product/products41-min.jpg"
-                              alt=""
-                            />
-                          </Link>
-                          <Link
-                            className="tplist__product-img-two"
-                            to="shop-details"
-                          >
-                            <img
-                              src="https://html.hixstudio.net/orfarm/assets/img/product/products48-min.jpg"
-                              alt=""
-                            />
-                          </Link>
-                          <div className="tpproduct__info bage">
-                            <span className="tpproduct__info-discount bage__discount">
-                              -50%
-                            </span>
-                            <span className="tpproduct__info-hot bage__hot">
-                              HOT
-                            </span>
-                          </div>
-                        </div>
-                        <div className="tplist__content">
-                          <span>500 gram</span>
-                          <h4 className="tplist__content-title">
-                            <Link to="#">
-                              Fresh Mangosteen 100% Organic From VietNamese
-                            </Link>
-                          </h4>
-                          <div className="tplist__rating mb-5">
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-star_outline1"></i>
-                            </Link>
-                          </div>
-                          <ul className="tplist__content-info">
-                            <li>Delicous Non-Dairy cheese sauce</li>
-                            <li>Vegan & Allergy Friendly</li>
-                            <li>Smooth, velvety Dairy free cheese sauce</li>
-                          </ul>
-                        </div>
-                        <div className="tplist__price justify-content-end">
-                          <h4 className="tplist__instock">
-                            Availability: <span>92 in stock</span>{" "}
-                          </h4>
-                          <h3 className="tplist__count mb-15">$56.00</h3>
-                          <button className="tp-btn-2 mb-10">
-                            Add to cart
-                          </button>
-                          <div className="tplist__shopping">
-                            <Link to="#">
-                              <i className="icon-heart icons"></i> wishlist
-                            </Link>
-                            <Link to="#">
-                              <i className="icon-layers"></i>Compare
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                </section>
               </fieldset>
             )}
           </form>

@@ -9,8 +9,8 @@ function Cart() {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const response = await fetch(Baseurl + "api/v1/cart/product", {
+        const token = localStorage.getItem("accessToken");
+        const response = await fetch(Baseurl + "/api/v1/cart/product", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -70,7 +70,7 @@ function Cart() {
 
   const removeProduct = async (productId) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("accessToken");
       const response = await fetch(Baseurl + "/api/v1/cart/removeproduct", {
         method: "DELETE",
         headers: {
@@ -202,7 +202,7 @@ function Cart() {
                                 </td>
                                 <td className="product-subtotal">
                                   <span className="amount">
-                                    Rs{" "}
+                                    Rs
                                     {product.quantity * product.product.price}
                                   </span>
                                 </td>

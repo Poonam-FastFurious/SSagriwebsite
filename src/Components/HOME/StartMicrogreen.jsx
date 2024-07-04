@@ -14,7 +14,7 @@ function StartMicrogreen() {
                   width="100%"
                   height="100%"
                   style={{
-                    "aspect-ratio": "1",
+                    aspectRatio: "1",
                     maxHeight: "100vh",
                     maxWidth: "100vw",
                     outline: "none",
