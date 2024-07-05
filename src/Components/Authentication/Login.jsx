@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 
 import "react-toastify/dist/ReactToastify.css";
 import { Baseurl } from "../Confige";
+import { Link } from "react-router-dom";
 
 function Signin() {
   const [email, setEmail] = useState("");
@@ -168,6 +169,9 @@ function Signin() {
                     <div className="tpsign__pass">
                       <a href="#">Forget Password</a>
                     </div>
+                  </div>
+                  <div className="tpsign__account mb-15">
+                    <Link to="/register">Dont Have Account?</Link>
                   </div>
                   <div className="tptrack__btn">
                     <button

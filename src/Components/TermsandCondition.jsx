@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import { Baseurl } from "./Confige";
 
 const TermsandCondition = () => {
   const [sections, setSections] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/terms/all")
+    fetch(Baseurl + "/api/v1/terms/all")
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {

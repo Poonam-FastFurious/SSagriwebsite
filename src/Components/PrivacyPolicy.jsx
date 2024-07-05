@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import { Baseurl } from "./Confige";
 
 const PrivacyPolicy = () => {
   const [sections, setSections] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/privacy/privacy-policy")
+    fetch(Baseurl + "/api/v1/privacy/privacy-policy")
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {

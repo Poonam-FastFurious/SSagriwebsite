@@ -8,8 +8,10 @@ import { addToCart } from "../Utils/Addtocartutils";
 function ProductDetails() {
   const [products, setProducts] = useState([]);
   const { id } = useParams();
-  const increaseQuantity = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+  const [newproduct, setNewproduct] = useState([]);
+
+  const handleAddToCart = (productId) => {
+    addToCart(productId);
   };
   useEffect(() => {
     fetch(Baseurl + "/api/v1/Product/products")
@@ -551,7 +553,7 @@ function ProductDetails() {
           <div className="container">
             <div className="row">
               <div className="col-lg-12">
-                <h5 className="tpdescription__product-title mb-20">
+                <h5 className="tpdescription__product-title mb-20 text-24">
                   Related Products
                 </h5>
               </div>
@@ -559,789 +561,91 @@ function ProductDetails() {
             <div className="tpproduct__arrow double-product p-relative">
               <div className="swiper-container tpproduct-active tpslider-bottom p-relative">
                 <div className="swiper-wrapper">
-                  <div className="swiper-slide">
-                    <div className="tpproduct p-relative">
-                      <div className="tpproduct__thumb p-relative text-center">
-                        <a href="#">
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products29-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <a
-                          className="tpproduct__thumb-img"
-                          href="shop-details.html"
-                        >
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products30-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <div className="tpproduct__info bage">
-                          <span className="tpproduct__info-discount bage__discount">
-                            -50%
+                  {newproduct.map((product, index) => (
+                    <div className="swiper-slide" key={index}>
+                      <div className="tpproduct p-relative">
+                        <div className="tpproduct__thumb p-relative text-center">
+                          <Link to="#">
+                            <img src={product.image} alt="" />
+                          </Link>
+                          <Link className="tpproduct__thumb-img" to="#">
+                            <img src={product.image} alt="" />
+                          </Link>
+                          <div className="tpproduct__info bage">
+                            <span className="tpproduct__info-hot bage__discount">
+                              HOT
+                            </span>
+                          </div>
+                          <div className="tpproduct__shopping">
+                            <Link
+                              className="tpproduct__shopping-wishlist"
+                              to="#"
+                            >
+                              <i className="icon-heart icons"></i>
+                            </Link>
+                            <Link
+                              className="tpproduct__shopping-wishlist"
+                              to="#"
+                            >
+                              <i className="icon-layers"></i>
+                            </Link>
+                            <Link className="tpproduct__shopping-cart" to="#">
+                              <i className="icon-eye"></i>
+                            </Link>
+                          </div>
+                        </div>
+                        <div className="tpproduct__content">
+                          <span className="tpproduct__content-weight">
+                            <Link to="#">{product.category}</Link>
                           </span>
-                          <span className="tpproduct__info-hot bage__hot">
-                            HOT
-                          </span>
+                          <h4 className="tpproduct__title">
+                            <Link to="#">{product.productTitle}</Link>
+                          </h4>
+                          <div className="tpproduct__rating mb-5">
+                            <Link to="#">
+                              <i className="icon-star_outline1"></i>
+                            </Link>
+                            <Link to="#">
+                              <i className="icon-star_outline1"></i>
+                            </Link>
+                            <Link to="#">
+                              <i className="icon-star_outline1"></i>
+                            </Link>
+                            <Link to="#">
+                              <i className="icon-star_outline1"></i>
+                            </Link>
+                            <Link to="#">
+                              <i className="icon-star_outline1"></i>
+                            </Link>
+                          </div>
+                          <div className="tpproduct__price">
+                            <span>₹{product.oneTimePrice}</span>
+                            <del className="pl-10">
+                              {product.discountPercentage}%
+                            </del>
+                          </div>
                         </div>
-                        <div className="tpproduct__shopping">
-                          <a
-                            className="tpproduct__shopping-wishlist"
-                            href="wishlist.html"
-                          >
-                            <i className="icon-heart icons"></i>
-                          </a>
-                          <a className="tpproduct__shopping-wishlist" href="#">
-                            <i className="icon-layers"></i>
-                          </a>
-                          <a className="tpproduct__shopping-cart" href="#">
-                            <i className="icon-eye"></i>
-                          </a>
-                        </div>
-                      </div>
-                      <div className="tpproduct__content">
-                        <span className="tpproduct__content-weight">
-                          <a href="shop-details.html">Fresh Meat</a>
-                        </span>
-                        <h4 className="tpproduct__title">
-                          <a href="shop-details-top-.html">
-                            Mangosteen Organic From VietNamese
-                          </a>
-                        </h4>
-                        <div className="tpproduct__rating mb-5">
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                        </div>
-                        <div className="tpproduct__price">
-                          <span>$56.00</span>
-                          <del>$19.00</del>
-                        </div>
-                      </div>
-                      <div className="tpproduct__hover-text">
-                        <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                          <a className="tp-btn-2" href="cart.html">
-                            Add to cart
-                          </a>
-                        </div>
-                        <div className="tpproduct__descrip">
-                          <ul>
-                            <li>Type: Organic</li>
-                            <li>MFG: August 4.2021</li>
-                            <li>LIFE: 60 days</li>
-                          </ul>
+                        <div className="tpproduct__hover-text">
+                          <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                            <Link
+                              className="tp-btn-2"
+                              to="#"
+                              onClick={() => handleAddToCart(product._id)}
+                            >
+                              Add to cart
+                            </Link>
+                          </div>
+                          <div className="tpproduct__descrip">
+                            <ul>
+                              <li>Stock: {product.stock}</li>
+                              <li>Rating: {product.rating}</li>
+                              <li>Type: Organic</li>
+                            </ul>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="swiper-slide">
-                    <div className="tpproduct p-relative">
-                      <div className="tpproduct__thumb p-relative text-center">
-                        <a href="#">
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products9-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <a
-                          className="tpproduct__thumb-img"
-                          href="shop-details.html"
-                        >
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products10-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <div className="tpproduct__info bage">
-                          <span className="tpproduct__info-discount bage__discount">
-                            -40%
-                          </span>
-                        </div>
-                        <div className="tpproduct__shopping">
-                          <a
-                            className="tpproduct__shopping-wishlist"
-                            href="wishlist.html"
-                          >
-                            <i className="icon-heart icons"></i>
-                          </a>
-                          <a className="tpproduct__shopping-wishlist" href="#">
-                            <i className="icon-layers"></i>
-                          </a>
-                          <a className="tpproduct__shopping-cart" href="#">
-                            <i className="icon-eye"></i>
-                          </a>
-                        </div>
-                      </div>
-                      <div className="tpproduct__content">
-                        <span className="tpproduct__content-weight">
-                          <a href="shop-details.html">Fresh Meat</a>
-                        </span>
-                        <h4 className="tpproduct__title">
-                          <a href="shop-details-top.html">
-                            Soda Sparkling Water Maker (Rose Gold)
-                          </a>
-                        </h4>
-                        <div className="tpproduct__rating mb-5">
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                        </div>
-                        <div className="tpproduct__price">
-                          <span>$56.00</span>
-                          <del>$19.00</del>
-                        </div>
-                      </div>
-                      <div className="tpproduct__hover-text">
-                        <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                          <a className="tp-btn-2" href="cart.html">
-                            Add to cart
-                          </a>
-                        </div>
-                        <div className="tpproduct__descrip">
-                          <ul>
-                            <li>Type: Organic</li>
-                            <li>MFG: August 4.2021</li>
-                            <li>LIFE: 60 days</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="swiper-slide">
-                    <div className="tpproduct p-relative">
-                      <div className="tpproduct__thumb p-relative text-center">
-                        <a href="#">
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products13-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <a
-                          className="tpproduct__thumb-img"
-                          href="shop-details.html"
-                        >
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products35-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <div className="tpproduct__info bage">
-                          <span className="tpproduct__info-discount bage__discount">
-                            -10%
-                          </span>
-                        </div>
-                        <div className="tpproduct__shopping">
-                          <a
-                            className="tpproduct__shopping-wishlist"
-                            href="wishlist.html"
-                          >
-                            <i className="icon-heart icons"></i>
-                          </a>
-                          <a className="tpproduct__shopping-wishlist" href="#">
-                            <i className="icon-layers"></i>
-                          </a>
-                          <a className="tpproduct__shopping-cart" href="#">
-                            <i className="icon-eye"></i>
-                          </a>
-                        </div>
-                      </div>
-                      <div className="tpproduct__content">
-                        <span className="tpproduct__content-weight">
-                          <a href="shop-details-3.html">Fresh Fruits</a>
-                        </span>
-                        <h4 className="tpproduct__title">
-                          <a href="shop-details.html">
-                            HOT - Lettuce Fresh Produce Fruit Vegetables
-                          </a>
-                        </h4>
-                        <div className="tpproduct__rating mb-5">
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                        </div>
-                        <div className="tpproduct__price">
-                          <span>$56.00</span>
-                          <del>$19.00</del>
-                        </div>
-                      </div>
-                      <div className="tpproduct__hover-text">
-                        <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                          <a className="tp-btn-2" href="cart.html">
-                            Add to cart
-                          </a>
-                        </div>
-                        <div className="tpproduct__descrip">
-                          <ul>
-                            <li>Type: Organic</li>
-                            <li>MFG: August 4.2021</li>
-                            <li>LIFE: 60 days</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="swiper-slide">
-                    <div className="tpproduct p-relative">
-                      <div className="tpproduct__thumb p-relative text-center">
-                        <a href="#">
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products27-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <a
-                          className="tpproduct__thumb-img"
-                          href="shop-details.html"
-                        >
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products14-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <div className="tpproduct__info bage">
-                          <span className="tpproduct__info-discount bage__discount">
-                            -90%
-                          </span>
-                          <span className="tpproduct__info-hot bage__hot">
-                            HOT
-                          </span>
-                        </div>
-                        <div className="tpproduct__shopping">
-                          <a
-                            className="tpproduct__shopping-wishlist"
-                            href="wishlist.html"
-                          >
-                            <i className="icon-heart icons"></i>
-                          </a>
-                          <a className="tpproduct__shopping-wishlist" href="#">
-                            <i className="icon-layers"></i>
-                          </a>
-                          <a className="tpproduct__shopping-cart" href="#">
-                            <i className="icon-eye"></i>
-                          </a>
-                        </div>
-                      </div>
-                      <div className="tpproduct__content">
-                        <span className="tpproduct__content-weight">
-                          <a href="shop-details-3.html">Fresh Fruits</a>
-                        </span>
-                        <h4 className="tpproduct__title">
-                          <a href="shop-details-grid.html">
-                            Pure Irish Organic Beef Quarter Pounder Burgers
-                          </a>
-                        </h4>
-                        <div className="tpproduct__rating mb-5">
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                        </div>
-                        <div className="tpproduct__price">
-                          <span>$56.00</span>
-                          <del>$19.00</del>
-                        </div>
-                      </div>
-                      <div className="tpproduct__hover-text">
-                        <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                          <a className="tp-btn-2" href="cart.html">
-                            Add to cart
-                          </a>
-                        </div>
-                        <div className="tpproduct__descrip">
-                          <ul>
-                            <li>Type: Organic</li>
-                            <li>MFG: August 4.2021</li>
-                            <li>LIFE: 60 days</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="swiper-slide">
-                    <div className="tpproduct p-relative">
-                      <div className="tpproduct__thumb p-relative text-center">
-                        <a href="#">
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products15-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <a
-                          className="tpproduct__thumb-img"
-                          href="shop-details.html"
-                        >
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products32-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <div className="tpproduct__info bage">
-                          <span className="tpproduct__info-discount bage__discount">
-                            -50%
-                          </span>
-                        </div>
-                        <div className="tpproduct__shopping">
-                          <a
-                            className="tpproduct__shopping-wishlist"
-                            href="wishlist.html"
-                          >
-                            <i className="icon-heart icons"></i>
-                          </a>
-                          <a className="tpproduct__shopping-wishlist" href="#">
-                            <i className="icon-layers"></i>
-                          </a>
-                          <a className="tpproduct__shopping-cart" href="#">
-                            <i className="icon-eye"></i>
-                          </a>
-                        </div>
-                      </div>
-                      <div className="tpproduct__content">
-                        <span className="tpproduct__content-weight">
-                          <a href="shop-details-3.html">Vagetables</a>
-                        </span>
-                        <h4 className="tpproduct__title">
-                          <a href="shop-details-3.html">
-                            Ginger Fresh, Whole, Organic - 250gram
-                          </a>
-                        </h4>
-                        <div className="tpproduct__rating mb-5">
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                        </div>
-                        <div className="tpproduct__price">
-                          <span>$56.00</span>
-                          <del>$19.00</del>
-                        </div>
-                      </div>
-                      <div className="tpproduct__hover-text">
-                        <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                          <a className="tp-btn-2" href="cart.html">
-                            Add to cart
-                          </a>
-                        </div>
-                        <div className="tpproduct__descrip">
-                          <ul>
-                            <li>Type: Organic</li>
-                            <li>MFG: August 4.2021</li>
-                            <li>LIFE: 60 days</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="swiper-slide">
-                    <div className="tpproduct p-relative">
-                      <div className="tpproduct__thumb p-relative text-center">
-                        <a href="#">
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products12-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <a
-                          className="tpproduct__thumb-img"
-                          href="shop-details.html"
-                        >
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products28-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <div className="tpproduct__info bage">
-                          <span className="tpproduct__info-discount bage__discount">
-                            -40%
-                          </span>
-                          <span className="tpproduct__info-hot bage__hot">
-                            HOT
-                          </span>
-                        </div>
-                        <div className="tpproduct__shopping">
-                          <a
-                            className="tpproduct__shopping-wishlist"
-                            href="wishlist.html"
-                          >
-                            <i className="icon-heart icons"></i>
-                          </a>
-                          <a className="tpproduct__shopping-wishlist" href="#">
-                            <i className="icon-layers"></i>
-                          </a>
-                          <a className="tpproduct__shopping-cart" href="#">
-                            <i className="icon-eye"></i>
-                          </a>
-                        </div>
-                      </div>
-                      <div className="tpproduct__content">
-                        <span className="tpproduct__content-weight">
-                          <a href="shop-details-3.html">Fresh Fruits</a>
-                        </span>
-                        <h4 className="tpproduct__title">
-                          <a href="shop-details-grid.html">
-                            Laffy Taffy Laff Bites Gone Bananas - 4 Packs
-                          </a>
-                        </h4>
-                        <div className="tpproduct__rating mb-5">
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                        </div>
-                        <div className="tpproduct__price">
-                          <span>$56.00</span>
-                          <del>$19.00</del>
-                        </div>
-                      </div>
-                      <div className="tpproduct__hover-text">
-                        <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                          <a className="tp-btn-2" href="cart.html">
-                            Add to cart
-                          </a>
-                        </div>
-                        <div className="tpproduct__descrip">
-                          <ul>
-                            <li>Type: Organic</li>
-                            <li>MFG: August 4.2021</li>
-                            <li>LIFE: 60 days</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="swiper-slide">
-                    <div className="tpproduct p-relative">
-                      <div className="tpproduct__thumb p-relative text-center">
-                        <a href="#">
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products12-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <a
-                          className="tpproduct__thumb-img"
-                          href="shop-details.html"
-                        >
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products28-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <div className="tpproduct__info bage">
-                          <span className="tpproduct__info-discount bage__discount">
-                            -40%
-                          </span>
-                          <span className="tpproduct__info-hot bage__hot">
-                            HOT
-                          </span>
-                        </div>
-                        <div className="tpproduct__shopping">
-                          <a
-                            className="tpproduct__shopping-wishlist"
-                            href="wishlist.html"
-                          >
-                            <i className="icon-heart icons"></i>
-                          </a>
-                          <a className="tpproduct__shopping-wishlist" href="#">
-                            <i className="icon-layers"></i>
-                          </a>
-                          <a className="tpproduct__shopping-cart" href="#">
-                            <i className="icon-eye"></i>
-                          </a>
-                        </div>
-                      </div>
-                      <div className="tpproduct__content">
-                        <span className="tpproduct__content-weight">
-                          <a href="shop-details-3.html">Fresh Fruits</a>
-                        </span>
-                        <h4 className="tpproduct__title">
-                          <a href="shop-details-grid.html">
-                            Laffy Taffy Laff Bites Gone Bananas - 4 Packs
-                          </a>
-                        </h4>
-                        <div className="tpproduct__rating mb-5">
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                        </div>
-                        <div className="tpproduct__price">
-                          <span>$56.00</span>
-                          <del>$19.00</del>
-                        </div>
-                      </div>
-                      <div className="tpproduct__hover-text">
-                        <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                          <a className="tp-btn-2" href="cart.html">
-                            Add to cart
-                          </a>
-                        </div>
-                        <div className="tpproduct__descrip">
-                          <ul>
-                            <li>Type: Organic</li>
-                            <li>MFG: August 4.2021</li>
-                            <li>LIFE: 60 days</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="swiper-slide">
-                    <div className="tpproduct p-relative">
-                      <div className="tpproduct__thumb p-relative text-center">
-                        <a href="#">
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products12-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <a
-                          className="tpproduct__thumb-img"
-                          href="shop-details.html"
-                        >
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products28-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <div className="tpproduct__info bage">
-                          <span className="tpproduct__info-discount bage__discount">
-                            -40%
-                          </span>
-                          <span className="tpproduct__info-hot bage__hot">
-                            HOT
-                          </span>
-                        </div>
-                        <div className="tpproduct__shopping">
-                          <a
-                            className="tpproduct__shopping-wishlist"
-                            href="wishlist.html"
-                          >
-                            <i className="icon-heart icons"></i>
-                          </a>
-                          <a className="tpproduct__shopping-wishlist" href="#">
-                            <i className="icon-layers"></i>
-                          </a>
-                          <a className="tpproduct__shopping-cart" href="#">
-                            <i className="icon-eye"></i>
-                          </a>
-                        </div>
-                      </div>
-                      <div className="tpproduct__content">
-                        <span className="tpproduct__content-weight">
-                          <a href="shop-details-3.html">Fresh Fruits</a>
-                        </span>
-                        <h4 className="tpproduct__title">
-                          <a href="shop-details-grid.html">
-                            Laffy Taffy Laff Bites Gone Bananas - 4 Packs
-                          </a>
-                        </h4>
-                        <div className="tpproduct__rating mb-5">
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                        </div>
-                        <div className="tpproduct__price">
-                          <span>$56.00</span>
-                          <del>$19.00</del>
-                        </div>
-                      </div>
-                      <div className="tpproduct__hover-text">
-                        <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                          <a className="tp-btn-2" href="cart.html">
-                            Add to cart
-                          </a>
-                        </div>
-                        <div className="tpproduct__descrip">
-                          <ul>
-                            <li>Type: Organic</li>
-                            <li>MFG: August 4.2021</li>
-                            <li>LIFE: 60 days</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="swiper-slide">
-                    <div className="tpproduct p-relative">
-                      <div className="tpproduct__thumb p-relative text-center">
-                        <a href="#">
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products12-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <a
-                          className="tpproduct__thumb-img"
-                          href="shop-details.html"
-                        >
-                          <img
-                            src="https://html.hixstudio.net/orfarm/assets/img/product/products28-min.jpg"
-                            alt=""
-                          />
-                        </a>
-                        <div className="tpproduct__info bage">
-                          <span className="tpproduct__info-discount bage__discount">
-                            -40%
-                          </span>
-                          <span className="tpproduct__info-hot bage__hot">
-                            HOT
-                          </span>
-                        </div>
-                        <div className="tpproduct__shopping">
-                          <a
-                            className="tpproduct__shopping-wishlist"
-                            href="wishlist.html"
-                          >
-                            <i className="icon-heart icons"></i>
-                          </a>
-                          <a className="tpproduct__shopping-wishlist" href="#">
-                            <i className="icon-layers"></i>
-                          </a>
-                          <a className="tpproduct__shopping-cart" href="#">
-                            <i className="icon-eye"></i>
-                          </a>
-                        </div>
-                      </div>
-                      <div className="tpproduct__content">
-                        <span className="tpproduct__content-weight">
-                          <a href="shop-details-3.html">Fresh Fruits</a>
-                        </span>
-                        <h4 className="tpproduct__title">
-                          <a href="shop-details-grid.html">
-                            Laffy Taffy Laff Bites Gone Bananas - 4 Packs
-                          </a>
-                        </h4>
-                        <div className="tpproduct__rating mb-5">
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                        </div>
-                        <div className="tpproduct__price">
-                          <span>$56.00</span>
-                          <del>$19.00</del>
-                        </div>
-                      </div>
-                      <div className="tpproduct__hover-text">
-                        <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                          <a className="tp-btn-2" href="cart.html">
-                            Add to cart
-                          </a>
-                        </div>
-                        <div className="tpproduct__descrip">
-                          <ul>
-                            <li>Type: Organic</li>
-                            <li>MFG: August 4.2021</li>
-                            <li>LIFE: 60 days</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>

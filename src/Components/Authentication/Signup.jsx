@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Baseurl } from "../Confige";
 
 function SignUp() {
   const [fullName, setFullName] = useState("");
@@ -9,7 +11,7 @@ function SignUp() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:3000/api/v1/user/register", {
+    const response = await fetch(Baseurl + "/api/v1/user/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -91,7 +93,7 @@ function SignUp() {
                     </form>
                   </div>
                   <div className="tpsign__account mb-15">
-                    <a href="#">Already Have Account?</a>
+                    <Link to="/login">Already Have Account?</Link>
                   </div>
                   <div className="tptrack__btn">
                     <button
