@@ -1,5 +1,35 @@
+import { useParams } from "react-router-dom";
+import { Baseurl } from "../Confige";
+import { useEffect, useState } from "react";
+import { format } from "date-fns";
+
 /* eslint-disable react/no-unescaped-entities */
 function Blogdetails() {
+  const [blogData, setBlogData] = useState(null);
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `${Baseurl}/api/v1/blog/singleblogs?id=${id}`
+        );
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        setBlogData(data.data); // Assuming data is structured as { success: true, data: {...} }
+      } catch (error) {
+        console.error("Error fetching blog:", error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+  if (!blogData) return null;
+  console.log(blogData);
   return (
     <>
       <div className="breadcrumb__area pt-5 pb-5">
@@ -16,9 +46,7 @@ function Blogdetails() {
                     <a href="index.html">Lifestyle </a>
                   </span>
                   <span className="dvdr">/</span>
-                  <span>
-                    The Best Great Benefits Of Fresh foods for Women's Health
-                  </span>
+                  <span>{blogData.title}</span>
                 </div>
               </div>
             </div>
@@ -30,10 +58,7 @@ function Blogdetails() {
           <div className="row">
             <div className="col-lg-12">
               <div className="tp-blog-details__thumb">
-                <img
-                  src="https://html.hixstudio.net/orfarm/assets/img/blog/blog-details-1.jpg"
-                  alt=""
-                />
+                <img src={blogData.thumbnail} alt="" />
               </div>
             </div>
           </div>
@@ -46,10 +71,12 @@ function Blogdetails() {
                       <a href="shop-details.html">Lifestyle</a>
                     </span>
                     <span className="author-by">
-                      <a href="#">Admin</a>
+                      <a href="#">{blogData.author}</a>
                     </span>
                     <span className="post-data">
-                      <a href="#">SEP 15. 2022</a>
+                      <a href="#">
+                        {format(new Date(blogData.createdAt), "MMM dd, yyyy")}
+                      </a>
                     </span>
                   </div>
                   <h2 className="tp-blog-details__title mb-25">
@@ -92,30 +119,13 @@ function Blogdetails() {
                 </div>
                 <div className="tp-blog-details__img">
                   <div className="row">
-                    <div className="col-lg-6 col-md-6">
-                      <div className="tp-blog-details__img-item mb-30">
-                        <img
-                          src="https://html.hixstudio.net/orfarm/assets/img/blog/blog-details-sm-1.jpg"
-                          alt=""
-                        />
+                    {blogData.gallery.map((image, index) => (
+                      <div className="col-lg-6 col-md-6" key={index}>
+                        <div className="tp-blog-details__img-item mb-30">
+                          <img src={image} alt="" />
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-lg-6 col-md-6">
-                      <div className="tp-blog-details__img-item mb-30">
-                        <img
-                          src="https://html.hixstudio.net/orfarm/assets/img/blog/blog-details-sm-2.jpg"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                    <div className="col-lg-12 col-md-12">
-                      <div className="tp-blog-details__img-item mb-30">
-                        <img
-                          src="https://html.hixstudio.net/orfarm/assets/img/blog/blog-details-sm-3.jpg"
-                          alt=""
-                        />
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
                 <div className="tp-blog-details__content">

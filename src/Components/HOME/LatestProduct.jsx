@@ -5,41 +5,14 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import "swiper/swiper-bundle.css";
 import { useEffect, useState } from "react";
 import { Baseurl } from "../Confige";
+import { addToCart } from "../Utils/Addtocartutils";
 
 function LatestProduct() {
   const [latestproduct, setLatestproduct] = useState([]);
   const [wishlist, setWishlist] = useState([]);
 
-  const addToCart = async (productId) => {
-    try {
-      const response = await fetch(Baseurl + "/api/v1/cart/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ productId }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-      console.log("Product added to cart:", data);
-      toast.success("Product added to cart!", {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    } catch (error) {
-      console.error("Error adding product to cart:", error);
-      toast.error("Failed to add product to cart.");
-    }
+  const handleAddToCart = (productId) => {
+    addToCart(productId);
   };
 
   const addToWishlist = (productId) => {
@@ -104,11 +77,7 @@ function LatestProduct() {
                 <div className="tpproduct p-relative mb-20">
                   <div className="tpproduct__thumb p-relative text-center">
                     <Link to={`/Product/${product._id}`}>
-                      <img
-                        src={product.image}
-                        alt="latestproduct"
-                        style={{ height: "200px" }}
-                      />
+                      <img src={product.image} alt="latestproduct" />
                     </Link>
 
                     <div className="tpproduct__info bage">
@@ -140,11 +109,14 @@ function LatestProduct() {
                   </div>
                   <div className="tpproduct__content">
                     <span className="tpproduct__content-weight">
-                      <Link to={`/Product/${product._id}`}>Fresh Fruits</Link>,
-                      <Link to={`/Product/${product._id}`}>Vegetables</Link>
+                      <Link to={`/Product/${product._id}`}>
+                        {product.category}
+                      </Link>
                     </span>
                     <h4 className="tpproduct__title">
-                      <Link to="shop-details-top-">{product.productTitle}</Link>
+                      <Link to={`/Product/${product._id}`}>
+                        {product.productTitle}
+                      </Link>
                     </h4>
                     <div className="tpproduct__rating mb-5">
                       <Link to="#">
@@ -164,8 +136,10 @@ function LatestProduct() {
                       </Link>
                     </div>
                     <div className="tpproduct__price">
-                      <span>{product.oneTimePrice}</span>
-                      <del>$19.00</del>
+                      <span>₹{product.oneTimePrice}</span>
+                      <del style={{ marginLeft: "4px" }}>
+                        {product.discountPercentage}%
+                      </del>
                     </div>
                   </div>
                   <div className="tpproduct__hover-text">
@@ -173,7 +147,7 @@ function LatestProduct() {
                       <Link
                         className="tp-btn-2"
                         to="#"
-                        onClick={() => addToCart(product._id)}
+                        onClick={() => handleAddToCart(product._id)}
                       >
                         Add to cart
                       </Link>

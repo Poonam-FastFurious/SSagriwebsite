@@ -59,11 +59,11 @@ function Footer() {
                 </div>
                 <div className="col-xl-2 col-lg-4 col-md-4 col-sm-5">
                   <div className="tpfooter__widget footer-col-3 mb-50">
-                    <h4 className="tpfooter__widget-title">HOT CATEGORIES</h4>
+                    <h4 className="tpfooter__widget-title">Pages</h4>
                     <div className="tpfooter__widget-links">
                       <ul>
                         <li>
-                          <Link to="#">Women’s health</Link>
+                          <Link to="/Termscondition">Terms & condition</Link>
                         </li>
                         <li>
                           <Link to="#">Skin Care </Link>

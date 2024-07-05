@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Baseurl } from "../Confige";
-
+import logo from "../../assets/Images/logo ssagri.png";
 function Checkout() {
   const [formData, setFormData] = useState({
     address: "",
@@ -93,9 +93,9 @@ function Checkout() {
         key: "rzp_test_apOsHc9PArNQm9",
         amount: formData.totalAmount * 100,
         currency: "INR",
-        name: "Acme Corp",
+        name: "SS AgriQulture Innovations Pvt Ltd",
         description: "Test Transaction",
-        image: "https://example.com/your_logo",
+        image: { logo },
         order_id: order.payment.razorpayOrderId,
         handler: async function (response) {
           const body = {
@@ -114,11 +114,21 @@ function Checkout() {
           });
           const jsonRes = await validateRes.json();
           console.log(jsonRes);
+          if (validateRes.ok) {
+            // Payment verification successful
+            localStorage.removeItem("cartProducts");
+            localStorage.setItem("orderId", jsonRes.payment.order);
+            navigate("/");
+            // Navigate to home or success page
+          } else {
+            // Payment verification failed
+            navigate("/payment-failed"); // Navigate to failure page
+          }
         },
         prefill: {
-          name: "Web Dev Matrix",
-          email: "webdevmatrix@example.com",
-          contact: "9000000000",
+          name: "SS AgriQulture Innovations Pvt Ltd",
+          email: "info.agriqulture@gmail.com",
+          contact: "+918076406706",
         },
         notes: {
           address: "Razorpay Corporate Office",
@@ -129,8 +139,6 @@ function Checkout() {
       };
       var rzp1 = new window.Razorpay(options);
       rzp1.open();
-      localStorage.removeItem("cartProducts");
-      navigate("/");
     } catch (error) {
       console.error("Error:", error.message); // Print error message to console
     }
@@ -468,7 +476,7 @@ function Checkout() {
                               </td>
                               <td className="product-total">
                                 <span className="amount">
-                                  {product.product.price * product.quantity}
+                                  ₹{product.product.price * product.quantity}
                                 </span>
                               </td>
                             </tr>
@@ -479,17 +487,17 @@ function Checkout() {
                             <th>Cart Subtotal</th>
                             <td>
                               <span className="amount">
-                                ${formData.totalAmount}
+                                ₹{formData.totalAmount}
                               </span>
                             </td>
                           </tr>
                           <tr className="shipping">
-                            <th>Shipping</th>
+                            <th>Shipping Charg</th>
                             <td>
                               <ul>
                                 <li>
                                   <input type="radio" name="shipping" />
-                                  <label>Free Shipping:</label>
+                                  <label>Free Shipping</label>
                                 </li>
                               </ul>
                             </td>
@@ -499,7 +507,7 @@ function Checkout() {
                             <td>
                               <strong>
                                 <span className="amount">
-                                  ${formData.totalAmount}
+                                  ₹{formData.totalAmount}
                                 </span>
                               </strong>
                             </td>

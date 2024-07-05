@@ -4,10 +4,11 @@ import Blog from "../Blogs/Blog";
 import Category from "../Product/Category";
 import Testimonial from "../Testimonial";
 
-import Whychooseus from "../Whychooseus";
+// import Whychooseus from "../Whychooseus";
 import Dealofday from "./Dealofday";
 import Instagram from "./Instagram";
 import LatestProduct from "./LatestProduct";
+import Newarrive from "./Newarrive";
 import StartMicrogreen from "./StartMicrogreen";
 import Topproducts from "./Topproducts";
 
@@ -15,10 +16,11 @@ function Home() {
   return (
     <>
       <Mainbanner />
-      <Whychooseus />
-
+      {/* <Whychooseus /> */}
       <Category />
+
       <LatestProduct />
+      <Newarrive />
       <StartMicrogreen />
       <OfferBanner />
       <Topproducts />

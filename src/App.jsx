@@ -5,7 +5,6 @@ import "../src/assets//New folder/css/icons.min.css";
 import "../src/assets//New folder/css/app.min.css";
 import "../src/assets//New folder/css/custom.min.css";
 import "./App.css";
-
 import "./assets/css/bootstrap.min.css";
 import "./assets/css/animate.css";
 import "./assets/css/swiper-bundle.css";
@@ -18,12 +17,9 @@ import "./assets/css/fontawesome.min.css";
 import "./assets/css/icon-dukamarket.css";
 import "./assets/css/main.css";
 import Header from "./Components/Header";
-
 import Footer from "./Components/Footer";
-
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Home from "./Components/HOME/Home";
-
 import AboutUs from "./Components/AboutUs";
 import ContactUs from "./Components/ContactUs";
 import Wishlist from "./Components/User/Wishlist";
@@ -41,8 +37,11 @@ import Howtogrow from "./Components/Howtogrow";
 import Helpandfaq from "./Components/Helpandfaq";
 import Bloagepages from "./Components/Blogs/Bloagepages";
 import Blogdetails from "./Components/Blogs/Blogdetails";
-import Shop2 from "./Components/Shops/Shop2";
 import RouteProtected from "./Components/ProtectedRoutes/RouteProtected";
+import Shop from "./Components/Shops/Shop";
+import Categoryproduct from "./Components/Pages/Categoryproduct";
+import PrivacyPolicy from "./Components/PrivacyPolicy";
+import TermsandCondition from "./Components/TermsandCondition";
 
 function App() {
   return (
@@ -59,7 +58,8 @@ function App() {
             }
           >
             <Route path="/" element={<Home />} />
-            <Route path="/shop" element={<Shop2 />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/Category/:id" element={<Categoryproduct />} />
             <Route path="/AboutUs" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route
@@ -90,7 +90,9 @@ function App() {
             <Route path="/howtogrow" element={<Howtogrow />} />
             <Route path="/Faq" element={<Helpandfaq />} />
             <Route path="/Blog" element={<Bloagepages />} />
-            <Route path="/blog-details" element={<Blogdetails />} />
+            <Route path="/blogdetails/:id" element={<Blogdetails />} />
+            <Route path="/Privacy" element={<PrivacyPolicy />} />
+            <Route path="/Termscondition" element={<TermsandCondition />} />
           </Route>
         </Routes>
       </BrowserRouter>

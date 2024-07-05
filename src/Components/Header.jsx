@@ -1,32 +1,24 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../assets/Images/logo ssagri.png";
 import { useEffect, useState } from "react";
 import images from "../assets/Images/1.png";
 import { Baseurl } from "./Confige";
+import axios from "axios";
 function Header() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [categories, setCategories] = useState([]);
-  const navigate = useNavigate();
-
+  const [isSearchBarOpened, setIsSearchBarOpened] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     if (token) {
       setIsUserLoggedIn(true);
     } else {
       setIsUserLoggedIn(false);
     }
   }, []);
-  const handleLogout = () => {
-    localStorage.removeItem("token");
 
-    document.cookie =
-      "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-    setIsUserLoggedIn(false);
-
-    navigate("/login");
-  };
   useEffect(() => {
     fetch(Baseurl + "/api/v1/category/allcategory")
       .then((response) => {
@@ -44,7 +36,57 @@ function Header() {
         console.log(error);
       });
   }, []);
+  const handleLogout = async () => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+      const userId = localStorage.getItem("userid");
 
+      if (!accessToken || !userId) {
+        throw new Error("User information not found in local storage.");
+      }
+
+      const response = await axios.post(
+        Baseurl + "/api/v1/user/logout",
+        { id: userId },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("userid");
+        localStorage.removeItem("user"); // Remove user info if stored
+        localStorage.removeItem("refreshToken");
+
+        document.cookie = `accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        document.cookie = `refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        // Redirect to login page or perform any other actions
+        window.location.href = "/login"; // Example: redirect to login page
+      } else {
+        console.error("Failed to log out:", response);
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
+  const handleSearchToggle = () => {
+    setIsSearchBarOpened(true);
+  };
+
+  const handleClose = () => {
+    setIsSearchBarOpened(false);
+  };
+
+  const handleToggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleCloseSidebar = () => {
+    setIsSidebarOpen(false);
+  };
   return (
     <>
       <div id="header-sticky" className="header__main-area d-none d-xl-block">
@@ -78,18 +120,11 @@ function Header() {
                               ))}
                             </Link>
                             <ul>
-                              <li>
-                                <Link to="/shop">Radish Mix Greens</Link>
-                              </li>
-                              <li>
-                                <Link to="/shop">Red Amaranth</Link>
-                              </li>
-                              <li>
-                                <Link to="/shop">Immunity Booster Pack</Link>
-                              </li>
-                              <li>
-                                <Link to="/shop">Memek</Link>
-                              </li>
+                              {categories.map((title, index) => (
+                                <li key={index}>
+                                  <Link to="/shop">{title}</Link>
+                                </li>
+                              ))}
                             </ul>
                           </li>
                         </ul>
@@ -124,7 +159,10 @@ function Header() {
               <div className="col-xl-3">
                 <div className="header__info d-flex align-items-center">
                   <div className="header__info-search tpcolor__purple ml-10">
-                    <button className="tp-search-toggle">
+                    <button
+                      className="tp-search-toggle"
+                      onClick={handleSearchToggle}
+                    >
                       <i className="icon-search"></i>
                     </button>
                   </div>
@@ -185,14 +223,18 @@ function Header() {
         </div>
       </div>
 
-      <div className="tpsearchbar tp-sidebar-area">
-        <button className="tpsearchbar__close">
+      <div
+        className={`tpsearchbar tp-sidebar-area ${
+          isSearchBarOpened ? "tp-searchbar-opened" : ""
+        }`}
+      >
+        <button className="tpsearchbar__close" onClick={handleClose}>
           <i className="icon-x"></i>
         </button>
         <div className="search-wrap text-center">
           <div className="container">
             <div className="row justify-content-center">
-              <div className="col-6 pt-100 pb-100">
+              <div className="col-6 pt-40 ">
                 <h2 className="tpsearchbar__title">
                   What Are You Looking For?
                 </h2>
@@ -219,7 +261,10 @@ function Header() {
           <div className="row align-items-center">
             <div className="col-lg-4 col-md-4 col-3 col-sm-3">
               <div className="mobile-menu-icon">
-                <button className="tp-menu-toggle">
+                <button
+                  className="tp-menu-toggle"
+                  onClick={handleToggleSidebar}
+                >
                   <i className="icon-menu1"></i>
                 </button>
               </div>
@@ -264,6 +309,133 @@ function Header() {
           </div>
         </div>
       </div>
+      <div className={`tpsideinfo ${isSidebarOpen ? "tp-sidebar-opened" : ""}`}>
+        <button className="tpsideinfo__close" onClick={handleCloseSidebar}>
+          Close<i className="fal fa-times ml-10"></i>
+        </button>
+        <div className="tpsideinfo__search text-center pt-35">
+          <span className="tpsideinfo__search-title mb-20">
+            What Are You Looking For?
+          </span>
+          <form action="#">
+            <input type="text" placeholder="Search Products..." />
+            <button>
+              <i className="icon-search"></i>
+            </button>
+          </form>
+        </div>
+        <div className="tpsideinfo__nabtab">
+          <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li className="nav-item" role="presentation">
+              <button
+                className="nav-link active"
+                id="pills-home-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-home"
+                type="button"
+                role="tab"
+                aria-controls="pills-home"
+                aria-selected="true"
+              >
+                Menu
+              </button>
+            </li>
+            <li className="nav-item" role="presentation">
+              <button
+                className="nav-link"
+                id="pills-profile-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-profile"
+                type="button"
+                role="tab"
+                aria-controls="pills-profile"
+                aria-selected="false"
+              >
+                Categories
+              </button>
+            </li>
+          </ul>
+          <div className="tab-content" id="pills-tabContent">
+            <div
+              className="tab-pane fade show active"
+              id="pills-home"
+              role="tabpanel"
+              aria-labelledby="pills-home-tab"
+              tabIndex="0"
+            >
+              <div className="mobile-menu"></div>
+            </div>
+            <div
+              className="tab-pane fade"
+              id="pills-profile"
+              role="tabpanel"
+              aria-labelledby="pills-profile-tab"
+              tabIndex="0"
+            >
+              <div className="tpsidebar-categories">
+                <ul>
+                  <li>
+                    <Link to="#">Dairy Farm</Link>
+                  </li>
+                  <li>
+                    <Link to="#">Healthy Foods</Link>
+                  </li>
+                  <li>
+                    <Link to="#">Lifestyle</Link>
+                  </li>
+                  <li>
+                    <Link to="#">Organics</Link>
+                  </li>
+                  <li>
+                    <Link to="#">Photography</Link>
+                  </li>
+                  <li>
+                    <Link to="#">Shopping</Link>
+                  </li>
+                  <li>
+                    <Link to="#">Tips & Tricks</Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="tpsideinfo__wishlist-link">
+          <Link to="/" target="_parent">
+            Home
+          </Link>
+        </div>
+        <div className="tpsideinfo__wishlist-link">
+          <Link to="/contact" target="_parent">
+            AboutUs
+          </Link>
+        </div>
+        <div className="tpsideinfo__wishlist-link">
+          <Link to="/contact" target="_parent">
+            ContactUs
+          </Link>
+        </div>
+        <div className="tpsideinfo__account-link">
+          <Link to="/login">
+            <i className="icon-user icons"></i> Login / Register
+          </Link>
+        </div>
+        <div className="tpsideinfo__wishlist-link">
+          <Link to="/wishlist" target="_parent">
+            <i className="icon-heart"></i> Wishlist
+          </Link>
+        </div>
+
+        <div className="tpsideinfo__wishlist-link">
+          <Link to="#" onClick={handleLogout}>
+            <i className="icon-heart"></i> Logout
+          </Link>
+        </div>
+      </div>
+
+      {isSidebarOpen && (
+        <div className="body-overlay opened" onClick={handleCloseSidebar}></div>
+      )}
     </>
   );
 }

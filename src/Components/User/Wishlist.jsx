@@ -1,15 +1,82 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { Baseurl } from "../Confige";
 
 function Wishlist() {
-  const [quantity, setQuantity] = useState(1);
-  const incresequantity = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+  const [wishlistData, setWishlistData] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    setIsLoading(true);
+    // Retrieve accessToken from localStorage
+    const accessToken = localStorage.getItem("accessToken");
+
+    // Fetch wishlist data with authorization header
+    fetch(Baseurl + "/api/v1/wishlist", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setIsLoading(false);
+        if (data.success) {
+          setWishlistData(data.wishlist);
+        } else {
+          // Handle error or set default state
+          console.error("Failed to fetch wishlist data:", data.message);
+        }
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.error("Error fetching wishlist data:", error);
+        setError("Failed to retrieve wishlist");
+      });
+  }, []);
+
+  const removeFromWishlist = (productId) => {
+    // Retrieve accessToken from localStorage
+    const accessToken = localStorage.getItem("accessToken");
+
+    // Make DELETE request to remove item from wishlist
+    fetch(`${Baseurl}/api/v1/wishlist/remove`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ productId }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to remove item from wishlist");
+        }
+        toast.success("remove item from wishlist!", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        setWishlistData((prevData) => {
+          const updatedItems = prevData.items.filter(
+            (item) => item.productId !== productId
+          );
+          return { ...prevData, items: updatedItems };
+        });
+      })
+      .catch((error) => {
+        console.error("Error removing item from wishlist:", error);
+        setError("Failed to remove item from wishlist");
+      });
   };
-  const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
-    }
-  };
+  console.log(error);
+  if (isLoading) {
+    return <div>Loading....</div>;
+  }
   return (
     <>
       <main>
@@ -41,115 +108,58 @@ function Wishlist() {
                       <thead>
                         <tr>
                           <th className="product-thumbnail">Images</th>
-                          <th className="cart-product-name">Courses</th>
-                          <th className="product-price">Unit Price</th>
-                          <th className="product-quantity">Quantity</th>
-                          <th className="product-subtotal">Total</th>
+                          <th className="cart-product-name">Name</th>
+                          <th className="product-price"> Price</th>
+
+                          <th className="product-subtotal">Date</th>
                           <th className="product-add-to-cart">Add To Cart</th>
                           <th className="product-remove">Remove</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td className="product-thumbnail">
-                            <a href="shop-details.html">
-                              <img
-                                src="https://html.hixstudio.net/orfarm/assets/img/product/product-details-1.png"
-                                alt=""
-                              />
-                            </a>
-                          </td>
-                          <td className="product-name">
-                            <a href="shop-details.html">
-                              Summer Breakfast For Healthy Morning
-                            </a>
-                          </td>
-                          <td className="product-price">
-                            <span className="amount">$130.00</span>
-                          </td>
-                          <td className="product-quantity">
-                            <span
-                              className="cart-minus"
-                              onClick={decreaseQuantity}
-                            >
-                              -
-                            </span>
-                            <input
-                              className="cart-input"
-                              type="text"
-                              value={quantity}
-                            />
-                            <span
-                              className="cart-plus"
-                              onClick={incresequantity}
-                            >
-                              +
-                            </span>
-                          </td>
-                          <td className="product-subtotal">
-                            <span className="amount">{quantity * 130.5}</span>
-                          </td>
-                          <td className="product-add-to-cart">
-                            <button className="tp-btn tp-color-btn  tp-wish-cart banner-animation">
-                              Add To Cart
-                            </button>
-                          </td>
-                          <td className="product-remove">
-                            <a href="#">
-                              <i className="fa fa-times"></i>
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="product-thumbnail">
-                            <a href="shop-details.html">
-                              <img
-                                src="https://html.hixstudio.net/orfarm/assets/img/product/product-details-2.png"
-                                alt=""
-                              />
-                            </a>
-                          </td>
-                          <td className="product-name">
-                            <a href="shop-details.html">
-                              The Best Great Benefits Of Fresh Beef
-                            </a>
-                          </td>
-                          <td className="product-price">
-                            <span className="amount">$120.50</span>
-                          </td>
-                          <td className="product-quantity">
-                            <span
-                              className="cart-minus"
-                              onClick={decreaseQuantity}
-                            >
-                              -
-                            </span>
-                            <input
-                              className="cart-input"
-                              type="text"
-                              value={quantity}
-                            />
-                            <span
-                              className="cart-plus"
-                              onClick={incresequantity}
-                            >
-                              +
-                            </span>
-                          </td>
-                          <td className="product-subtotal">
-                            <span className="amount">{quantity * 120.5}</span>
-                          </td>
-                          <td className="product-add-to-cart">
-                            <button className="tp-btn tp-color-btn tp-wish-cart banner-animation">
-                              Add To Cart
-                            </button>
-                          </td>
-                          <td className="product-remove">
-                            <a href="#">
-                              <i className="fa fa-times"></i>
-                            </a>
-                          </td>
-                        </tr>
+                        {wishlistData &&
+                          wishlistData.items.map((item, index) => (
+                            <>
+                              <tr key={index}>
+                                <td className="product-thumbnail">
+                                  <a href="shop-details.html">
+                                    <img src={item.url} alt="" />
+                                  </a>
+                                </td>
+                                <td className="product-name">
+                                  <a href="shop-details.html">
+                                    {item.productName}
+                                  </a>
+                                </td>
+                                <td className="product-price">
+                                  <span className="amount">₹{item.price}</span>
+                                </td>
+
+                                <td className="product-subtotal">
+                                  <span className="amount">
+                                    {new Date(
+                                      item.addedAt
+                                    ).toLocaleDateString()}
+                                  </span>
+                                </td>
+                                <td className="product-add-to-cart">
+                                  <button className="tp-btn tp-color-btn  tp-wish-cart banner-animation">
+                                    Add To Cart
+                                  </button>
+                                </td>
+                                <td
+                                  className="product-remove"
+                                  onClick={() =>
+                                    removeFromWishlist(item.productId)
+                                  }
+                                >
+                                  <a href="#">
+                                    <i className="fa fa-times"></i>
+                                  </a>
+                                </td>
+                              </tr>
+                            </>
+                          ))}
                       </tbody>
                     </table>
                   </div>

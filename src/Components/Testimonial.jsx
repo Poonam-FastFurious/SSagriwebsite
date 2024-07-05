@@ -1,9 +1,24 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Swiper from "swiper";
+import { Baseurl } from "./Confige";
 
 function Testimonial() {
+  const [testimonial, SetTestimonial] = useState([]);
   useEffect(() => {
+    const fetchTestimonial = async () => {
+      try {
+        const response = await fetch(
+          Baseurl + "/api/v1/testimonial/alltestimonial"
+        );
+        const data = await response.json();
+        SetTestimonial(data.data); // Adjust this line based on the actual API response structure
+      } catch (error) {
+        console.error("Error fetching banner data:", error);
+      }
+    };
+
+    fetchTestimonial();
     const tptestimonial = new Swiper(".tptestimonial-active3", {
       loop: true,
       slidesPerView: 3,
@@ -63,155 +78,44 @@ function Testimonial() {
           </div>
           <div className="swiper-container tptestimonial-active3 p-relative">
             <div className="swiper-wrapper">
-              <div className="swiper-slide">
-                <div className="row justify-content-center p-relative">
-                  <div className="col-md-12">
-                    <div className="tptestimonial__item text-center mb-30">
-                      <div className="tptestimonial__avata mb-25">
-                        <img
-                          src="https://html.hixstudio.net/orfarm/assets/img/testimonial/test-avata-1.png"
-                          alt=""
-                        />
-                      </div>
-                      <div className="tptestimonial__content tptestimonial__content2">
-                        <p>
-                          I am very happy with my purchase from this website,
-                          the plants were healthy and arrived on time."
-                        </p>
-                        <div className="tptestimonial__rating mb-5">
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
+              {testimonial.map((testi, index) => (
+                <div className="swiper-slide" key={index}>
+                  <div className="row justify-content-center p-relative">
+                    <div className="col-md-12">
+                      <div className="tptestimonial__item text-center mb-30">
+                        <div className="tptestimonial__avata mb-25">
+                          <img
+                            src="https://html.hixstudio.net/orfarm/assets/img/testimonial/test-avata-1.png"
+                            alt=""
+                          />
                         </div>
-                        <h4 className="tptestimonial__title">Rahul Raj</h4>
+                        <div className="tptestimonial__content tptestimonial__content2">
+                          <p>{testi.message}</p>
+                          <div className="tptestimonial__rating mb-5">
+                            <a href="#">
+                              <i className="icon-star_outline1"></i>
+                            </a>
+                            <a href="#">
+                              <i className="icon-star_outline1"></i>
+                            </a>
+                            <a href="#">
+                              <i className="icon-star_outline1"></i>
+                            </a>
+                            <a href="#">
+                              <i className="icon-star_outline1"></i>
+                            </a>
+                            <a href="#">
+                              <i className="icon-star_outline1"></i>
+                              {testi.rating}
+                            </a>
+                          </div>
+                          <h4 className="tptestimonial__title">{testi.name}</h4>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="swiper-slide">
-                <div className="row justify-content-center p-relative">
-                  <div className="col-md-12">
-                    <div className="tptestimonial__item text-center mb-30">
-                      <div className="tptestimonial__avata mb-25">
-                        <img
-                          src="https://html.hixstudio.net/orfarm/assets/img/testimonial/test-avata-2.png"
-                          alt=""
-                        />
-                      </div>
-                      <div className="tptestimonial__content tptestimonial__content2">
-                        <p>" This is the Amazing Healthy Microgreens "</p>
-                        <div className="tptestimonial__rating mb-5">
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                        </div>
-                        <h4 className="tptestimonial__title">Tina</h4>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="swiper-slide">
-                <div className="row justify-content-center p-relative">
-                  <div className="col-md-12">
-                    <div className="tptestimonial__item text-center mb-30">
-                      <div className="tptestimonial__avata mb-25">
-                        <img
-                          src="https://html.hixstudio.net/orfarm/assets/img/testimonial/test-avata-3.png"
-                          alt=""
-                        />
-                      </div>
-                      <div className="tptestimonial__content tptestimonial__content2">
-                        <p>
-                          “I am very happy with my purchase from this website,
-                          the plants were healthy and arrived on time."
-                        </p>
-                        <div className="tptestimonial__rating mb-5">
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                        </div>
-                        <h4 className="tptestimonial__title">Jessica</h4>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="swiper-slide">
-                <div className="row justify-content-center p-relative">
-                  <div className="col-md-12">
-                    <div className="tptestimonial__item text-center mb-30">
-                      <div className="tptestimonial__avata mb-25">
-                        <img
-                          src="https://html.hixstudio.net/orfarm/assets/img/testimonial/test-avata-3.png"
-                          alt=""
-                        />
-                      </div>
-                      <div className="tptestimonial__content tptestimonial__content2">
-                        <p>
-                          “I am very happy with my purchase from this website,
-                          the plants were healthy and arrived on time.”
-                        </p>
-                        <div className="tptestimonial__rating mb-5">
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                          <a href="#">
-                            <i className="icon-star_outline1"></i>
-                          </a>
-                        </div>
-                        <h4 className="tptestimonial__title">Priyanka</h4>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

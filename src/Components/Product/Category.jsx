@@ -52,7 +52,7 @@ function Category() {
         return response.json();
       })
       .then((data) => {
-        setCategories(data.data.slice(0, 8));
+        setCategories(data.data);
       })
       .catch((error) => {
         console.log(error);
@@ -69,19 +69,62 @@ function Category() {
                 <div className="swiper-slide" key={index}>
                   <div className="category__item mb-30">
                     <div className="category__thumb fix mb-15">
-                      <Link to="shop-details-3">
-                        <img
-                          src={cat.avatar}
-                          alt="category-thumb"
-                          style={{ height: "80px" }}
-                        />
+                      <Link to={`/Category/${cat.title}`}>
+                        <img src={cat.avatar} alt="category-thumb" />
                       </Link>
                     </div>
                     <div className="category__content">
                       <h5 className="category__title">
-                        <Link to="shop-details-4">{cat.title}</Link>
+                        <Link to={`/Category/${cat.title}`}>{cat.title}</Link>
                       </h5>
-                      <span className="category__count">05 items</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              {categories.map((cat, index) => (
+                <div className="swiper-slide" key={index}>
+                  <div className="category__item mb-30">
+                    <div className="category__thumb fix mb-15">
+                      <Link to={`/Category/${cat.title}`}>
+                        <img src={cat.avatar} alt="category-thumb" />
+                      </Link>
+                    </div>
+                    <div className="category__content">
+                      <h5 className="category__title">
+                        <Link to={`/Category/${cat.title}`}>{cat.title}</Link>
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+              ))}{" "}
+              {categories.map((cat, index) => (
+                <div className="swiper-slide" key={index}>
+                  <div className="category__item mb-30">
+                    <div className="category__thumb fix mb-15">
+                      <Link to={`/Category/${cat.title}`}>
+                        <img src={cat.avatar} alt="category-thumb" />
+                      </Link>
+                    </div>
+                    <div className="category__content">
+                      <h5 className="category__title">
+                        <Link to={`/Category/${cat.title}`}>{cat.title}</Link>
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+              ))}{" "}
+              {categories.map((cat, index) => (
+                <div className="swiper-slide" key={index}>
+                  <div className="category__item mb-30">
+                    <div className="category__thumb fix mb-15">
+                      <Link to={`/Category/${cat.title}`}>
+                        <img src={cat.avatar} alt="category-thumb" />
+                      </Link>
+                    </div>
+                    <div className="category__content">
+                      <h5 className="category__title">
+                        <Link to={`/Category/${cat.title}`}>{cat.title}</Link>
+                      </h5>
                     </div>
                   </div>
                 </div>
