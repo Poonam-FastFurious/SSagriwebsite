@@ -8,8 +8,8 @@ import axios from "axios";
 function Header() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [isSearchBarOpened, setIsSearchBarOpened] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (token) {
@@ -36,57 +36,7 @@ function Header() {
         console.log(error);
       });
   }, []);
-  const handleLogout = async () => {
-    try {
-      const accessToken = localStorage.getItem("accessToken");
-      const userId = localStorage.getItem("userid");
 
-      if (!accessToken || !userId) {
-        throw new Error("User information not found in local storage.");
-      }
-
-      const response = await axios.post(
-        Baseurl + "/api/v1/user/logout",
-        { id: userId },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
-
-      if (response.status === 200) {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("userid");
-        localStorage.removeItem("user"); // Remove user info if stored
-        localStorage.removeItem("refreshToken");
-
-        document.cookie = `accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-        document.cookie = `refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-        // Redirect to login page or perform any other actions
-        window.location.href = "/login"; // Example: redirect to login page
-      } else {
-        console.error("Failed to log out:", response);
-      }
-    } catch (error) {
-      console.error("Error during logout:", error);
-    }
-  };
-  const handleSearchToggle = () => {
-    setIsSearchBarOpened(true);
-  };
-
-  const handleClose = () => {
-    setIsSearchBarOpened(false);
-  };
-
-  const handleToggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const handleCloseSidebar = () => {
-    setIsSidebarOpen(false);
-  };
   return (
     <>
       <div id="header-sticky" className="header__main-area d-none d-xl-block">

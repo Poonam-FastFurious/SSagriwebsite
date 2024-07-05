@@ -38,10 +38,6 @@ import Helpandfaq from "./Components/Helpandfaq";
 import Bloagepages from "./Components/Blogs/Bloagepages";
 import Blogdetails from "./Components/Blogs/Blogdetails";
 import RouteProtected from "./Components/ProtectedRoutes/RouteProtected";
-import Shop from "./Components/Shops/Shop";
-import Categoryproduct from "./Components/Pages/Categoryproduct";
-import PrivacyPolicy from "./Components/PrivacyPolicy";
-import TermsandCondition from "./Components/TermsandCondition";
 
 function App() {
   return (
@@ -90,9 +86,7 @@ function App() {
             <Route path="/howtogrow" element={<Howtogrow />} />
             <Route path="/Faq" element={<Helpandfaq />} />
             <Route path="/Blog" element={<Bloagepages />} />
-            <Route path="/blogdetails/:id" element={<Blogdetails />} />
-            <Route path="/Privacy" element={<PrivacyPolicy />} />
-            <Route path="/Termscondition" element={<TermsandCondition />} />
+            <Route path="/blog-details" element={<Blogdetails />} />
           </Route>
         </Routes>
       </BrowserRouter>
