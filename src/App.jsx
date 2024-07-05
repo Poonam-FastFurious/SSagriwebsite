@@ -38,6 +38,8 @@ import Helpandfaq from "./Components/Helpandfaq";
 import Bloagepages from "./Components/Blogs/Bloagepages";
 import Blogdetails from "./Components/Blogs/Blogdetails";
 import RouteProtected from "./Components/ProtectedRoutes/RouteProtected";
+import Categoryproduct from "./Components/Pages/Categoryproduct";
+import Shop from "./Components/Shops/Shop";
 
 function App() {
   return (
