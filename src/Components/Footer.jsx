@@ -66,7 +66,7 @@ function Footer() {
                           <Link to="/Termscondition">Terms & condition</Link>
                         </li>
                         <li>
-                          <Link to="/privacy">PRIVACY POLICY</Link>
+                          <Link to="#">Skin Care </Link>
                         </li>
                         <li>
                           <Link to="#">Immunity booster</Link>
