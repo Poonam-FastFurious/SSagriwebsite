@@ -224,6 +224,30 @@ function ProductDetails() {
                                 >
                                   <img src={products.image} alt="" />
                                 </button>
+                                <button
+                                  className="nav-link"
+                                  id="nav-contact-tab"
+                                  data-bs-toggle="tab"
+                                  data-bs-target="#nav-contact"
+                                  type="button"
+                                  role="tab"
+                                  aria-controls="nav-contact"
+                                  aria-selected="false"
+                                >
+                                  <img src={products.image} alt="" />
+                                </button>{" "}
+                                <button
+                                  className="nav-link"
+                                  id="nav-contact-tab"
+                                  data-bs-toggle="tab"
+                                  data-bs-target="#nav-contact"
+                                  type="button"
+                                  role="tab"
+                                  aria-controls="nav-contact"
+                                  aria-selected="false"
+                                >
+                                  <img src={products.image} alt="" />
+                                </button>
                               </div>
                             </nav>
                           </div>
@@ -325,16 +349,6 @@ function ProductDetails() {
                                     <Link to="#">
                                       <i className="icon-heart icons"></i> add
                                       to wishlist
-                                    </Link>
-                                  </li>
-                                  <li>
-                                    <Link to="#">
-                                      <i className="icon-layers"></i>
-                                    </Link>
-                                  </li>
-                                  <li>
-                                    <Link to="#">
-                                      <i className="icon-share-2"></i> Share
                                     </Link>
                                   </li>
                                 </ul>

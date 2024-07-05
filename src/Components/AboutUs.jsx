@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Swiper from "swiper";
 import "swiper/swiper-bundle.css";
 function AboutUs() {
@@ -65,7 +66,7 @@ function AboutUs() {
                     Ipsam fugit earum ab..
                   </p>
                   <div className="tpabout__inner-btn">
-                    <a href="about.html">About us</a>
+                    <Link to="#">About us</Link>
                   </div>
                 </div>
               </div>
@@ -288,7 +289,7 @@ function AboutUs() {
                     alt=""
                   />
                   <div className="tpvideo__video-btn">
-                    <a className="tpvideo__video-icon popup-video" href="#">
+                    <Link className="tpvideo__video-icon popup-video" to="#">
                       <i>
                         <svg
                           width="20"
@@ -307,7 +308,7 @@ function AboutUs() {
                           ></path>
                         </svg>
                       </i>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -344,12 +345,12 @@ function AboutUs() {
                       Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                       Tempore
                     </p>
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="tpchoose__details d-flex align-items-center justify-content-center"
                     >
                       learn more<i className="icon-chevrons-right"></i>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -367,12 +368,12 @@ function AboutUs() {
                       Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                       Tempore
                     </p>
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="tpchoose__details d-flex align-items-center justify-content-center"
                     >
                       learn more<i className="icon-chevrons-right"></i>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -389,12 +390,12 @@ function AboutUs() {
                     <p>
                       Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                     </p>
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="tpchoose__details d-flex align-items-center justify-content-center"
                     >
                       learn more<i className="icon-chevrons-right"></i>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -411,12 +412,12 @@ function AboutUs() {
                     <p>
                       Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                     </p>
-                    <a
-                      href="#"
+                    <Link
+                      to="#"
                       className="tpchoose__details d-flex align-items-center justify-content-center"
                     >
                       learn more<i className="icon-chevrons-right"></i>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -457,21 +458,21 @@ function AboutUs() {
                             time."
                           </p>
                           <div className="tptestimonial__rating mb-5">
-                            <a href="#">
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
+                            </Link>
                           </div>
                           <h4 className="tptestimonial__title">Rahul Raj</h4>
                         </div>
@@ -492,21 +493,21 @@ function AboutUs() {
                         <div className="tptestimonial__content tptestimonial__content2">
                           <p>" This is the Amazing Healthy Microgreens "</p>
                           <div className="tptestimonial__rating mb-5">
-                            <a href="#">
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
+                            </Link>
                           </div>
                           <h4 className="tptestimonial__title">Tina</h4>
                         </div>
@@ -530,21 +531,21 @@ function AboutUs() {
                             the plants were healthy and arrived on time."
                           </p>
                           <div className="tptestimonial__rating mb-5">
-                            <a href="#">
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
+                            </Link>
                           </div>
                           <h4 className="tptestimonial__title">Jessica</h4>
                         </div>
@@ -568,21 +569,21 @@ function AboutUs() {
                             the plants were healthy and arrived on time.”
                           </p>
                           <div className="tptestimonial__rating mb-5">
-                            <a href="#">
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
+                            </Link>
                           </div>
                           <h4 className="tptestimonial__title">Priyanka</h4>
                         </div>

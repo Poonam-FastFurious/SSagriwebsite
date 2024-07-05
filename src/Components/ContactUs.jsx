@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function ContactUs() {
   return (
     <>
@@ -24,7 +26,7 @@ function ContactUs() {
                     Ipsam fugit earum ab..
                   </p>
                   <div className="tpabout__inner-btn">
-                    <a href="about.html">About us</a>
+                    <Link to="#">Contact Us</Link>
                   </div>
                 </div>
               </div>
@@ -105,9 +107,9 @@ function ContactUs() {
                                   htmlFor="flexCheckDefault01"
                                 >
                                   I am bound by the terms of the{" "}
-                                  <a href="#">
+                                  <Link to="#">
                                     Service I accept Privacy Policy.
-                                  </a>
+                                  </Link>
                                 </label>
                               </div>
                             </div>
