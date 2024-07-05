@@ -67,6 +67,29 @@ function Cart() {
       };
     });
   };
+  const decrementsQuantity = (productId) => {
+    setCart((prevCart) => {
+      const updatedCart = { ...prevCart };
+      const updatedItems = updatedCart.items.map((item) => {
+        if (item.product._id === productId && item.quantity > 1) {
+          const updatedQuantity = item.quantity - 1;
+          return { ...item, quantity: updatedQuantity };
+        }
+        return item;
+      });
+
+      const updatedSubtotal = updatedItems.reduce(
+        (total, item) => total + item.quantity * item.product.price,
+        0
+      );
+
+      return {
+        ...updatedCart,
+        items: updatedItems,
+        total: updatedSubtotal,
+      };
+    });
+  };
 
   const removeProduct = async (productId) => {
     try {
@@ -184,7 +207,14 @@ function Cart() {
                                   </span>
                                 </td>
                                 <td className="product-quantity">
-                                  <span className="cart-minus">-</span>
+                                  <span
+                                    className="cart-minus "
+                                    onClick={() =>
+                                      decrementsQuantity(product.product._id)
+                                    }
+                                  >
+                                    -
+                                  </span>
                                   <input
                                     className="cart-input"
                                     type="text"
@@ -251,7 +281,7 @@ function Cart() {
                               name="update_cart"
                               type="submit"
                             >
-                              Update cart
+                              <Link to="/">Update cart</Link>
                             </button>
                           </div>
                         </div>

@@ -318,6 +318,190 @@ function Topproducts() {
                               </div>
                             </div>
                           ))}
+                          {topproduct.map((product, index) => (
+                            <div className="swiper-slide" key={index}>
+                              <div className="tpproduct p-relative">
+                                <div className="tpproduct__thumb p-relative text-center">
+                                  <Link to={`/Product/${product._id}`}>
+                                    <img src={product.image} alt="" />
+                                  </Link>
+                                  <Link
+                                    className="tpproduct__thumb-img"
+                                    to={`/Product/${product._id}`}
+                                  >
+                                    <img src={product.image} alt="" />
+                                  </Link>
+                                  <div className="tpproduct__info bage">
+                                    <span className="tpproduct__info-hot bage__hot">
+                                      HOT
+                                    </span>
+                                  </div>
+                                  <div className="tpproduct__shopping ">
+                                    <Link
+                                      className="tpproduct__shopping-wishlist"
+                                      to="#"
+                                    >
+                                      <i className="icon-heart icons"></i>
+                                    </Link>
+
+                                    <Link
+                                      className="tpproduct__shopping-cart"
+                                      to="#"
+                                    >
+                                      <i className="icon-eye"></i>
+                                    </Link>
+                                  </div>
+                                </div>
+                                <div className="tpproduct__content">
+                                  <span className="tpproduct__content-weight">
+                                    <Link to={`/Product/${product._id}`}>
+                                      {product.category}
+                                    </Link>
+                                  </span>
+                                  <h4 className="tpproduct__title">
+                                    <Link to={`/Product/${product._id}`}>
+                                      {product.productTitle}
+                                    </Link>
+                                  </h4>
+                                  <div className="tpproduct__rating mb-5">
+                                    <Link to="#">
+                                      <i className="icon-star_outline1"></i>
+                                    </Link>
+                                    <Link to="#">
+                                      <i className="icon-star_outline1"></i>
+                                    </Link>
+                                    <Link to="#">
+                                      <i className="icon-star_outline1"></i>
+                                    </Link>
+                                    <Link to="#">
+                                      <i className="icon-star_outline1"></i>
+                                    </Link>
+                                    <Link to="#">
+                                      <i className="icon-star_outline1"></i>
+                                    </Link>
+                                  </div>
+                                  <div className="tpproduct__price">
+                                    <span>₹{product.oneTimePrice}</span>
+                                    <del className="pl-10">
+                                      {product.discountPercentage}%
+                                    </del>
+                                  </div>
+                                </div>
+                                <div className="tpproduct__hover-text">
+                                  <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                                    <Link
+                                      className="tp-btn-2"
+                                      to="#"
+                                      onClick={() =>
+                                        handleAddToCart(product._id)
+                                      }
+                                    >
+                                      Add to cart
+                                    </Link>
+                                  </div>
+                                  <div className="tpproduct__descrip">
+                                    <ul>
+                                      <li>Stock: {product.stock}</li>
+                                      <li>Rating:{product.rating}</li>
+                                      <li>Type: Organic</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                          {topproduct.map((product, index) => (
+                            <div className="swiper-slide" key={index}>
+                              <div className="tpproduct p-relative">
+                                <div className="tpproduct__thumb p-relative text-center">
+                                  <Link to={`/Product/${product._id}`}>
+                                    <img src={product.image} alt="" />
+                                  </Link>
+                                  <Link
+                                    className="tpproduct__thumb-img"
+                                    to={`/Product/${product._id}`}
+                                  >
+                                    <img src={product.image} alt="" />
+                                  </Link>
+                                  <div className="tpproduct__info bage">
+                                    <span className="tpproduct__info-hot bage__hot">
+                                      HOT
+                                    </span>
+                                  </div>
+                                  <div className="tpproduct__shopping ">
+                                    <Link
+                                      className="tpproduct__shopping-wishlist"
+                                      to="#"
+                                    >
+                                      <i className="icon-heart icons"></i>
+                                    </Link>
+
+                                    <Link
+                                      className="tpproduct__shopping-cart"
+                                      to="#"
+                                    >
+                                      <i className="icon-eye"></i>
+                                    </Link>
+                                  </div>
+                                </div>
+                                <div className="tpproduct__content">
+                                  <span className="tpproduct__content-weight">
+                                    <Link to={`/Product/${product._id}`}>
+                                      {product.category}
+                                    </Link>
+                                  </span>
+                                  <h4 className="tpproduct__title">
+                                    <Link to={`/Product/${product._id}`}>
+                                      {product.productTitle}
+                                    </Link>
+                                  </h4>
+                                  <div className="tpproduct__rating mb-5">
+                                    <Link to="#">
+                                      <i className="icon-star_outline1"></i>
+                                    </Link>
+                                    <Link to="#">
+                                      <i className="icon-star_outline1"></i>
+                                    </Link>
+                                    <Link to="#">
+                                      <i className="icon-star_outline1"></i>
+                                    </Link>
+                                    <Link to="#">
+                                      <i className="icon-star_outline1"></i>
+                                    </Link>
+                                    <Link to="#">
+                                      <i className="icon-star_outline1"></i>
+                                    </Link>
+                                  </div>
+                                  <div className="tpproduct__price">
+                                    <span>₹{product.oneTimePrice}</span>
+                                    <del className="pl-10">
+                                      {product.discountPercentage}%
+                                    </del>
+                                  </div>
+                                </div>
+                                <div className="tpproduct__hover-text">
+                                  <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                                    <Link
+                                      className="tp-btn-2"
+                                      to="#"
+                                      onClick={() =>
+                                        handleAddToCart(product._id)
+                                      }
+                                    >
+                                      Add to cart
+                                    </Link>
+                                  </div>
+                                  <div className="tpproduct__descrip">
+                                    <ul>
+                                      <li>Stock: {product.stock}</li>
+                                      <li>Rating:{product.rating}</li>
+                                      <li>Type: Organic</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>

@@ -5,11 +5,14 @@ import { useEffect, useState } from "react";
 import images from "../assets/Images/1.png";
 import { Baseurl } from "./Confige";
 import axios from "axios";
+import { IoIosLogOut } from "react-icons/io";
 function Header() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [categories, setCategories] = useState([]);
   const [isSearchBarOpened, setIsSearchBarOpened] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (token) {
@@ -87,15 +90,52 @@ function Header() {
   const handleCloseSidebar = () => {
     setIsSidebarOpen(false);
   };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <>
-      <div id="header-sticky" className="header__main-area d-none d-xl-block">
+      <div
+        id="header-sticky"
+        className="header__main-area d-none d-xl-block"
+        style={
+          isScrolled
+            ? {
+                position: "fixed",
+                top: "0",
+                left: "0",
+                width: "100%",
+                zIndex: "1000",
+                backgroundColor: "white",
+              }
+            : {}
+        }
+      >
         <div className="container">
           <div className="header__for-megamenu p-relative">
             <div className="row align-items-center">
               <div className="col-xl-3">
                 <div className="header__logo">
-                  <Link to="/">
+                  <Link to="/" onClick={scrollToTop}>
                     <img src={logo} alt="logo" />
                   </Link>
                 </div>
@@ -105,10 +145,14 @@ function Header() {
                   <nav id="mobile-menu">
                     <ul>
                       <li className=" has-homemenu">
-                        <Link to="/">Home</Link>
+                        <Link to="/" onClick={scrollToTop}>
+                          Home
+                        </Link>
                       </li>
                       <li className="has-dropdown has-megamenu">
-                        <Link to="/shop">Shop</Link>
+                        <Link to="/shop" onClick={scrollToTop}>
+                          Shop
+                        </Link>
                         <ul
                           className="sub-menu mega-menu"
                           data-background={images}
@@ -122,7 +166,9 @@ function Header() {
                             <ul>
                               {categories.map((title, index) => (
                                 <li key={index}>
-                                  <Link to="/shop">{title}</Link>
+                                  <Link to="/shop" onClick={scrollToTop}>
+                                    {title}
+                                  </Link>
                                 </li>
                               ))}
                             </ul>
@@ -130,27 +176,41 @@ function Header() {
                         </ul>
                       </li>
                       <li className="#">
-                        <Link to="/quize">Take the test</Link>
+                        <Link to="/quize" onClick={scrollToTop}>
+                          Take the test
+                        </Link>
                       </li>
                       <li className="has-dropdown">
-                        <Link to="#">Suport</Link>
+                        <Link to="#" onClick={scrollToTop}>
+                          Suport
+                        </Link>
                         <ul className="sub-menu">
                           <li>
-                            <Link to="/howtogrow">Istruction</Link>
+                            <Link to="/howtogrow" onClick={scrollToTop}>
+                              Istruction
+                            </Link>
                           </li>
                           <li>
-                            <Link to="/Faq">Help & FAQ</Link>
+                            <Link to="/Faq" onClick={scrollToTop}>
+                              Help & FAQ
+                            </Link>
                           </li>
                           <li>
-                            <Link to="/Blog">Blogs</Link>
+                            <Link to="/Blog" onClick={scrollToTop}>
+                              Blogs
+                            </Link>
                           </li>
                         </ul>
                       </li>
                       <li>
-                        <Link to="/AboutUs">About Us</Link>
+                        <Link to="/AboutUs" onClick={scrollToTop}>
+                          About Us
+                        </Link>
                       </li>
                       <li>
-                        <Link to="contact">Contact Us</Link>
+                        <Link to="contact" onClick={scrollToTop}>
+                          Contact Us
+                        </Link>
                       </li>
                     </ul>
                   </nav>
@@ -168,7 +228,7 @@ function Header() {
                   </div>
 
                   <div className="header__info-wishlist tpcolor__greenish ml-10">
-                    <Link to="wishlist">
+                    <Link to="/wishlist">
                       <i className="icon-heart icons"></i>
                     </Link>
                   </div>
@@ -295,12 +355,14 @@ function Header() {
                 </div>
                 <div className="header__info-cart tpcolor__oasis ml-10 tp-cart-toggle">
                   <button>
-                    <i>
-                      <img
-                        src="https://html.hixstudio.net/orfarm/assets/img/icon/cart-1.svg"
-                        alt=""
-                      />
-                    </i>
+                    <Link to="/cart">
+                      <i>
+                        <img
+                          src="https://html.hixstudio.net/orfarm/assets/img/icon/cart-1.svg"
+                          alt=""
+                        />
+                      </i>
+                    </Link>
                     <span>5</span>
                   </button>
                 </div>
@@ -375,25 +437,7 @@ function Header() {
               <div className="tpsidebar-categories">
                 <ul>
                   <li>
-                    <Link to="#">Dairy Farm</Link>
-                  </li>
-                  <li>
-                    <Link to="#">Healthy Foods</Link>
-                  </li>
-                  <li>
-                    <Link to="#">Lifestyle</Link>
-                  </li>
-                  <li>
                     <Link to="#">Organics</Link>
-                  </li>
-                  <li>
-                    <Link to="#">Photography</Link>
-                  </li>
-                  <li>
-                    <Link to="#">Shopping</Link>
-                  </li>
-                  <li>
-                    <Link to="#">Tips & Tricks</Link>
                   </li>
                 </ul>
               </div>
@@ -406,7 +450,7 @@ function Header() {
           </Link>
         </div>
         <div className="tpsideinfo__wishlist-link">
-          <Link to="/contact" target="_parent">
+          <Link to="/AboutUs" target="_parent">
             AboutUs
           </Link>
         </div>
@@ -426,9 +470,10 @@ function Header() {
           </Link>
         </div>
 
-        <div className="tpsideinfo__wishlist-link">
+        <div className="tpsideinfo__wishlist-link pl-4">
           <Link to="#" onClick={handleLogout}>
-            <i className="icon-heart"></i> Logout
+            <IoIosLogOut />
+            <span style={{ paddingLeft: "10px" }}>Logout</span>
           </Link>
         </div>
       </div>

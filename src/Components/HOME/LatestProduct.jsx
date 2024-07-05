@@ -1,33 +1,13 @@
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-alice-carousel/lib/alice-carousel.css";
 import "swiper/swiper-bundle.css";
 import { useEffect, useState } from "react";
 import { Baseurl } from "../Confige";
-import { addToCart } from "../Utils/Addtocartutils";
+
+import CardProduct from "../Product/CardProduct";
 
 function LatestProduct() {
   const [latestproduct, setLatestproduct] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
-
-  const handleAddToCart = (productId) => {
-    addToCart(productId);
-  };
-
-  const addToWishlist = (productId) => {
-    setWishlist((prevWishlist) => [...prevWishlist, productId]);
-    toast.success("Item added to wishlist!", {
-      position: "top-right",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-  };
 
   useEffect(() => {
     const fetchLatestProduct = async () => {
@@ -73,95 +53,7 @@ function LatestProduct() {
           </div>
           <div className="row row-cols-xxl-5 row-cols-xl-5 row-cols-lg-3 row-cols-md-3 row-cols-sm-2 row-cols-1 tpproduct__shop-item  ">
             {latestproduct.map((product, index) => (
-              <div className="col" key={index}>
-                <div className="tpproduct p-relative mb-20">
-                  <div className="tpproduct__thumb p-relative text-center">
-                    <Link to={`/Product/${product._id}`}>
-                      <img src={product.image} alt="latestproduct" />
-                    </Link>
-
-                    <div className="tpproduct__info bage">
-                      <span className="tpproduct__info-discount bage__discount">
-                        -{product.discountPercentage}%
-                      </span>
-                      <span className="tpproduct__info-hot bage__hot">HOT</span>
-                    </div>
-                    <div className="tpproduct__shopping pt-25">
-                      <Link
-                        className="tpproduct__shopping-wishlist"
-                        to="#"
-                        onClick={() => addToWishlist(product._id)}
-                      >
-                        <i
-                          className="icon-heart icons"
-                          style={{
-                            color: wishlist.includes(product._id)
-                              ? "red"
-                              : "black",
-                          }}
-                        ></i>
-                      </Link>
-
-                      <Link className="tpproduct__shopping-cart" to="#">
-                        <i className="icon-eye"></i>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="tpproduct__content">
-                    <span className="tpproduct__content-weight">
-                      <Link to={`/Product/${product._id}`}>
-                        {product.category}
-                      </Link>
-                    </span>
-                    <h4 className="tpproduct__title">
-                      <Link to={`/Product/${product._id}`}>
-                        {product.productTitle}
-                      </Link>
-                    </h4>
-                    <div className="tpproduct__rating mb-5">
-                      <Link to="#">
-                        <i className="icon-star_outline1"></i>
-                      </Link>
-                      <Link to="#">
-                        <i className="icon-star_outline1"></i>
-                      </Link>
-                      <Link to="#">
-                        <i className="icon-star_outline1"></i>
-                      </Link>
-                      <Link to="#">
-                        <i className="icon-star_outline1"></i>
-                      </Link>
-                      <Link to="#">
-                        <i className="icon-star_outline1"></i>
-                      </Link>
-                    </div>
-                    <div className="tpproduct__price">
-                      <span>₹{product.oneTimePrice}</span>
-                      <del style={{ marginLeft: "4px" }}>
-                        {product.discountPercentage}%
-                      </del>
-                    </div>
-                  </div>
-                  <div className="tpproduct__hover-text">
-                    <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
-                      <Link
-                        className="tp-btn-2"
-                        to="#"
-                        onClick={() => handleAddToCart(product._id)}
-                      >
-                        Add to cart
-                      </Link>
-                    </div>
-                    <div className="tpproduct__descrip">
-                      <ul>
-                        <li>Stock: {product.stock}</li>
-                        <li>Rating: {product.rating}</li>
-                        <li>Type: Organic</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <CardProduct key={index} product={product} />
             ))}
           </div>
         </div>

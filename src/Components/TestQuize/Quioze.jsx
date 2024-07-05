@@ -152,10 +152,6 @@ function Quioze() {
                 >
                   Take the microgreen quiz
                 </h3>
-
-                <div className="tpabout__inner-btn">
-                  <Link to="#">Take the test</Link>
-                </div>
               </div>
             </div>
           </div>
@@ -343,31 +339,31 @@ function Quioze() {
                         </div>
                         <div className="tpbrandproduct__contact">
                           <span className="tpbrandproduct__product-title">
-                            <a href="shop-details.html">
+                            <Link to={`/Product/${product._id}`}>
                               {product.productTitle}
-                            </a>
+                            </Link>
                           </span>
                           <div className="tpproduct__rating mb-5">
-                            <a href="#">
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
+                            </Link>
                           </div>
                           <div className="tpproduct__price">
-                            <span>{product.oneTimePrice}</span>
+                            ₹<span>{product.oneTimePrice}</span>
                             <del className="ml-10">
-                              {product.subscriptionPrice}
+                              {product.discountPercentage}%
                             </del>
                           </div>
                         </div>

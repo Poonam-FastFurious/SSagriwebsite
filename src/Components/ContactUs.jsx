@@ -12,12 +12,7 @@ function ContactUs() {
                   <h5 className="tpabout__inner-sub mb-15">
                     About for SSAGRICULTURE
                   </h5>
-                  <h3
-                    className="tpabout__inner-title mb-35"
-                    style={{ color: "black" }}
-                  >
-                    Contact Us ?
-                  </h3>
+                  <h3 className="tpabout__inner-title mb-35">Contact Us ?</h3>
                   <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Obcaecati perspiciatis commodi dolore pariatur, optio hic.
@@ -25,9 +20,6 @@ function ContactUs() {
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Ipsam fugit earum ab..
                   </p>
-                  <div className="tpabout__inner-btn">
-                    <Link to="#">Contact Us</Link>
-                  </div>
                 </div>
               </div>
             </div>

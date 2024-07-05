@@ -4,12 +4,16 @@ import Swiper from "swiper";
 import "swiper/swiper-bundle.css";
 import { Baseurl } from "../Confige";
 import { addToCart } from "../Utils/Addtocartutils";
+import handleAddToWishlist from "../Utils/WishlistUtils";
 
 function ProductDetails() {
   const [products, setProducts] = useState([]);
   const { id } = useParams();
   const [newproduct, setNewproduct] = useState([]);
-
+  const [loading, setLoading] = useState(false);
+  const addToWishlist = (productId) => {
+    handleAddToWishlist(productId, setLoading);
+  };
   const handleAddToCart = (productId) => {
     addToCart(productId);
   };
@@ -100,10 +104,10 @@ function ProductDetails() {
                     </span>
                     <span className="dvdr">/</span>
                     <span className="tp-breadcrumb__active">
-                      <Link to="/">Breakfast </Link>
+                      <Link to="/"> {products.category} </Link>
                     </span>
                     <span className="dvdr">/</span>
-                    <span>Fresh microgreen 100% Organic From VietNamese</span>
+                    <span> {products.productTitle}</span>
                   </div>
                 </div>
               </div>
@@ -344,11 +348,15 @@ function ProductDetails() {
                                     </Link>
                                   </div>
                                 </div>
-                                <ul className="product__details-check">
+                                <ul
+                                  className="product__details-check"
+                                  onClick={() => addToWishlist(products._id)}
+                                  disabled={loading}
+                                >
                                   <li>
                                     <Link to="#">
-                                      <i className="icon-heart icons"></i> add
-                                      to wishlist
+                                      <i className="icon-heart icons"></i>
+                                      add to wishlist
                                     </Link>
                                   </li>
                                 </ul>
@@ -416,147 +424,59 @@ function ProductDetails() {
                 </div>
               </div>
               <div className="col-lg-2 col-md-12">
-                <div className="tpsidebar pb-30">
-                  <div className="tpsidebar__banner mb-30">
-                    <img
-                      src="https://html.hixstudio.net/orfarm/assets/img/shape/sidebar-product-1.png"
-                      alt=""
-                    />
-                  </div>
+                <div
+                  className="tpsidebar pb-30"
+                  style={{ justifyItems: "center" }}
+                >
                   <div className="tpsidebar__product">
                     <h4 className="tpsidebar__title mb-15">Recent Products</h4>
-                    <div className="tpsidebar__product-item">
-                      <div className="tpsidebar__product-thumb p-relative">
-                        <img
-                          src="https://html.hixstudio.net/orfarm/assets/img/product/sidebar-pro-1.jpg"
-                          alt=""
-                        />
-                        <div className="tpsidebar__info bage">
-                          <span className="tpproduct__info-hot bage__hot">
-                            HOT
+                    {newproduct.slice(0, 3).map((pro, index) => (
+                      <div className="tpsidebar__product-item" key={index}>
+                        <div className="tpsidebar__product-thumb p-relative">
+                          <img src={pro.image} alt="" />
+                          <div className="tpsidebar__info bage">
+                            <span className="tpproduct__info-hot bage__hot">
+                              HOT
+                            </span>
+                          </div>
+                        </div>
+                        <div className="tpsidebar__product-content">
+                          <span className="tpproduct__product-category">
+                            <Link to={`/Product/${pro._id}`}>
+                              {pro.category}
+                            </Link>
                           </span>
+                          <h4 className="tpsidebar__product-title">
+                            <Link to={`/Product/${pro._id}`}>
+                              {pro.productTitle}
+                            </Link>
+                          </h4>
+                          <div className="tpproduct__rating mb-5">
+                            <Link to="#">
+                              <i className="icon-star_outline1"></i>
+                            </Link>
+                            <Link to="#">
+                              <i className="icon-star_outline1"></i>
+                            </Link>
+                            <Link to="#">
+                              <i className="icon-star_outline1"></i>
+                            </Link>
+                            <Link to="#">
+                              <i className="icon-star_outline1"></i>
+                            </Link>
+                            <Link to="#">
+                              <i className="icon-star_outline1"></i>
+                            </Link>
+                          </div>
+                          <div className="tpproduct__price">
+                            <span>₹{pro.oneTimePrice}</span>
+                            <del className="pl-10">
+                              {pro.discountPercentage}%
+                            </del>
+                          </div>
                         </div>
                       </div>
-                      <div className="tpsidebar__product-content">
-                        <span className="tpproduct__product-category">
-                          <Link to="#">Fresh Fruits</Link>
-                        </span>
-                        <h4 className="tpsidebar__product-title">
-                          <Link to="#">
-                            Fresh Mangosteen 100% Organic From VietNamese
-                          </Link>
-                        </h4>
-                        <div className="tpproduct__rating mb-5">
-                          <Link to="#">
-                            <i className="icon-star_outline1"></i>
-                          </Link>
-                          <Link to="#">
-                            <i className="icon-star_outline1"></i>
-                          </Link>
-                          <Link to="#">
-                            <i className="icon-star_outline1"></i>
-                          </Link>
-                          <Link to="#">
-                            <i className="icon-star_outline1"></i>
-                          </Link>
-                          <Link to="#">
-                            <i className="icon-star_outline1"></i>
-                          </Link>
-                        </div>
-                        <div className="tpproduct__price">
-                          <span>$56.00</span>
-                          <del>$19.00</del>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="tpsidebar__product-item">
-                      <div className="tpsidebar__product-thumb p-relative">
-                        <img
-                          src="https://html.hixstudio.net/orfarm/assets/img/product/sidebar-pro-2.jpg"
-                          alt=""
-                        />
-                        <div className="tpsidebar__info bage">
-                          <span className="tpproduct__info-hot bage__hot">
-                            HOT
-                          </span>
-                        </div>
-                      </div>
-                      <div className="tpsidebar__product-content">
-                        <span className="tpproduct__product-category">
-                          <Link to="#">Fresh Fruits</Link>
-                        </span>
-                        <h4 className="tpsidebar__product-title">
-                          <Link to="#">
-                            Fresh Mangosteen 100% Organic From VietNamese
-                          </Link>
-                        </h4>
-                        <div className="tpproduct__rating mb-5">
-                          <Link to="#">
-                            <i className="icon-star_outline1"></i>
-                          </Link>
-                          <Link to="#">
-                            <i className="icon-star_outline1"></i>
-                          </Link>
-                          <Link to="#">
-                            <i className="icon-star_outline1"></i>
-                          </Link>
-                          <Link to="#">
-                            <i className="icon-star_outline1"></i>
-                          </Link>
-                          <Link to="#">
-                            <i className="icon-star_outline1"></i>
-                          </Link>
-                        </div>
-                        <div className="tpproduct__price">
-                          <span>$56.00</span>
-                          <del>$19.00</del>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="tpsidebar__product-item">
-                      <div className="tpsidebar__product-thumb p-relative">
-                        <img
-                          src="https://html.hixstudio.net/orfarm/assets/img/product/sidebar-pro-3.jpg"
-                          alt=""
-                        />
-                        <div className="tpsidebar__info bage">
-                          <span className="tpproduct__info-hot bage__hot">
-                            HOT
-                          </span>
-                        </div>
-                      </div>
-                      <div className="tpsidebar__product-content">
-                        <span className="tpproduct__product-category">
-                          <Link to="#">Fresh Fruits</Link>
-                        </span>
-                        <h4 className="tpsidebar__product-title">
-                          <Link to="#">
-                            Fresh Mangosteen 100% Organic From VietNamese
-                          </Link>
-                        </h4>
-                        <div className="tpproduct__rating mb-5">
-                          <Link to="#">
-                            <i className="icon-star_outline1"></i>
-                          </Link>
-                          <Link to="#">
-                            <i className="icon-star_outline1"></i>
-                          </Link>
-                          <Link to="#">
-                            <i className="icon-star_outline1"></i>
-                          </Link>
-                          <Link to="#">
-                            <i className="icon-star_outline1"></i>
-                          </Link>
-                          <Link to="#">
-                            <i className="icon-star_outline1"></i>
-                          </Link>
-                        </div>
-                        <div className="tpproduct__price">
-                          <span>$56.00</span>
-                          <del>$19.00</del>
-                        </div>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -610,10 +530,14 @@ function ProductDetails() {
                         </div>
                         <div className="tpproduct__content">
                           <span className="tpproduct__content-weight">
-                            <Link to="#">{product.category}</Link>
+                            <Link to={`/Product/${product._id}`}>
+                              {product.category}
+                            </Link>
                           </span>
                           <h4 className="tpproduct__title">
-                            <Link to="#">{product.productTitle}</Link>
+                            <Link to={`/Product/${product._id}`}>
+                              {product.productTitle}
+                            </Link>
                           </h4>
                           <div className="tpproduct__rating mb-5">
                             <Link to="#">

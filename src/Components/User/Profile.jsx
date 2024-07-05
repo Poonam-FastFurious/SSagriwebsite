@@ -1,13 +1,115 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { Baseurl } from "../../Components/Confige";
+import { Link } from "react-alice-carousel";
 function Profile() {
-  const [editable, setEditable] = useState(false);
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  const [editable, setEditable] = useState(false);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [userDetails, setUserDetails] = useState({});
+  const token = localStorage.getItem("accessToken");
+  const userId = localStorage.getItem("userid");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate inputs
+    if (newPassword !== confirmPassword) {
+      setError("New password and confirm password do not match");
+      return;
+    }
+
+    setError("");
+    setSuccess("");
+
+    // API request to change password
+    fetch(Baseurl + "/api/v1/user/change-password", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to change password");
+        }
+        return response.json();
+      })
+      .then(() => {
+        setSuccess("Password changed successfully");
+        setOldPassword("");
+        setNewPassword("");
+        setConfirmPassword("");
+      })
+      .catch((error) => {
+        console.error("Error changing password:", error);
+        setError("Error changing password. Please try again.");
+      });
+  };
   // Function to toggle the editable state
   const toggleEditable = () => {
     setEditable(!editable);
   };
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      try {
+        const accessToken = localStorage.getItem("accessToken");
+        const response = await fetch(Baseurl + "/api/v1/user/current-user", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+
+        setUserDetails(data.data);
+      } catch (err) {
+        setError(err.message || "Error fetching user details");
+      }
+    };
+
+    fetchCurrentUser();
+  }, []);
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await fetch(Baseurl + "/api/v1/order/allorder");
+        const data = await response.json();
+        if (data.statusCode === 200) {
+          const filteredOrders = data.data.filter(
+            (order) => order.customer === userId
+          );
+          setOrders(filteredOrders);
+        } else {
+          throw new Error("Failed to fetch orders");
+        }
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, [userId]);
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
@@ -29,13 +131,6 @@ function Profile() {
                         type="file"
                         className="profile-foreground-img-file-input"
                       />
-                      <label
-                        htmlFor="profile-foreground-img-file-input"
-                        className="profile-photo-edit btn btn-light"
-                      >
-                        <i className="ri-image-edit-line align-bottom me-1"></i>
-                        Change Cover
-                      </label>
                     </div>
                   </div>
                 </div>
@@ -44,12 +139,12 @@ function Profile() {
 
             <div className="row">
               <div className="col-xxl-3">
-                <div className="card mt-n5">
+                <div className="card  mt-10">
                   <div className="card-body p-4">
                     <div className="text-center">
                       <div className="profile-user position-relative d-inline-block mx-auto  mb-4">
                         <img
-                          src="https://themesbrand.com/velzon/html/master/assets/images/users/avatar-1.jpg"
+                          src={userDetails.avatar}
                           className="rounded-circle avatar-xl img-thumbnail user-profile-image"
                           alt="user-profile-image"
                         />
@@ -69,11 +164,10 @@ function Profile() {
                           </label>
                         </div>
                       </div>
-                      <h5 className="fs-16 mb-1">fullname</h5>
+                      <h5 className="fs-16 mb-1">{userDetails.fullName}</h5>
                     </div>
                   </div>
                 </div>
-
                 <div className="card">
                   <div className="card-body">
                     <div className="d-flex align-items-center mb-5">
@@ -106,64 +200,15 @@ function Profile() {
                     </div>
                   </div>
                 </div>
-                <div className="card">
-                  <div className="card-body">
-                    <div className="d-flex align-items-center mb-4">
-                      <div className="flex-grow-1">
-                        <h5 className="card-title mb-0">Profile</h5>
-                      </div>
-                    </div>
-
-                    <div className="mb-3 d-flex">
-                      <div className="avatar-xs d-block flex-shrink-0 me-3">
-                        <span className="avatar-title rounded-circle fs-16 bg-primary">
-                          <i className="ri-global-fill"></i>
-                        </span>
-                      </div>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="websiteInput"
-                        placeholder="www.example.com"
-                        value=""
-                      />
-                    </div>
-                    <div className="mb-3 d-flex">
-                      <div className="avatar-xs d-block flex-shrink-0 me-3">
-                        <span className="avatar-title rounded-circle fs-16 bg-success">
-                          <i className="ri-dribbble-fill"></i>
-                        </span>
-                      </div>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="dribbleName"
-                        placeholder="Username"
-                      />
-                    </div>
-                    <div className="d-flex">
-                      <div className="avatar-xs d-block flex-shrink-0 me-3">
-                        <span className="avatar-title rounded-circle fs-16 bg-danger">
-                          <i className="ri-pinterest-fill"></i>
-                        </span>
-                      </div>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="pinterestName"
-                        placeholder="Username"
-                      />
-                    </div>
-                  </div>
-                </div>
               </div>
 
               <div className="col-xxl-9">
-                <div className="card mt-xxl-n5">
+                <div className="card mt-10">
                   <div className="card-header">
                     <ul
-                      className="nav nav-tabs-custom rounded card-header-tabs border-bottom-0"
+                      className="nav  rounded  border-bottom-0 "
                       role="tablist"
+                      style={{ color: "red" }}
                     >
                       <li className="nav-item">
                         <a
@@ -189,20 +234,10 @@ function Profile() {
                         <a
                           className="nav-link"
                           data-bs-toggle="tab"
-                          href="#changePassword"
+                          href="#orderlist"
                           role="tab"
                         >
                           <i className="far fa-user"></i> Orders
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a
-                          className="nav-link"
-                          data-bs-toggle="tab"
-                          href="#changePassword"
-                          role="tab"
-                        >
-                          <i className="far fa-user"></i> Addresses
                         </a>
                       </li>
                     </ul>
@@ -222,33 +257,14 @@ function Profile() {
                                   htmlFor="firstnameInput"
                                   className="form-label"
                                 >
-                                  First Name
+                                  Name(Full-Name)
                                 </label>
                                 <input
                                   type="text"
                                   className="form-control"
                                   id="firstnameInput"
                                   placeholder="Enter your firstname"
-                                  value=""
-                                  disabled={!editable}
-                                />
-                              </div>
-                            </div>
-
-                            <div className="col-lg-6">
-                              <div className="mb-3">
-                                <label
-                                  htmlFor="lastnameInput"
-                                  className="form-label"
-                                >
-                                  Last Name
-                                </label>
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  id="lastnameInput"
-                                  placeholder="Enter your lastname"
-                                  value=""
+                                  value={userDetails.fullName}
                                   disabled={!editable}
                                 />
                               </div>
@@ -268,11 +284,27 @@ function Profile() {
                                   id="phonenumberInput"
                                   placeholder="Enter your phone number"
                                   disabled={!editable}
-                                  value=""
+                                  value={userDetails.mobile}
                                 />
                               </div>
                             </div>
-
+                            <div className="col-lg-6">
+                              <label
+                                htmlFor="phonenumberInput"
+                                className="form-label"
+                              >
+                                Gender
+                              </label>
+                              <select
+                                className="form-select mb-3"
+                                aria-label="Default select example"
+                              >
+                                <option selected>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Three</option>
+                              </select>
+                            </div>
                             <div className="col-lg-6">
                               <div className="mb-3">
                                 <label
@@ -287,22 +319,12 @@ function Profile() {
                                   id="emailInput"
                                   placeholder="Enter your email"
                                   disabled={!editable}
-                                  value=""
+                                  value={userDetails.email}
                                 />
                               </div>
                             </div>
 
-                            <div className="col-lg-12">
-                              <div className="mb-3">
-                                <label
-                                  htmlFor="JoiningdatInput"
-                                  className="form-label"
-                                >
-                                  Today Login time
-                                </label>
-                                <p>""</p>
-                              </div>
-                            </div>
+                            <div className="col-lg-12"></div>
 
                             <div className="col-lg-12"></div>
 
@@ -417,7 +439,7 @@ function Profile() {
                         id="changePassword"
                         role="tabpanel"
                       >
-                        <form>
+                        <form onSubmit={handleSubmit}>
                           <div className="row g-2">
                             <div className="col-lg-4">
                               <div>
@@ -432,6 +454,11 @@ function Profile() {
                                   className="form-control"
                                   id="oldpasswordInput"
                                   placeholder="Enter current password"
+                                  value={oldPassword}
+                                  onChange={(e) =>
+                                    setOldPassword(e.target.value)
+                                  }
+                                  required
                                 />
                               </div>
                             </div>
@@ -449,6 +476,11 @@ function Profile() {
                                   className="form-control"
                                   id="newpasswordInput"
                                   placeholder="Enter new password"
+                                  value={newPassword}
+                                  onChange={(e) =>
+                                    setNewPassword(e.target.value)
+                                  }
+                                  required
                                 />
                               </div>
                             </div>
@@ -466,11 +498,19 @@ function Profile() {
                                   className="form-control"
                                   id="confirmpasswordInput"
                                   placeholder="Confirm password"
+                                  value={confirmPassword}
+                                  onChange={(e) =>
+                                    setConfirmPassword(e.target.value)
+                                  }
+                                  required
                                 />
                               </div>
                             </div>
 
-                            <div className="col-lg-12">
+                            <div
+                              className="col-lg-12"
+                              style={{ visibility: "hidden" }}
+                            >
                               <div className="mb-3">
                                 <a
                                   href=""
@@ -491,6 +531,27 @@ function Profile() {
                                 </button>
                               </div>
                             </div>
+                            {error && (
+                              <div className="col-lg-12">
+                                <div
+                                  className="alert alert-danger"
+                                  role="alert"
+                                >
+                                  {error}
+                                </div>
+                              </div>
+                            )}
+
+                            {success && (
+                              <div className="col-lg-12">
+                                <div
+                                  className="alert alert-success"
+                                  role="alert"
+                                >
+                                  {success}
+                                </div>
+                              </div>
+                            )}
                           </div>
                         </form>
                         <div className="mt-4 mb-3 border-bottom pb-2">
@@ -517,52 +578,135 @@ function Profile() {
                             <a href="">Logout</a>
                           </div>
                         </div>
-                        <div className="d-flex align-items-center mb-3">
-                          <div className="flex-shrink-0 avatar-sm">
-                            <div className="avatar-title bg-light text-primary rounded-3 fs-18">
-                              <i className="ri-tablet-line"></i>
+                      </div>
+                      <div className="tab-pane" id="orderlist" role="tabpanel">
+                        <div>
+                          <ul
+                            className="nav nav-tabs nav-tabs-custom nav-success mb-3"
+                            role="tablist"
+                          >
+                            <li className="nav-item">
+                              <Link
+                                className="nav-link active All py-3"
+                                data-bs-toggle="tab"
+                                id="All"
+                                to="#home1"
+                                role="tab"
+                                aria-selected="true"
+                              >
+                                <i className="ri-store-2-fill me-1 align-bottom"></i>
+                                All Orders
+                              </Link>
+                            </li>
+                          </ul>
+                          <div className="tab-content">
+                            <div
+                              className="tab-pane fade show active"
+                              id="home1"
+                              role="tabpanel"
+                            >
+                              <div className="table-responsive table-card mb-1">
+                                <table className="table table-nowrap align-middle">
+                                  <thead className="text-muted table-light">
+                                    <tr className="text-uppercase">
+                                      <th scope="col" style={{ width: "25px" }}>
+                                        <div className="form-check">
+                                          <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            id="checkAll"
+                                            value="option"
+                                          />
+                                        </div>
+                                      </th>
+                                      <th className="sort" data-sort="id">
+                                        Order ID
+                                      </th>
+
+                                      <th
+                                        className="sort"
+                                        data-sort="product_name"
+                                      >
+                                        Product
+                                      </th>
+                                      <th className="sort" data-sort="date">
+                                        Order Date
+                                      </th>
+                                      <th className="sort" data-sort="amount">
+                                        Amount
+                                      </th>
+                                      <th className="sort" data-sort="payment">
+                                        Payment status
+                                      </th>
+                                      <th className="sort" data-sort="status">
+                                        Delivery Status
+                                      </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody className="list form-check-all">
+                                    {orders.map((userorder, index) => (
+                                      <tr key={index}>
+                                        <th scope="row">
+                                          <div className="form-check">
+                                            <input
+                                              className="form-check-input"
+                                              type="checkbox"
+                                              name="checkAll"
+                                              value="option1"
+                                            />
+                                          </div>
+                                        </th>
+                                        <td className="product_name">
+                                          {userorder.orderID}
+                                        </td>
+
+                                        <td className="product_name">
+                                          name of products
+                                        </td>
+                                        <td className="date">
+                                          {new Date(
+                                            userorder.createdAt
+                                          ).toLocaleDateString()}
+                                        </td>
+                                        <td className="amount">
+                                          {userorder.totalAmount}
+                                        </td>
+                                        <td className="payment">
+                                          {userorder.paymentInfo.status}
+                                        </td>
+                                        <td className="status">
+                                          <span className="badge bg-white text-success text-uppercase">
+                                            {userorder.status}
+                                          </span>
+                                        </td>
+                                      </tr>
+                                    ))}
+                                  </tbody>
+                                </table>
+
+                                <div className="noresult">
+                                  <div className="text-center">
+                                    <lord-icon
+                                      src="../../../msoeawqm.json"
+                                      trigger="loop"
+                                      colors="primary:#121331,secondary:#08a88a"
+                                      style={{
+                                        width: "75px",
+                                        height: "75px",
+                                      }}
+                                    ></lord-icon>
+                                    <h5 className="mt-2">
+                                      Sorry! No Result Found
+                                    </h5>
+                                    <p className="text-muted mb-0">
+                                      We've searched more than 150+ customers.
+                                      We did not find any customer for your
+                                      search.
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                          <div className="flex-grow-1 ms-3">
-                            <h6>Apple iPad Pro</h6>
-                            <p className="text-muted mb-0">
-                              Washington, United States - November 06 at 10:43AM
-                            </p>
-                          </div>
-                          <div>
-                            <a href="">Logout</a>
-                          </div>
-                        </div>
-                        <div className="d-flex align-items-center mb-3">
-                          <div className="flex-shrink-0 avatar-sm">
-                            <div className="avatar-title bg-light text-primary rounded-3 fs-18">
-                              <i className="ri-smartphone-line"></i>
-                            </div>
-                          </div>
-                          <div className="flex-grow-1 ms-3">
-                            <h6>Galaxy S21 Ultra 5G</h6>
-                            <p className="text-muted mb-0">
-                              Conneticut, United States - June 12 at 3:24PM
-                            </p>
-                          </div>
-                          <div>
-                            <a href="">Logout</a>
-                          </div>
-                        </div>
-                        <div className="d-flex align-items-center">
-                          <div className="flex-shrink-0 avatar-sm">
-                            <div className="avatar-title bg-light text-primary rounded-3 fs-18">
-                              <i className="ri-macbook-line"></i>
-                            </div>
-                          </div>
-                          <div className="flex-grow-1 ms-3">
-                            <h6>Dell Inspiron 14</h6>
-                            <p className="text-muted mb-0">
-                              Phoenix, United States - July 26 at 8:10AM
-                            </p>
-                          </div>
-                          <div>
-                            <a href="">Logout</a>
                           </div>
                         </div>
                       </div>

@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 
 function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <>
       <footer>
@@ -63,7 +69,9 @@ function Footer() {
                     <div className="tpfooter__widget-links">
                       <ul>
                         <li>
-                          <Link to="/Termscondition">Terms & condition</Link>
+                          <Link to="/Termscondition" onClick={scrollToTop}>
+                            Terms & condition
+                          </Link>
                         </li>
                         <li>
                           <Link to="/privacy">PRIVACY POLICY</Link>

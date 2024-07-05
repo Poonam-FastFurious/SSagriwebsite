@@ -36,7 +36,10 @@ function CardProduct({ product }) {
               </Link>
             </div>
           </div>
-          <div className="tpproduct__content">
+          <div
+            className="tpproduct__content"
+            style={{ backgroundColor: "white" }}
+          >
             <span className="tpproduct__content-weight">
               <Link to={`/Product/${product._id}`}>{product.category}</Link>,
             </span>

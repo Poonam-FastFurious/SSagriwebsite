@@ -65,9 +65,6 @@ function AboutUs() {
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Ipsam fugit earum ab..
                   </p>
-                  <div className="tpabout__inner-btn">
-                    <Link to="#">About us</Link>
-                  </div>
                 </div>
               </div>
             </div>
