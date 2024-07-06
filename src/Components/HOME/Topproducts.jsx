@@ -5,9 +5,14 @@ import Swiper from "swiper";
 import "swiper/swiper-bundle.css";
 import { Baseurl } from "../Confige";
 import { addToCart } from "../Utils/Addtocartutils";
+import handleAddToWishlist from "../Utils/WishlistUtils";
 
 function Topproducts() {
   const [topproduct, setTopproduct] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const addToWishlist = (productId) => {
+    handleAddToWishlist(productId, setLoading);
+  };
   const swiperRef = useRef(null);
 
   const handleAddToCart = (productId) => {
@@ -156,15 +161,10 @@ function Topproducts() {
                                     <Link
                                       className="tpproduct__shopping-wishlist"
                                       to="#"
+                                      onClick={() => addToWishlist(product._id)}
+                                      disabled={loading}
                                     >
                                       <i className="icon-heart icons"></i>
-                                    </Link>
-
-                                    <Link
-                                      className="tpproduct__shopping-cart"
-                                      to="#"
-                                    >
-                                      <i className="icon-eye"></i>
                                     </Link>
                                   </div>
                                 </div>
@@ -240,6 +240,9 @@ function Topproducts() {
                                     <img src={product.image} alt="" />
                                   </Link>
                                   <div className="tpproduct__info bage">
+                                    <span className="tpproduct__info-discount bage__discount">
+                                      -{product.discountPercentage}%
+                                    </span>
                                     <span className="tpproduct__info-hot bage__hot">
                                       HOT
                                     </span>
@@ -248,15 +251,10 @@ function Topproducts() {
                                     <Link
                                       className="tpproduct__shopping-wishlist"
                                       to="#"
+                                      onClick={() => addToWishlist(product._id)}
+                                      disabled={loading}
                                     >
                                       <i className="icon-heart icons"></i>
-                                    </Link>
-
-                                    <Link
-                                      className="tpproduct__shopping-cart"
-                                      to="#"
-                                    >
-                                      <i className="icon-eye"></i>
                                     </Link>
                                   </div>
                                 </div>
@@ -332,6 +330,9 @@ function Topproducts() {
                                     <img src={product.image} alt="" />
                                   </Link>
                                   <div className="tpproduct__info bage">
+                                    <span className="tpproduct__info-discount bage__discount">
+                                      -{product.discountPercentage}%
+                                    </span>
                                     <span className="tpproduct__info-hot bage__hot">
                                       HOT
                                     </span>
@@ -340,15 +341,10 @@ function Topproducts() {
                                     <Link
                                       className="tpproduct__shopping-wishlist"
                                       to="#"
+                                      onClick={() => addToWishlist(product._id)}
+                                      disabled={loading}
                                     >
                                       <i className="icon-heart icons"></i>
-                                    </Link>
-
-                                    <Link
-                                      className="tpproduct__shopping-cart"
-                                      to="#"
-                                    >
-                                      <i className="icon-eye"></i>
                                     </Link>
                                   </div>
                                 </div>
@@ -424,6 +420,9 @@ function Topproducts() {
                                     <img src={product.image} alt="" />
                                   </Link>
                                   <div className="tpproduct__info bage">
+                                    <span className="tpproduct__info-discount bage__discount">
+                                      -{product.discountPercentage}%
+                                    </span>
                                     <span className="tpproduct__info-hot bage__hot">
                                       HOT
                                     </span>
@@ -432,15 +431,10 @@ function Topproducts() {
                                     <Link
                                       className="tpproduct__shopping-wishlist"
                                       to="#"
+                                      onClick={() => addToWishlist(product._id)}
+                                      disabled={loading}
                                     >
                                       <i className="icon-heart icons"></i>
-                                    </Link>
-
-                                    <Link
-                                      className="tpproduct__shopping-cart"
-                                      to="#"
-                                    >
-                                      <i className="icon-eye"></i>
                                     </Link>
                                   </div>
                                 </div>

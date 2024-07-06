@@ -1,10 +1,16 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { addToCart } from "../Utils/Addtocartutils";
+import handleAddToWishlist from "../Utils/WishlistUtils";
+import { useState } from "react";
 
 function CardProduct({ product }) {
+  const [loading, setLoading] = useState(false);
   const handleAddToCart = (productId) => {
     addToCart(productId);
+  };
+  const addToWishlist = (productId) => {
+    handleAddToWishlist(productId, setLoading);
   };
 
   return (
@@ -25,14 +31,13 @@ function CardProduct({ product }) {
               <span className="tpproduct__info-hot bage__hot">HOT</span>
             </div>
             <div className="tpproduct__shopping">
-              <Link className="tpproduct__shopping-wishlist" to="#">
+              <Link
+                className="tpproduct__shopping-wishlist"
+                to="#"
+                onClick={() => addToWishlist(product._id)}
+                disabled={loading}
+              >
                 <i className="icon-heart icons"></i>
-              </Link>
-              <Link className="tpproduct__shopping-wishlist" to="#">
-                <i className="icon-layers"></i>
-              </Link>
-              <Link className="tpproduct__shopping-cart" to="#">
-                <i className="icon-eye"></i>
               </Link>
             </div>
           </div>
