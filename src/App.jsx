@@ -85,8 +85,18 @@ function App() {
                 <RouteProtected element={<Cart />} redirectTo="/login" />
               }
             />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/Profile" element={<Profile />} />
+            <Route
+              path="/checkout"
+              element={
+                <RouteProtected element={<Checkout />} redirectTo="/login" />
+              }
+            />
+            <Route
+              path="/Profile"
+              element={
+                <RouteProtected element={<Profile />} redirectTo="/login" />
+              }
+            />
             <Route path="/quize" element={<Quioze />} />
             <Route path="/Card" element={<CardProduct />} />
             <Route path="/howtogrow" element={<Howtogrow />} />

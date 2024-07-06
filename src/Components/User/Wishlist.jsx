@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Baseurl } from "../Confige";
+import { Link } from "react-router-dom";
+import { addToCart } from "../Utils/Addtocartutils";
 
 function Wishlist() {
   const [wishlistData, setWishlistData] = useState(null);
@@ -77,6 +79,9 @@ function Wishlist() {
   if (isLoading) {
     return <div>Loading....</div>;
   }
+  const handleAddToCart = (productId) => {
+    addToCart(productId);
+  };
   return (
     <>
       <main>
@@ -87,7 +92,7 @@ function Wishlist() {
                 <div className="tp-breadcrumb__content">
                   <div className="tp-breadcrumb__list">
                     <span className="tp-breadcrumb__active">
-                      <a href="index.html">Home</a>
+                      <Link to="/">Home</Link>
                     </span>
                     <span className="dvdr">/</span>
                     <span>Wishlist</span>
@@ -122,14 +127,12 @@ function Wishlist() {
                             <>
                               <tr key={index}>
                                 <td className="product-thumbnail">
-                                  <a href="shop-details.html">
+                                  <Link to="#">
                                     <img src={item.url} alt="" />
-                                  </a>
+                                  </Link>
                                 </td>
                                 <td className="product-name">
-                                  <a href="shop-details.html">
-                                    {item.productName}
-                                  </a>
+                                  <Link to="#">{item.productName}</Link>
                                 </td>
                                 <td className="product-price">
                                   <span className="amount">₹{item.price}</span>
@@ -143,7 +146,12 @@ function Wishlist() {
                                   </span>
                                 </td>
                                 <td className="product-add-to-cart">
-                                  <button className="tp-btn tp-color-btn  tp-wish-cart banner-animation">
+                                  <button
+                                    className="tp-btn tp-color-btn  tp-wish-cart banner-animation"
+                                    onClick={() =>
+                                      handleAddToCart(item.productId)
+                                    }
+                                  >
                                     Add To Cart
                                   </button>
                                 </td>
@@ -153,9 +161,9 @@ function Wishlist() {
                                     removeFromWishlist(item.productId)
                                   }
                                 >
-                                  <a href="#">
+                                  <Link to="#">
                                     <i className="fa fa-times"></i>
-                                  </a>
+                                  </Link>
                                 </td>
                               </tr>
                             </>

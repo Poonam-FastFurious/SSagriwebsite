@@ -256,10 +256,10 @@ function Header() {
                             </li>
 
                             <li>
-                              <Link to="#">Order</Link>
+                              <Link to="/Profile">Order</Link>
                             </li>
                             <li>
-                              <Link to="#">Support</Link>
+                              <Link to="/contact">Support</Link>
                             </li>
                             <li>
                               <Link to="#" onClick={handleLogout}>
@@ -460,9 +460,17 @@ function Header() {
           </Link>
         </div>
         <div className="tpsideinfo__account-link">
-          <Link to="/login">
-            <i className="icon-user icons"></i> Login / Register
-          </Link>
+          {isUserLoggedIn ? (
+            <Link to="/Profile">
+              <i className="icon-user icons"></i>
+              Profile
+            </Link>
+          ) : (
+            <Link to="/login">
+              <i className="icon-user icons"></i>
+              Login
+            </Link>
+          )}
         </div>
         <div className="tpsideinfo__wishlist-link">
           <Link to="/wishlist" target="_parent">

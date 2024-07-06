@@ -7,7 +7,6 @@ function Profile() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [editable, setEditable] = useState(false);
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -16,6 +15,22 @@ function Profile() {
   const [userDetails, setUserDetails] = useState({});
   const token = localStorage.getItem("accessToken");
   const userId = localStorage.getItem("userid");
+  const [formData, setFormData] = useState({
+    fullName: userDetails.fullName || "",
+    email: userDetails.email || "",
+    avatar: userDetails.avatar || "",
+    address: {
+      city: userDetails.address?.city || "",
+      country: userDetails.address?.country || "",
+      zipCode: userDetails.address?.zipCode || "",
+    },
+    username: userDetails.username || "",
+    mobile: userDetails.mobile || "",
+    dob: userDetails.dob || "",
+    gender: userDetails.gender || "",
+  });
+  const [editable, setEditable] = useState(false);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -112,6 +127,59 @@ function Profile() {
     return <p>Loading...</p>;
   }
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleAddressChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      address: {
+        ...prevData.address,
+        [name]: value,
+      },
+    }));
+  };
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData((prevData) => ({
+          ...prevData,
+          avatar: reader.result,
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleupdateprofile = (e) => {
+    e.preventDefault();
+
+    fetch(Baseurl + "/api/v1/user/update-account", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        setEditable(false);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   return (
     <>
       <div className="">
@@ -145,7 +213,11 @@ function Profile() {
                     <div className="text-center">
                       <div className="profile-user position-relative d-inline-block mx-auto  mb-4">
                         <img
-                          src={userDetails.avatar}
+                          src={
+                            userDetails.avatar
+                              ? userDetails.avatar
+                              : "https://cdn.dribbble.com/users/1041205/screenshots/3636353/media/b9d3272401a456bdfaef25bb2a7accd2.jpg?resize=400x0"
+                          }
                           className="rounded-circle avatar-xl img-thumbnail user-profile-image"
                           alt="user-profile-image"
                         />
@@ -235,6 +307,16 @@ function Profile() {
                           role="tab"
                         >
                           <i className="far fa-user"></i> Orders
+                        </a>
+                      </li>
+                      <li className="nav-item">
+                        <a
+                          className="nav-link"
+                          data-bs-toggle="tab"
+                          href="#personalDetailsupdate"
+                          role="tab"
+                        >
+                          <i className="far fa-user"></i> Updateprofile
                         </a>
                       </li>
                     </ul>
@@ -700,6 +782,227 @@ function Profile() {
                             </div>
                           </div>
                         </div>
+                      </div>
+                      <div
+                        className="tab-pane "
+                        id="personalDetailsupdate"
+                        role="tabpanel"
+                      >
+                        <form onSubmit={handleupdateprofile}>
+                          <div className="row">
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="firstnameInput"
+                                  className="form-label"
+                                >
+                                  Name (Full-Name)
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="firstnameInput"
+                                  name="fullName"
+                                  placeholder="Enter your fullname"
+                                  value={formData.fullName}
+                                  onChange={handleChange}
+                                  disabled={!editable}
+                                />
+                              </div>
+                            </div>
+
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="phonenumberInput"
+                                  className="form-label"
+                                >
+                                  Phone Number
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="phonenumberInput"
+                                  name="mobile"
+                                  placeholder="Enter your phone number"
+                                  value={formData.mobile}
+                                  onChange={handleChange}
+                                  disabled={!editable}
+                                />
+                              </div>
+                            </div>
+
+                            <div className="col-lg-6">
+                              <label
+                                htmlFor="genderInput"
+                                className="form-label"
+                              >
+                                Gender
+                              </label>
+                              <select
+                                className="form-select mb-3"
+                                aria-label="Default select example"
+                                name="gender"
+                                value={formData.gender}
+                                onChange={handleChange}
+                                disabled={!editable}
+                              >
+                                <option>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                              </select>
+                            </div>
+
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="emailInput"
+                                  className="form-label"
+                                >
+                                  Email Address
+                                </label>
+                                <input
+                                  type="email"
+                                  className="form-control"
+                                  id="emailInput"
+                                  name="email"
+                                  placeholder="Enter your email"
+                                  value={formData.email}
+                                  onChange={handleChange}
+                                  disabled={!editable}
+                                />
+                              </div>
+                            </div>
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="avatarInput"
+                                  className="form-label"
+                                >
+                                  Avatar
+                                </label>
+                                <input
+                                  type="file"
+                                  className="form-control"
+                                  id="avatarInput"
+                                  name="avatar"
+                                  onChange={handleAvatarChange}
+                                  disabled={!editable}
+                                />
+                              </div>
+                            </div>
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="cityInput"
+                                  className="form-label"
+                                >
+                                  City
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="cityInput"
+                                  name="city"
+                                  placeholder="City"
+                                  value={formData.address.city}
+                                  onChange={handleAddressChange}
+                                  disabled={!editable}
+                                />
+                              </div>
+                            </div>
+
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="countryInput"
+                                  className="form-label"
+                                >
+                                  Country
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="countryInput"
+                                  name="country"
+                                  placeholder="Country"
+                                  value={formData.address.country}
+                                  onChange={handleAddressChange}
+                                  disabled={!editable}
+                                />
+                              </div>
+                            </div>
+
+                            <div className="col-lg-6">
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="zipcodeInput"
+                                  className="form-label"
+                                >
+                                  Zip Code
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="zipcodeInput"
+                                  name="zipCode"
+                                  placeholder="Enter zipcode"
+                                  value={formData.address.zipCode}
+                                  onChange={handleAddressChange}
+                                  disabled={!editable}
+                                />
+                              </div>
+                            </div>
+
+                            <div className="col-lg-12">
+                              <div className="mb-3 pb-2">
+                                <label
+                                  htmlFor="descriptionInput"
+                                  className="form-label"
+                                >
+                                  Description
+                                </label>
+                                <textarea
+                                  className="form-control"
+                                  id="descriptionInput"
+                                  name="description"
+                                  placeholder="Enter your description"
+                                  rows="3"
+                                  value={formData.description}
+                                  onChange={handleChange}
+                                  disabled
+                                >
+                                  Hi I'm Anna Adame,It will be as simple as
+                                  Occidental; in fact, it will be Occidental. To
+                                  an English person, it will seem like
+                                  simplified English, as a skeptical Cambridge
+                                  friend of mine told me what Occidental is
+                                  European languages are members of the same
+                                  family.
+                                </textarea>
+                              </div>
+                            </div>
+
+                            <div className="col-lg-12">
+                              <div className="hstack gap-2 justify-content-end">
+                                <button
+                                  type="submit"
+                                  className="btn btn-primary"
+                                >
+                                  Update
+                                </button>
+                                <button
+                                  onClick={toggleEditable}
+                                  type="button"
+                                  className="btn btn-soft-success"
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
                       </div>
                     </div>
                   </div>

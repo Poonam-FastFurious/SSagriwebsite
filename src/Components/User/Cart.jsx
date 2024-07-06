@@ -192,12 +192,12 @@ function Cart() {
                             cart.items.map((product, index) => (
                               <tr key={index}>
                                 <td className="product-thumbnail">
-                                  <Link to="/shop-details">
+                                  <Link to="#">
                                     <img src={product.product.image} alt="" />
                                   </Link>
                                 </td>
                                 <td className="product-name">
-                                  <Link to="/shop-details">
+                                  <Link to="#">
                                     {product.product.productTitle}
                                   </Link>
                                 </td>
