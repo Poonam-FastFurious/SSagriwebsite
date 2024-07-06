@@ -42,6 +42,8 @@ import Shop from "./Components/Shops/Shop";
 import Categoryproduct from "./Components/Pages/Categoryproduct";
 import PrivacyPolicy from "./Components/PrivacyPolicy";
 import TermsandCondition from "./Components/TermsandCondition";
+import Successpage from "./Components/User/Successpage";
+import OrderDetails from "./Components/User/OrderDetails";
 
 function App() {
   return (
@@ -93,6 +95,8 @@ function App() {
             <Route path="/blogdetails/:id" element={<Blogdetails />} />
             <Route path="/Privacy" element={<PrivacyPolicy />} />
             <Route path="/Termscondition" element={<TermsandCondition />} />
+            <Route path="/sucseess" element={<Successpage />} />
+            <Route path="/orderdetails/:id" element={<OrderDetails />} />
           </Route>
         </Routes>
       </BrowserRouter>

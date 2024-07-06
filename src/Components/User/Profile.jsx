@@ -1,7 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react";
 import { Baseurl } from "../../Components/Confige";
-import { Link } from "react-alice-carousel";
+import { Link } from "react-router-dom";
+
 function Profile() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -157,11 +158,7 @@ function Profile() {
                           <label
                             htmlFor="profile-img-file-input"
                             className="profile-photo-edit avatar-xs"
-                          >
-                            <span className="avatar-title rounded-circle bg-light text-body">
-                              <i className="ri-camera-fill"></i>
-                            </span>
-                          </label>
+                          ></label>
                         </div>
                       </div>
                       <h5 className="fs-16 mb-1">{userDetails.fullName}</h5>
@@ -623,12 +620,6 @@ function Profile() {
                                         Order ID
                                       </th>
 
-                                      <th
-                                        className="sort"
-                                        data-sort="product_name"
-                                      >
-                                        Product
-                                      </th>
                                       <th className="sort" data-sort="date">
                                         Order Date
                                       </th>
@@ -640,6 +631,9 @@ function Profile() {
                                       </th>
                                       <th className="sort" data-sort="status">
                                         Delivery Status
+                                      </th>
+                                      <th className="sort" data-sort="city">
+                                        Action
                                       </th>
                                     </tr>
                                   </thead>
@@ -657,12 +651,13 @@ function Profile() {
                                           </div>
                                         </th>
                                         <td className="product_name">
-                                          {userorder.orderID}
+                                          <Link
+                                            to={`/orderdetails/${userorder._id}`}
+                                          >
+                                            {userorder.orderID}
+                                          </Link>
                                         </td>
 
-                                        <td className="product_name">
-                                          name of products
-                                        </td>
                                         <td className="date">
                                           {new Date(
                                             userorder.createdAt
@@ -679,32 +674,28 @@ function Profile() {
                                             {userorder.status}
                                           </span>
                                         </td>
+                                        <td>
+                                          <ul className="list-inline hstack gap-2 mb-0">
+                                            <li
+                                              className="list-inline-item"
+                                              data-bs-toggle="tooltip"
+                                              data-bs-trigger="hover"
+                                              data-bs-placement="top"
+                                              title="View"
+                                            >
+                                              <Link
+                                                to={`${userorder._id}`}
+                                                className="text-primary d-inline-block"
+                                              >
+                                                <i className="ri-eye-fill fs-16"></i>
+                                              </Link>
+                                            </li>
+                                          </ul>
+                                        </td>
                                       </tr>
                                     ))}
                                   </tbody>
                                 </table>
-
-                                <div className="noresult">
-                                  <div className="text-center">
-                                    <lord-icon
-                                      src="../../../msoeawqm.json"
-                                      trigger="loop"
-                                      colors="primary:#121331,secondary:#08a88a"
-                                      style={{
-                                        width: "75px",
-                                        height: "75px",
-                                      }}
-                                    ></lord-icon>
-                                    <h5 className="mt-2">
-                                      Sorry! No Result Found
-                                    </h5>
-                                    <p className="text-muted mb-0">
-                                      We've searched more than 150+ customers.
-                                      We did not find any customer for your
-                                      search.
-                                    </p>
-                                  </div>
-                                </div>
                               </div>
                             </div>
                           </div>
