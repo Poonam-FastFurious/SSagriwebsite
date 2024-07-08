@@ -157,7 +157,7 @@ function Topproducts() {
                                       HOT
                                     </span>
                                   </div>
-                                  <div className="tpproduct__shopping ">
+                                  <div className="tpproduct__shopping">
                                     <Link
                                       className="tpproduct__shopping-wishlist"
                                       to="#"
@@ -202,9 +202,7 @@ function Topproducts() {
                                       {product.discountPercentage}%
                                     </del>
                                   </div>
-                                </div>
-                                <div className="tpproduct__hover-text">
-                                  <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                                  <div className="tpproduct__hover-btn d-flex justify-content-center">
                                     <Link
                                       className="tp-btn-2"
                                       to="#"
@@ -214,13 +212,6 @@ function Topproducts() {
                                     >
                                       Add to cart
                                     </Link>
-                                  </div>
-                                  <div className="tpproduct__descrip">
-                                    <ul>
-                                      <li>Stock: {product.stock}</li>
-                                      <li>Rating:{product.rating}</li>
-                                      <li>Type: Organic</li>
-                                    </ul>
                                   </div>
                                 </div>
                               </div>
@@ -247,7 +238,7 @@ function Topproducts() {
                                       HOT
                                     </span>
                                   </div>
-                                  <div className="tpproduct__shopping ">
+                                  <div className="tpproduct__shopping">
                                     <Link
                                       className="tpproduct__shopping-wishlist"
                                       to="#"
@@ -292,9 +283,7 @@ function Topproducts() {
                                       {product.discountPercentage}%
                                     </del>
                                   </div>
-                                </div>
-                                <div className="tpproduct__hover-text">
-                                  <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                                  <div className="tpproduct__hover-btn d-flex justify-content-center">
                                     <Link
                                       className="tp-btn-2"
                                       to="#"
@@ -304,13 +293,6 @@ function Topproducts() {
                                     >
                                       Add to cart
                                     </Link>
-                                  </div>
-                                  <div className="tpproduct__descrip">
-                                    <ul>
-                                      <li>Stock: {product.stock}</li>
-                                      <li>Rating:{product.rating}</li>
-                                      <li>Type: Organic</li>
-                                    </ul>
                                   </div>
                                 </div>
                               </div>
@@ -337,7 +319,7 @@ function Topproducts() {
                                       HOT
                                     </span>
                                   </div>
-                                  <div className="tpproduct__shopping ">
+                                  <div className="tpproduct__shopping">
                                     <Link
                                       className="tpproduct__shopping-wishlist"
                                       to="#"
@@ -382,9 +364,7 @@ function Topproducts() {
                                       {product.discountPercentage}%
                                     </del>
                                   </div>
-                                </div>
-                                <div className="tpproduct__hover-text">
-                                  <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                                  <div className="tpproduct__hover-btn d-flex justify-content-center">
                                     <Link
                                       className="tp-btn-2"
                                       to="#"
@@ -394,13 +374,6 @@ function Topproducts() {
                                     >
                                       Add to cart
                                     </Link>
-                                  </div>
-                                  <div className="tpproduct__descrip">
-                                    <ul>
-                                      <li>Stock: {product.stock}</li>
-                                      <li>Rating:{product.rating}</li>
-                                      <li>Type: Organic</li>
-                                    </ul>
                                   </div>
                                 </div>
                               </div>
@@ -427,7 +400,7 @@ function Topproducts() {
                                       HOT
                                     </span>
                                   </div>
-                                  <div className="tpproduct__shopping ">
+                                  <div className="tpproduct__shopping">
                                     <Link
                                       className="tpproduct__shopping-wishlist"
                                       to="#"
@@ -472,9 +445,7 @@ function Topproducts() {
                                       {product.discountPercentage}%
                                     </del>
                                   </div>
-                                </div>
-                                <div className="tpproduct__hover-text">
-                                  <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                                  <div className="tpproduct__hover-btn d-flex justify-content-center">
                                     <Link
                                       className="tp-btn-2"
                                       to="#"
@@ -484,13 +455,6 @@ function Topproducts() {
                                     >
                                       Add to cart
                                     </Link>
-                                  </div>
-                                  <div className="tpproduct__descrip">
-                                    <ul>
-                                      <li>Stock: {product.stock}</li>
-                                      <li>Rating:{product.rating}</li>
-                                      <li>Type: Organic</li>
-                                    </ul>
                                   </div>
                                 </div>
                               </div>

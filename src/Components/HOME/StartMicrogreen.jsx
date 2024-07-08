@@ -69,7 +69,7 @@ function StartMicrogreen() {
                         </span>
                       </div>
                       <div className="tpfeature__btn">
-                        <Link className="tp-btn-4" to="/cart">
+                        <Link className="tp-btn-4" to="#">
                           Add To Cart
                         </Link>
                       </div>
@@ -90,7 +90,7 @@ function StartMicrogreen() {
                         </span>
                       </div>
                       <div className="tpfeature__btn">
-                        <Link className="tp-btn-3" to="shop-2">
+                        <Link className="tp-btn-3" to="/shop">
                           View More
                         </Link>
                       </div>

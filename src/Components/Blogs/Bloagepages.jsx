@@ -48,7 +48,11 @@ function Bloagepages() {
                     <h4 className="tpblog__title">
                       <Link to={`/blogdetails/${blog._id}`}>{blog.title}</Link>
                     </h4>
-                    <p>{blog.content.slice(0, 60)}....</p>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: blog.content.slice(0, 60) + "....",
+                      }}
+                    />
                     <div className="tpblog__details">
                       <Link to={`/blogdetails/${blog._id}`}>
                         Continue reading

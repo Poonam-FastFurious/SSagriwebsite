@@ -459,6 +459,26 @@ function Header() {
             ContactUs
           </Link>
         </div>
+        <div className="tpsideinfo__wishlist-link">
+          <Link to="/quize" target="_parent">
+            Take The test
+          </Link>
+        </div>
+        <div className="tpsideinfo__wishlist-link">
+          <Link to="/howtogrow" target="_parent">
+            Istruction
+          </Link>
+        </div>
+        <div className="tpsideinfo__wishlist-link">
+          <Link to="/Faq" target="_parent">
+            Help & FAQ
+          </Link>
+        </div>
+        <div className="tpsideinfo__wishlist-link">
+          <Link to="/Blog" target="_parent">
+            Blogs
+          </Link>
+        </div>
         <div className="tpsideinfo__account-link">
           {isUserLoggedIn ? (
             <Link to="/Profile">

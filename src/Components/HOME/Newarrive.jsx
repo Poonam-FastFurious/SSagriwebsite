@@ -97,11 +97,14 @@ function Newarrive() {
                           className="tpproduct__thumb-img"
                           to={`/Product/${product._id}`}
                         >
-                          <img src={product.thumbnail} alt="" />
+                          <img src={product.image} alt="" />
                         </Link>
                         <div className="tpproduct__info bage">
                           <span className="tpproduct__info-discount bage__discount">
-                            Sale
+                            -{product.discountPercentage}%
+                          </span>
+                          <span className="tpproduct__info-hot bage__hot">
+                            HOT
                           </span>
                         </div>
                         <div className="tpproduct__shopping">
@@ -149,9 +152,7 @@ function Newarrive() {
                             {product.discountPercentage}%
                           </del>
                         </div>
-                      </div>
-                      <div className="tpproduct__hover-text">
-                        <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                        <div className="tpproduct__hover-btn d-flex justify-content-center">
                           <Link
                             className="tp-btn-2"
                             to="#"
@@ -159,13 +160,6 @@ function Newarrive() {
                           >
                             Add to cart
                           </Link>
-                        </div>
-                        <div className="tpproduct__descrip">
-                          <ul>
-                            <li>Stock: {product.stock}</li>
-                            <li>Rating: {product.rating}</li>
-                            <li>Type: Organic</li>
-                          </ul>
                         </div>
                       </div>
                     </div>
@@ -182,11 +176,14 @@ function Newarrive() {
                           className="tpproduct__thumb-img"
                           to={`/Product/${product._id}`}
                         >
-                          <img src={product.thumbnail} alt="" />
+                          <img src={product.image} alt="" />
                         </Link>
                         <div className="tpproduct__info bage">
                           <span className="tpproduct__info-discount bage__discount">
-                            Sale
+                            -{product.discountPercentage}%
+                          </span>
+                          <span className="tpproduct__info-hot bage__hot">
+                            HOT
                           </span>
                         </div>
                         <div className="tpproduct__shopping">
@@ -234,9 +231,7 @@ function Newarrive() {
                             {product.discountPercentage}%
                           </del>
                         </div>
-                      </div>
-                      <div className="tpproduct__hover-text">
-                        <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                        <div className="tpproduct__hover-btn d-flex justify-content-center">
                           <Link
                             className="tp-btn-2"
                             to="#"
@@ -244,13 +239,6 @@ function Newarrive() {
                           >
                             Add to cart
                           </Link>
-                        </div>
-                        <div className="tpproduct__descrip">
-                          <ul>
-                            <li>Stock: {product.stock}</li>
-                            <li>Rating: {product.rating}</li>
-                            <li>Type: Organic</li>
-                          </ul>
                         </div>
                       </div>
                     </div>
@@ -267,11 +255,14 @@ function Newarrive() {
                           className="tpproduct__thumb-img"
                           to={`/Product/${product._id}`}
                         >
-                          <img src={product.thumbnail} alt="" />
+                          <img src={product.image} alt="" />
                         </Link>
                         <div className="tpproduct__info bage">
                           <span className="tpproduct__info-discount bage__discount">
-                            Sale
+                            -{product.discountPercentage}%
+                          </span>
+                          <span className="tpproduct__info-hot bage__hot">
+                            HOT
                           </span>
                         </div>
                         <div className="tpproduct__shopping">
@@ -319,9 +310,7 @@ function Newarrive() {
                             {product.discountPercentage}%
                           </del>
                         </div>
-                      </div>
-                      <div className="tpproduct__hover-text">
-                        <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                        <div className="tpproduct__hover-btn d-flex justify-content-center">
                           <Link
                             className="tp-btn-2"
                             to="#"
@@ -329,13 +318,6 @@ function Newarrive() {
                           >
                             Add to cart
                           </Link>
-                        </div>
-                        <div className="tpproduct__descrip">
-                          <ul>
-                            <li>Stock: {product.stock}</li>
-                            <li>Rating: {product.rating}</li>
-                            <li>Type: Organic</li>
-                          </ul>
                         </div>
                       </div>
                     </div>
@@ -352,11 +334,14 @@ function Newarrive() {
                           className="tpproduct__thumb-img"
                           to={`/Product/${product._id}`}
                         >
-                          <img src={product.thumbnail} alt="" />
+                          <img src={product.image} alt="" />
                         </Link>
                         <div className="tpproduct__info bage">
                           <span className="tpproduct__info-discount bage__discount">
-                            Sale
+                            -{product.discountPercentage}%
+                          </span>
+                          <span className="tpproduct__info-hot bage__hot">
+                            HOT
                           </span>
                         </div>
                         <div className="tpproduct__shopping">
@@ -404,9 +389,7 @@ function Newarrive() {
                             {product.discountPercentage}%
                           </del>
                         </div>
-                      </div>
-                      <div className="tpproduct__hover-text">
-                        <div className="tpproduct__hover-btn d-flex justify-content-center mb-10">
+                        <div className="tpproduct__hover-btn d-flex justify-content-center">
                           <Link
                             className="tp-btn-2"
                             to="#"
@@ -414,13 +397,6 @@ function Newarrive() {
                           >
                             Add to cart
                           </Link>
-                        </div>
-                        <div className="tpproduct__descrip">
-                          <ul>
-                            <li>Stock: {product.stock}</li>
-                            <li>Rating: {product.rating}</li>
-                            <li>Type: Organic</li>
-                          </ul>
                         </div>
                       </div>
                     </div>
