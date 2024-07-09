@@ -70,22 +70,24 @@ function Blog() {
                 <div className="swiper-slide" key={index}>
                   <div className="tpblog__item">
                     <div className="tpblog__thumb fix">
-                      <a href="blog-details.html">
+                      <Link to="#">
                         <img src={blog.thumbnail} alt="" />
-                      </a>
+                      </Link>
                     </div>
                     <div className="tpblog__wrapper">
                       <div className="tpblog__entry-wap">
                         <span className="cat-links">
-                          <a href="shop-details.html">Lifestyle</a>
+                          <Link to={`/blogdetails/${blog._id}`}>Lifestyle</Link>
                         </span>
                         <span className="author-by">
-                          <a href="#">{blog.author}</a>
+                          <Link to={`/blogdetails/${blog._id}`}>
+                            {blog.author}
+                          </Link>
                         </span>
                         <span className="post-data">
-                          <a href="#">
+                          <Link to={`/blogdetails/${blog._id}`}>
                             {format(new Date(blog.createdAt), "MMM dd, yyyy")}
-                          </a>
+                          </Link>
                         </span>
                       </div>
                       <h4 className="tpblog__title">

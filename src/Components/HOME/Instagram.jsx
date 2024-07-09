@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import Swiper from "swiper";
 import imge from "../../assets/Images/instagram.jpeg";
+import { Link } from "react-router-dom";
 function Instagram() {
   useEffect(() => {
     const tpblogswiper = new Swiper(".insta-active", {
@@ -40,9 +41,9 @@ function Instagram() {
               <div className="tpsection mb-35">
                 <h4 className="tpsection__title">Our instagram</h4>
                 <p>
-                  Tag <a href="index.html">@orfarm</a> in your Instagram photos
-                  for a chance to be featured here. <br /> Find more inspiration
-                  on our Instagram.
+                  Tag <Link to="/">@SSAgriculture</Link> in your Instagram
+                  photos for a chance to be featured here. <br /> Find more
+                  inspiration on our Instagram.
                 </p>
               </div>
             </div>
@@ -51,121 +52,121 @@ function Instagram() {
             <div className="swiper-wrapper">
               <div className="swiper-slide">
                 <div className="tpinsta__item p-relative fix">
-                  <a href="#">
+                  <Link to="#">
                     <img src={imge} alt="thumb-img" />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     className="tpinsta__links popup-image"
-                    href="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
+                    to="https://www.instagram.com/agriqulture.innovations?igsh=eGMzeDBnNHI4NXJz&utm_source=qr"
                   >
                     <i className="fab fa-instagram"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="swiper-slide">
                 <div className="tpinsta__item p-relative fix">
-                  <a href="#">
+                  <Link to="#">
                     <img src={imge} alt="thumb-img" />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     className="tpinsta__links popup-image"
-                    href="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
+                    to="https://www.instagram.com/agriqulture.innovations?igsh=eGMzeDBnNHI4NXJz&utm_source=qr"
                   >
                     <i className="fab fa-instagram"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="swiper-slide">
                 <div className="tpinsta__item p-relative fix">
-                  <a href="#">
+                  <Link to="#">
                     <img src={imge} alt="thumb-img" />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     className="tpinsta__links popup-image"
-                    href="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
+                    to="https://www.instagram.com/agriqulture.innovations?igsh=eGMzeDBnNHI4NXJz&utm_source=qr"
                   >
                     <i className="fab fa-instagram"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="swiper-slide">
                 <div className="tpblog__item">
                   <div className="tpinsta__item p-relative fix">
-                    <a href="#">
+                    <Link to="#">
                       <img src={imge} alt="thumb-img" />
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                       className="tpinsta__links popup-image"
-                      href="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
+                      to="https://www.instagram.com/agriqulture.innovations?igsh=eGMzeDBnNHI4NXJz&utm_source=qr"
                     >
                       <i className="fab fa-instagram"></i>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
               <div className="swiper-slide">
                 <div className="tpinsta__item p-relative fix">
-                  <a href="#">
+                  <Link to="#">
                     <img src={imge} alt="thumb-img" />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     className="tpinsta__links popup-image"
-                    href="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
+                    to="https://www.instagram.com/agriqulture.innovations?igsh=eGMzeDBnNHI4NXJz&utm_source=qr"
                   >
                     <i className="fab fa-instagram"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="swiper-slide">
                 <div className="tpinsta__item p-relative fix">
-                  <a href="#">
+                  <Link to="#">
                     <img src={imge} alt="thumb-img" />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     className="tpinsta__links popup-image"
-                    href="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
+                    to="https://www.instagram.com/agriqulture.innovations?igsh=eGMzeDBnNHI4NXJz&utm_source=qr"
                   >
                     <i className="fab fa-instagram"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="swiper-slide">
                 <div className="tpinsta__item p-relative fix">
-                  <a href="#">
+                  <Link to="#">
                     <img src={imge} alt="thumb-img" />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     className="tpinsta__links popup-image"
-                    href="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
+                    to="https://www.instagram.com/agriqulture.innovations?igsh=eGMzeDBnNHI4NXJz&utm_source=qr"
                   >
                     <i className="fab fa-instagram"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="swiper-slide">
                 <div className="tpinsta__item p-relative fix">
-                  <a href="#">
+                  <Link to="#">
                     <img src={imge} alt="thumb-img" />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     className="tpinsta__links popup-image"
-                    href="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
+                    to="https://www.instagram.com/agriqulture.innovations?igsh=eGMzeDBnNHI4NXJz&utm_source=qr"
                   >
                     <i className="fab fa-instagram"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="swiper-slide">
                 <div className="tpinsta__item p-relative fix">
-                  <a href="#">
+                  <Link to="#">
                     <img src={imge} alt="thumb-img" />
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     className="tpinsta__links popup-image"
-                    href="https://html.hixstudio.net/orfarm/assets/img/insta/insta-1.jpg"
+                    to="https://www.instagram.com/agriqulture.innovations?igsh=eGMzeDBnNHI4NXJz&utm_source=qr"
                   >
                     <i className="fab fa-instagram"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

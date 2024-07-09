@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Swiper from "swiper";
 import { Baseurl } from "./Confige";
+import { Link } from "react-router-dom";
 
 function Testimonial() {
   const [testimonial, SetTestimonial] = useState([]);
@@ -92,22 +93,22 @@ function Testimonial() {
                         <div className="tptestimonial__content tptestimonial__content2">
                           <p>{testi.message}</p>
                           <div className="tptestimonial__rating mb-5">
-                            <a href="#">
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
-                            </a>
-                            <a href="#">
+                            </Link>
+                            <Link to="#">
                               <i className="icon-star_outline1"></i>
                               {testi.rating}
-                            </a>
+                            </Link>
                           </div>
                           <h4 className="tptestimonial__title">{testi.name}</h4>
                         </div>
